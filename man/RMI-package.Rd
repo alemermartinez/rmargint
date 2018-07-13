@@ -19,7 +19,7 @@ License: \tab GPL 3.0\cr
 \author{
 Alejandra Martinez, Matias Salibian-Barrera
 
-Maintainer: Alejandra Martinez <ale_m_martinez@hotmail.com>
+Maintainer: Alejandra Martinez <alemartinez@unlu.edu.ar>
 }
 \references{
 }
