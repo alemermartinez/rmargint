@@ -1,0 +1,23 @@
+\name{k.epan}
+\alias{kernel2}
+\alias{k.epan}
+%- Also NEED an '\alias' for EACH other topic documented here.
+\title{Epanechnikov kernel
+}
+\description{Epanechnikov kernel.
+}
+\usage{
+k.epan(x)
+kernel2(x)
+}
+%- maybe also 'usage' for other objects documented here.
+\arguments{
+  \item{x}{A real number.
+%%     ~~Describe \code{x} here~~
+}
+}
+\value{
+0 if abs(x) > 1 and 0.75 * (1 - x^2) otherwise.
+}
+\author{Alejandra Martinez, Matias Salibian-Barrera.
+}
