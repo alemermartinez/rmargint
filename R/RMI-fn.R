@@ -1,5 +1,5 @@
-#' @param variable
-#' @return value
+#' @param x a real number
+#' @return 0 if abs(x) > 1 and 0.75 * (1 - x^2) otherwise
 #' @export
 
 # Tukey's Psi
