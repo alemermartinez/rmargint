@@ -1,8 +1,10 @@
 ---
 title: "README-new"
 author: "Alejandra Martinez"
-date: "13 de julio de 2018"
-output: html_document
+date: "`r format(Sys.Date(), '%d %B, %Y')`"
+output:
+  md_document:
+    variant: markdown_github
 ---
 
 ## A marginal integration procedure
