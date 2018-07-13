@@ -1,5 +1,5 @@
 ---
-title: "README-new"
+title: "README"
 author: "Alejandra Martinez"
 date: "`r format(Sys.Date(), '%d %B, %Y')`"
 output:
