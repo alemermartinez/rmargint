@@ -15,7 +15,7 @@ This repository contains an <code>R</code> package with the classical and robust
 
 The package can be install from <code>R</code> by using
 
-```{r installation, cache=FALSE, results=FALSE, warning=FALSE, comment=FALSE, message=FALSE}
+```{r installation, results='hide', cache=FALSE, results=FALSE, warning=FALSE, comment=FALSE, message=FALSE}
 library(devtools)
 install_github("alemermartinez/RMI-GitHub")
 ```
