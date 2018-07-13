@@ -1,9 +1,5 @@
----
-title: "README-new"
-author: "Alejandra Martinez"
-date: "13 de julio de 2018"
-output: html_document
----
+# Robust Marginal Integration
+Alejandra Martinez 2018-04-16
 
 ## A marginal integration procedure
 
@@ -13,16 +9,16 @@ This repository contains an <code>R</code> package with the classical and robust
 
 The package can be install from <code>R</code> by using
 
-```{r installation, cache=FALSE, results=FALSE, warning=FALSE, comment=FALSE, warning=FALSE}
+```{r}
 library(devtools)
-install_github("alemermartinez/RMI-GitHub")
+install_github("alemermartinez/RMI")
 ```
 
 The following example corresponds to one of the 2-dimensional simulated samples considered in the paper.
 
 Let begin by defining the additive functions and then generating the simulated sample.
 
-```{r generating data}
+```{r}
 library(RMI)
 
 function.g1 <- function(x1) 24*(x1-1/2)^2-2
@@ -40,41 +36,40 @@ y <- regresion + eps
 
 As it is explained in the paper, the bandwidths used for the direction of interest and for the nuisance direction might be different. For estimating the additive functions, bandwidths for the direction of interest and for the nuisance direction were considered equal to 0.1.
 
-```{r bandw}
+```{r}
 bandw <- rep(0.1,2)
 ```
 
 Besides, for this estimation procedure, a different measure for approximating the integrals can be used. In this case, we will consider the following:
 
-```{r measure}
+```{r}
 set.seed(9090)
 Qmeasure <- matrix(runif(500*2), 500, 2)
 ```
 
 Now we will use the robust marginal integration procedure to fit an additive model using the Huber loss function (with default tuning constant c=1.345), a linear fit (degree=1) for the estimation procedure at each additive component, a kernel of order 2 (orderkernel=2) and the type of estimation procedure which, in this case, focus the attention on each alpha additive component and not on all of them at the same time (type='alpha'). In addition, a specific point will be predicted.
 
-```{r robust fit}
+```{r}
 point <- c(0.7, 0.6)
-robust.fit <- margint.rob(Xp=X, yp=y, point=point, windows=bandw, epsilon=1e-10, degree=1,
+robust.fit <- margint.rob(Xp=X, yp=y, point=point windows=bandw, epsilon=1e-10, degree=1,
                           type='alpha', orderkernel=2, typePhi='Huber', Qmeasure=Qmeasure)
 ```
 
 The prediction and true values of the additive functions are:
 
-
-```{r outputs}
+```{r}
 robust.fit$prediction
 c(function.g1(point[1]), function.g2(point[2]))
 ```
 
 The following figures plot the partial residuals, the estimated curve (in blue) and the true function (in black) for each additive function:
 
-```{r plots}
+```{r}
 lim.rob <- matrix(0, 2, 2)
 functions.g <- cbind(function.g1(X[,1]), function.g2(X[,2]))
 par(mfrow=c(1,2))
 for(j in 1:2) {
-  res <- y - robust.fit$mu - robust.fit$g.matrix[,-j]
+  res <- y - robust.fit$alpha - robust.fit$g.matrix[,-j]
   lim.rob[,j] <- range(res)
   plot(X[,j], res, type='p', pch=19, col='gray45', xlab=colnames(X)[j], ylab='', cex=1, ylim=lim.rob[,j])
   ord <- order(X[,j])
@@ -82,10 +77,12 @@ for(j in 1:2) {
   lines(X[ord,j], functions.g[ord,j], lwd=3)
 }
 ```
+![figure1](https://user-images.githubusercontent.com/38252440/39189762-63f782e2-47a9-11e8-8128-777cdd6575a5.png)
+
 
 Now, for estimating the derivatives, we will consider the bandwidth for the direction of interest as 0.15 while 0.2 for the nuisance direction. Same other arguments were set in the function.
 
-```{r robust fit for derivatives}
+```{r}
 htilde <- 0.2
 halpha <- 0.15
 bandw <- matrix(htilde,2,2)
@@ -97,7 +94,7 @@ robust.fit2 <- margint.rob(Xp=X, yp=y, point=point, windows=bandw, epsilon=1e-10
 
 The prediction and true values of the derivative additive functions are:
 
-```{r derivatives outputs}
+```{r}
 function.g1.prime <- function(x1) 24*2*(x1-1/2)
 function.g2.prime <- function(x2) 2*pi^2*cos(pi*x2)
 
@@ -107,7 +104,7 @@ c(function.g1.prime(point[1]), function.g2.prime(point[2]))
 
 The following figures plot the estimated (in blue) and true (in black) curves for each derivative additive function:
 
-```{r plot of derivatives}
+```{r}
 par(mfrow=c(1,2))
 lim.rob <- matrix(0, 2, 2)
 functions.g.prime <- cbind(function.g1.prime(X[,1]), function.g2.prime(X[,2]))
@@ -119,4 +116,4 @@ for(j in 1:2) {
   lines(X[ord,j], functions.g.prime[ord,j], lwd=3)
 }
 ```
-
+![figure2](https://user-images.githubusercontent.com/38252440/39189876-be0dff0e-47a9-11e8-83be-40fb84bb8881.png)
