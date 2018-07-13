@@ -470,8 +470,8 @@ margint.rob <- function(Xp, yp, point=NULL, windows, prob=NULL, sigma.hat=NULL,
     if(is.null(degree)){
       stop("Degree of local polynomial missing")
     }else{
-      if( is.null(dim(windows)) ){
-        stop("Windows should be a vector o a matrix")
+      if( is.null(dim(windows)) | (!is.vector(windows)) ){
+        stop("Windows should be a vector or a matrix")
       }
     }
   }else{
