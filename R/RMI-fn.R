@@ -121,11 +121,11 @@ kernel10<-function(x) {
   return(tmp)
 }
 
-#' @export
 #' @useDynLib RMI kernel_cl_pos_multi
 #' @useDynLib RMI kernel_cl_lin_multi
 #' @useDynLib RMI kernel_cl_alpha_multi
-#' @exportPattern ^[[:alpha:]]+
+#' @export
+
 
 ## Classic Marginal Integration
 margint.cl <- function(Xp, yp, point=NULL, windows, epsilon, prob=NULL,
@@ -438,7 +438,6 @@ margint.cl <- function(Xp, yp, point=NULL, windows, epsilon, prob=NULL,
 
 }
 
-#' @export
 #' @useDynLib RMI ini_mu_pos_multi
 #' @useDynLib RMI kernel_huber_pos_multi
 #' @useDynLib RMI kernel_tukey_pos_multi
@@ -446,8 +445,7 @@ margint.cl <- function(Xp, yp, point=NULL, windows, epsilon, prob=NULL,
 #' @useDynLib RMI kernel_tukey_lin_multi
 #' @useDynLib RMI kernel_huber_alpha_multi
 #' @useDynLib RMI kernel_tukey_alpha_multi
-#' @exportPattern ^[[:alpha:]]+
-
+#' @export
 
 ## Robust Marginal Integration
 margint.rob <- function(Xp, yp, point=NULL, windows, prob=NULL, sigma.hat=NULL,
