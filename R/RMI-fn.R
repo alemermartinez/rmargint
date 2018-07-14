@@ -1,3 +1,5 @@
+#' @param variable
+#' @return value
 #' @export
 
 # Tukey's Psi
@@ -8,7 +10,8 @@ psi.tukey <- function(r, k=4.685){
   return(w)
 }
 
-
+#' @param variable
+#' @return value
 #' @export
 
 #Tukey's weight function "Psi(r)/r"
@@ -20,6 +23,8 @@ psi.w <- function(r, k= 4.685){
 }
 
 
+#' @param variable
+#' @return value
 #' @export
 
 # Huber's Psi
@@ -27,6 +32,8 @@ psi.huber <- function(r, k=1.345)
   pmin(k, pmax(-k, r))
 
 
+#' @param variable
+#' @return value
 #' @export
 
 #Huber's weight function "Psi(r)/r"
@@ -34,12 +41,16 @@ psi.huber.w <- function(r, k=1.345)
   pmin(1, k/abs(r))
 
 
+#' @param variable
+#' @return value
 #' @export
 
 #Euclidean norm
 my.norm.2 <- function(x) sqrt(sum(x^2))
 
 
+#' @param variable
+#' @return value
 #' @export
 
 #Epanechnikov kernel
@@ -50,6 +61,8 @@ k.epan<-function(x) {
 }
 
 
+#' @param variable
+#' @return value
 #' @export
 
 #Order 2 kernel = Epanechnikov kernel
@@ -61,6 +74,8 @@ kernel2<-function(t){
 #- Higher order kernels -#
 
 
+#' @param variable
+#' @return value
 #' @export
 
 #Order 4
@@ -71,6 +86,8 @@ kernel4<-function(x) {
 }
 
 
+#' @param variable
+#' @return value
 #' @export
 
 #Order 6
@@ -81,6 +98,8 @@ kernel6<-function(x) {
 }
 
 
+#' @param variable
+#' @return value
 #' @export
 
 #Order 8
@@ -91,6 +110,8 @@ kernel8<-function(x) {
 }
 
 
+#' @param variable
+#' @return value
 #' @export
 
 #Order 10
@@ -100,10 +121,12 @@ kernel10<-function(x) {
   return(tmp)
 }
 
-
+#' @param variable
+#' @return value
 #' @export
 #' @useDynLib RMI
 #' @exportPattern ^[[:alpha:]]+
+
 
 ## Classic Marginal Integration
 margint.cl <- function(Xp, yp, point=NULL, windows, epsilon, prob=NULL,
@@ -417,7 +440,12 @@ margint.cl <- function(Xp, yp, point=NULL, windows, epsilon, prob=NULL,
 }
 
 
+#' @param variable
+#' @return value
 #' @export
+#' @useDynLib RMI
+#' @exportPattern ^[[:alpha:]]+
+
 
 ## Robust Marginal Integration
 margint.rob <- function(Xp, yp, point=NULL, windows, prob=NULL, sigma.hat=NULL,
