@@ -121,12 +121,9 @@ kernel10<-function(x) {
   return(tmp)
 }
 
-#' @param variable
-#' @return value
 #' @export
 #' @useDynLib RMI
 #' @exportPattern ^[[:alpha:]]+
-
 
 ## Classic Marginal Integration
 margint.cl <- function(Xp, yp, point=NULL, windows, epsilon, prob=NULL,
@@ -439,12 +436,7 @@ margint.cl <- function(Xp, yp, point=NULL, windows, epsilon, prob=NULL,
 
 }
 
-
-#' @param variable
-#' @return value
-#' @export
-#' @useDynLib RMI
-#' @exportPattern ^[[:alpha:]]+
+#'@export
 
 
 ## Robust Marginal Integration
