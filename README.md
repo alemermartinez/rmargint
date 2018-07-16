@@ -9,7 +9,7 @@ The package can be install from <code>R</code> by using
 
 ``` r
 library(devtools)
-install_github("alemermartinez/RMI-GitHub")
+install_github("alemermartinez/RMI")
 ```
 
 The following example corresponds to one of the 2-dimensional simulated samples considered in the paper.
