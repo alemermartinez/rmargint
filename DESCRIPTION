@@ -1,6 +1,6 @@
 Package: RMI
 Type: Package
-Title: Robust marginal integration
+Title: Robust marginal integration 
 Version: 0.1.0
 Author: Alejandra Martinez, Matias Salibian-Barrera
 Maintainer: Alejandra Martinez <alemartinez@unlu.edu.ar>
