@@ -14,6 +14,7 @@ export(psi.huber.w)
 export(psi.tukey)
 export(psi.w)
 
+
 exportPattern("^[[:alpha:]]+")
 useDynLib(RMI,ini_mu_pos_multi)
 useDynLib(RMI,kernel_cl_alpha_multi)
