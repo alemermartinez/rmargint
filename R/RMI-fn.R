@@ -393,8 +393,6 @@ margint.cl <- function(Xp, yp, point=NULL, windows, epsilon, prob=NULL,
       return(list(mu=alpha,g.matrix=g.matriz))
     }
   }
-
-
 }
 
 
