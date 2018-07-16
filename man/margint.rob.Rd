@@ -18,15 +18,14 @@ margint.rob(Xp, yp, point=NULL, windows, prob=NULL, sigma.hat=NULL, win.sigma=NU
   \item{yp}{Vector of responses (missing values are allowed).
 %%     ~~Describe \code{yp} here~~
 }
-  \item{point}{Matrix of points where predictions will be computed and returned. 
+  \item{point}{Matrix of points where predictions will be computed and returned.
 %%     ~~Describe \code{point} here~~
 }
-  \item{windows}{Vector or a squared matrix of bandwidths for the smoothing 
-estimation procedure. 
+  \item{windows}{Vector or a squared matrix of bandwidths for the smoothing
+estimation procedure.
 %%     ~~Describe \code{windows} here~~
 }
-  \item{prob}{Probabilities of observing each response (n). Defaults to ``NULL'' and
-in that case it is ignored.
+  \item{prob}{Probabilities of observing each response (n). Defaults to ``NULL''.
 %%     ~~Describe \code{prob} here~~
 }
  \item{sigma.hat}{Estimate of the residual standard error. If NULL we use the mad of the residuals obtained with local medians.
@@ -42,7 +41,7 @@ on all the covariates), type '1' (local linear smoother on all the covariates), 
 (local polynomial smoother only on the direction of interest).
 }
   \item{degree}{Degree of the local polynomial smoother in the direction of interest
-when using the estimator of type 'alpha'. Defaults to ``NULL'' for the case when using 
+when using the estimator of type 'alpha'. Defaults to ``NULL'' for the case when using
 estimators of type '0' or '1'.
 %%     ~~Describe \code{degree} here~~
 }
@@ -57,10 +56,10 @@ estimators of type '0' or '1'.
   \item{max.it}{Maximum number of iterations for the algorithm.
 %%     ~~Describe \code{max.it} here~~
 }
-  \item{qderivate}{If TRUE, it calculates g^(q+1)/(q+1)! for each component only 
+  \item{qderivate}{If TRUE, it calculates g^(q+1)/(q+1)! for each component only
 for the type 'alpha' method. Defaults to ``FALSE''.
 }
-  \item{orderkernel}{Order of the kernel used in the nuisance directions when 
+  \item{orderkernel}{Order of the kernel used in the nuisance directions when
 using the estimator of type 'alpha'. Defaults to ``2''.
 }
   \item{Qmeasure}{A matrix of points where the integration procedure ocurrs. Defaults
@@ -75,7 +74,7 @@ Three types of robust marginal integration procedures for additive models.
 \item{mu }{Estimate for the intercept.}
 \item{g.matrix }{Matrix of estimated additive components (n by p).}
 \item{sigma.hat }{Estimate of the residual standard error.}
-\item{prediction }{Matrix of estimated additive components 
+\item{prediction }{Matrix of estimated additive components
 for the points listed in the argument point.}
 \item{mul }{A vector of size q showing in each component the estimated intercept
 that considers only that direction of interest when using the type 'alpha' method.}

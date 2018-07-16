@@ -18,18 +18,17 @@ margint.cl(Xp, yp, point=NULL, windows, epsilon=1e-06, prob=NULL, type='0', degr
   \item{yp}{Vector of responses (missing values are allowed).
 %%     ~~Describe \code{yp} here~~
 }
-  \item{point}{Matrix of points where predictions will be computed and returned. 
+  \item{point}{Matrix of points where predictions will be computed and returned.
 %%     ~~Describe \code{point} here~~
 }
-  \item{windows}{Vector or a squared matrix of bandwidths for the smoothing 
-estimation procedure. 
+  \item{windows}{Vector or a squared matrix of bandwidths for the smoothing
+estimation procedure.
 %%     ~~Describe \code{windows} here~~
 }
   \item{epsilon}{Convergence criterion.
 %%     ~~Describe \code{epsilon} here~~
 }
-  \item{prob}{Probabilities of observing each response (n). Defaults to ``NULL'' and
-in that case it is ignored.
+  \item{prob}{Probabilities of observing each response (n). Defaults to ``NULL''.
 %%     ~~Describe \code{prob} here~~
 }
   \item{type}{Three different type of estimators can be selected: type '0' (local constant
@@ -37,14 +36,14 @@ on all the covariates), type '1' (local linear smoother on all the covariates), 
 (local polynomial smoother only on the direction of interest).
 }
   \item{degree}{Degree of the local polynomial smoother in the direction of interest
-when using the estimator of type 'alpha'. Defaults to ``NULL'' for the case when using 
+when using the estimator of type 'alpha'. Defaults to ``NULL'' for the case when using
 estimators of type '0' or '1'.
 %%     ~~Describe \code{degree} here~~
 }
-  \item{orderkernel}{Order of the kernel used in the nuisance directions when 
+  \item{orderkernel}{Order of the kernel used in the nuisance directions when
 using the estimator of type 'alpha'. Defaults to ``2''.
 }
-  \item{qderivate}{If TRUE, it calculates g^(q+1)/(q+1)! for each component only 
+  \item{qderivate}{If TRUE, it calculates g^(q+1)/(q+1)! for each component only
 for the type 'alpha' method. Defaults to ``FALSE''.
 }
   \item{Qmeasure}{A matrix of points where the integration procedure ocurrs. Defaults
@@ -52,14 +51,14 @@ to ``NULL'' for calcuting the integrals over the sample.
 }
 }
 \details{
-Three types of classical marginal integration procedures for additive models considering
+Three types of classical marginal integration procedures for additive models, that is, considering
 a squared loss function.
 %%  ~~ If necessary, more details than the description above ~~
 }
 \value{
 \item{mu }{Estimate for the intercept.}
 \item{g.matrix }{Matrix of estimated additive components (n by p).}
-\item{prediction }{Matrix of estimated additive components 
+\item{prediction }{Matrix of estimated additive components
 for the points listed in the argument point.}
 \item{mul }{A vector of size q showing in each component the estimated intercept
 that considers only that direction of interest when using the type 'alpha' method.}

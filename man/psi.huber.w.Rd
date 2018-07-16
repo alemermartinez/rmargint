@@ -19,8 +19,7 @@ psi.huber.w(r, k = 1.345)
 %%     ~~Describe \code{k} here~~
 }
 }
-\details{The weight function used in 
-the re-weighted least squares iterations.
+\details{The weight function used in the re-weighted least squares iterations.
 %%  ~~ If necessary, more details than the description above ~~
 }
 \value{
