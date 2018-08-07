@@ -60,7 +60,7 @@ a squared loss function.
 \item{g.matrix }{Matrix of estimated additive components (n by p).}
 \item{prediction }{Matrix of estimated additive components
 for the points listed in the argument point.}
-\item{mul }{A vector of size q showing in each component the estimated intercept
+\item{mul }{A vector of size p showing in each component the estimated intercept
 that considers only that direction of interest when using the type 'alpha' method.}
 \item{g.derivative }{Matrix of estimated derivatives of the additive components (only
 when qderivate is ``TRUE'') (n by p).}
