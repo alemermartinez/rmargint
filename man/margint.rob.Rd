@@ -31,7 +31,7 @@ estimation procedure.
  \item{sigma.hat}{Estimate of the residual standard error. If NULL we use the mad of the residuals obtained with local medians.
 %%     ~~Describe \code{sigma.hat} here~~
 }
-  \item{win.sigma}{
+  \item{win.sigma}{Vector of bandwidths for estimating sigma.hat. If NULL it uses the argument windows if it is a vector or its diagonal if it is a matrix.
 }
   \item{epsilon}{Convergence criterion.
 %%     ~~Describe \code{epsilon} here~~
@@ -76,7 +76,7 @@ Three types of robust marginal integration procedures for additive models.
 \item{sigma.hat }{Estimate of the residual standard error.}
 \item{prediction }{Matrix of estimated additive components
 for the points listed in the argument point.}
-\item{mul }{A vector of size q showing in each component the estimated intercept
+\item{mul }{A vector of size p showing in each component the estimated intercept
 that considers only that direction of interest when using the type 'alpha' method.}
 \item{g.derivative }{Matrix of estimated derivatives of the additive components (only
 when qderivate is ``TRUE'') (n by p).}
