@@ -11,6 +11,10 @@ export(psi.huber)
 export(psi.huber.w)
 export(psi.tukey)
 export(psi.w)
+export(residuals.margint)
+export(plot.margint)
+export(predict.margint)
+export(summary.margint)
 
 
 exportPattern("^[[:alpha:]]+")
