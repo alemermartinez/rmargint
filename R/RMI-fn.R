@@ -1047,20 +1047,12 @@ summary.margint <- function(object,...){
   NextMethod()
 }
 
-#' @param variable
-#' @return value
-#' @export
-
 summary.margint.cl <- function(object,...){
   message("Estimate of the intercept: ", round(object$mu,5))
   res <- residuals(object)
   message("Residuals:")
   summary(res)
 }
-
-#' @param variable
-#' @return value
-#' @export
 
 summary.margint.rob <- function(object,...){
   message("Estimate of the intercept: ", round(object$mu,5))
