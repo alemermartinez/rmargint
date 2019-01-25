@@ -141,21 +141,29 @@ margint.cl <- function(Xp, yp, point=NULL, windows, epsilon=1e-6, prob=NULL,
   #  only for the type 'alpha' method.
   # Qmeasure = if NULL, the integration procedure is over the sample.
 
-  if(type=='alpha'){
-    if(is.null(degree)){
-      stop("Degree of local polynomial missing")
+  if(!is.null(dim(Xp))){
+    if(type=='alpha'){
+      if(is.null(degree)){
+        stop("Degree of local polynomial missing")
+      }else{
+        if( length(windows)==1 ){
+          stop("Windows should be a vector o a matrix")
+        }
+      }
     }else{
-      if( length(windows)==1 ){
-        stop("Windows should be a vector o a matrix")
+      if( (is.matrix(windows)) | (length(windows)==1)  ){
+        stop("Windows should be a vector")
       }
     }
   }else{
-    if( (is.matrix(windows)) | (length(windows)==1)  ){
-      stop("Windows should be a vector")
+    if(!is.null(dim(windows))){
+      stop("Windows should be a number")
     }
   }
 
+
   n <- length(yp)
+  Xp <- as.matrix(Xp)
   q <- dim(Xp)[2]
   corte <- 10*epsilon
   punto <- point
@@ -164,13 +172,14 @@ margint.cl <- function(Xp, yp, point=NULL, windows, epsilon=1e-6, prob=NULL,
   yy <- yp
   XX <- Xp
   yp <- yp[ tmp<-!is.na(yp) ]
-  Xp <- Xp[tmp, ]
+  Xp <- Xp[tmp, , drop=FALSE]
   n.miss <- length(yp)
   if(is.null(prob)){prob <- rep(1,n.miss)
   } else {
     prob <- prob[tmp]
   }
   if(dim(t(as.matrix(windows)))[2]!=q){return("Error Dimension of Bandwidths")}
+
 
   #Initializations
   puntoj <- rep(0,q)
@@ -476,22 +485,28 @@ margint.rob <- function(Xp, yp, point=NULL, windows, prob=NULL, sigma.hat=NULL,
   # typePhi = 'Huber' or 'Tukey'
   # max.it = max number of iterations for the robust estimation step.
 
-
-  if(type=='alpha'){
-    if(is.null(degree)){
-      stop("Degree of local polynomial missing")
+  if(!is.null(dim(Xp))){
+    if(type=='alpha'){
+      if(is.null(degree)){
+        stop("Degree of local polynomial missing")
+      }else{
+        if( length(windows)==1 ){
+          stop("Windows should be a vector or a matrix")
+        }
+      }
     }else{
-      if( length(windows)==1 ){
-        stop("Windows should be a vector or a matrix")
+      if( (is.matrix(windows)) | (length(windows)==1) ){
+        stop("Windows should be a vector")
       }
     }
   }else{
-    if( (is.matrix(windows)) | (length(windows)==1) ){
-      stop("Windows should be a vector")
+    if(!is.null(dim(windows))){
+      stop("Windows should be a number")
     }
   }
 
   n <- length(yp)
+  Xp <- as.matrix(Xp)
   q <- dim(Xp)[2]
   corte <- 10*epsilon
   punto <- point
@@ -508,7 +523,7 @@ margint.rob <- function(Xp, yp, point=NULL, windows, prob=NULL, sigma.hat=NULL,
   yy<-yp
   XX <- Xp
   yp <- yp[ tmp<-!is.na(yp) ]
-  Xp <- Xp[tmp, ]
+  Xp <- Xp[tmp, ,drop=FALSE]
   n.miss <- length(yp)
   if(is.null(prob)){prob <- rep(1,n.miss)
   }else{
