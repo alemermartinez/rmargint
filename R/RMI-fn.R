@@ -120,7 +120,7 @@ kernel10<-function(x) {
 #' @export
 
 ## Classic Marginal Integration
-margint.cl <- function(Xp, yp, point=NULL, windows, epsilon, prob=NULL,
+margint.cl <- function(Xp, yp, point=NULL, windows, epsilon=1e-6, prob=NULL,
                        type='0', degree=NULL, qderivate=FALSE, orderkernel=2,
                        Qmeasure=NULL) {
   # Xp = covariance matrix (n x q).
@@ -408,22 +408,34 @@ margint.cl <- function(Xp, yp, point=NULL, windows, epsilon, prob=NULL,
   if(!is.null(point)){
     if(type=='alpha'){
       if(!qderivate){
-        return(list(mu=alpha,g.matrix=g.matriz, prediction=prediccion, mul=alphal))
+        object <- list(mu=alpha,g.matrix=g.matriz, prediction=prediccion, mul=alphal)
+        class(object) <- c("margint.cl", "margint", "list")
+        return(object)
       } else {
-        return(list(mu=alpha,g.matrix=g.matriz, prediction=prediccion, mul=alphal,g.derivate=g.derivate, prediction.derivate=prediccion.deri))
+        object <- list(mu=alpha,g.matrix=g.matriz, prediction=prediccion, mul=alphal,g.derivate=g.derivate, prediction.derivate=prediccion.deri)
+        class(object) <- c("margint.cl", "margint", "list")
+        return(object)
       }
     } else {
-      return(list(mu=alpha,g.matrix=g.matriz, prediction=prediccion))
+      object <- list(mu=alpha,g.matrix=g.matriz, prediction=prediccion)
+      class(object) <- c("margint.cl", "margint", "list")
+      return(object)
     }
   } else {
     if(type=='alpha'){
       if(!qderivate){
-        return(list(mu=alpha,g.matrix=g.matriz, mul=alphal))
+        object <- list(mu=alpha,g.matrix=g.matriz, mul=alphal)
+        class(object) <- c("margint.cl", "margint", "list")
+        return(object)
       } else {
-        return(list(mu=alpha,g.matrix=g.matriz, mul=alphal,g.derivate=g.derivate))
+        object <- list(mu=alpha,g.matrix=g.matriz, mul=alphal,g.derivate=g.derivate)
+        class(object) <- c("margint.cl", "margint", "list")
+        return(object)
       }
     } else {
-      return(list(mu=alpha,g.matrix=g.matriz))
+      object <- list(mu=alpha,g.matrix=g.matriz)
+      class(object) <- c("margint.cl", "margint", "list")
+      return(object)
     }
   }
 }
@@ -946,26 +958,36 @@ margint.rob <- function(Xp, yp, point=NULL, windows, prob=NULL, sigma.hat=NULL,
   if(!is.null(point)){
     if(type=='alpha'){
       if(!qderivate){
-        return(list(mu=alpha, g.matrix=g.matriz, sigma.hat=sigma.hat, prediction=prediccion, mul=alphal))
+        object <- list(mu=alpha, g.matrix=g.matriz, sigma.hat=sigma.hat, prediction=prediccion, mul=alphal)
+        class(object) <- c("margint.rob", "margint", "list")
+        return(object)
       } else {
-        return(list(mu=alpha, g.matrix=g.matriz, sigma.hat=sigma.hat, prediction=prediccion, mul=alphal, g.derivate=g.derivate, prediction.derivate=prediccion.deri))
+        object <- list(mu=alpha, g.matrix=g.matriz, sigma.hat=sigma.hat, prediction=prediccion, mul=alphal, g.derivate=g.derivate, prediction.derivate=prediccion.deri)
+        class(object) <- c("margint.rob", "margint", "list")
+        return(object)
       }
     } else {
-      return(list(mu=alpha, g.matrix=g.matriz, sigma.hat=sigma.hat, prediction=prediccion))
+      object <- list(mu=alpha, g.matrix=g.matriz, sigma.hat=sigma.hat, prediction=prediccion)
+      class(object) <- c("margint.rob", "margint", "list")
+      return(object)
     }
   } else {
     if(type=='alpha'){
       if(!qderivate){
-        return(list(mu=alpha, g.matrix=g.matriz, sigma.hat=sigma.hat, mul=alphal))
+        object <- list(mu=alpha, g.matrix=g.matriz, sigma.hat=sigma.hat, mul=alphal)
+        class(object) <- c("margint.rob", "margint", "list")
+        return(object)
       } else {
-        return(list(mu=alpha, g.matrix=g.matriz, sigma.hat=sigma.hat, mul=alphal,g.derivate=g.derivate))
+        object <- list(mu=alpha, g.matrix=g.matriz, sigma.hat=sigma.hat, mul=alphal,g.derivate=g.derivate)
+        class(object) <- c("margint.rob", "margint", "list")
+        return(object)
       }
     } else {
-      return(list(mu=alpha, g.matrix=g.matriz, sigma.hat=sigma.hat))
+      object <- list(mu=alpha, g.matrix=g.matriz, sigma.hat=sigma.hat)
+      class(object) <- c("margint.rob", "margint", "list")
+      return(object)
     }
   }
-
-
 }
 
 
