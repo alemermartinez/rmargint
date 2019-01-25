@@ -998,7 +998,7 @@ margint.rob <- function(Xp, yp, point=NULL, windows, prob=NULL, sigma.hat=NULL,
 #' @export
 
 residuals.margint <- function(object, ...){
-  return( object$yp - rowSums(object$g.matrix) -object$alpha )
+  return( object$yp - rowSums(object$g.matrix) -object$mu )
 }
 
 
@@ -1006,15 +1006,15 @@ residuals.margint <- function(object, ...){
 #' @return value
 #' @export
 
-predict.backf <- function(object, ...){
-  return( rowSums(object$g.matrix) + object$alpha )
+predict.margint <- function(object, ...){
+  return( rowSums(object$g.matrix) + object$mu )
 }
 
 #' @param variable
 #' @return value
 #' @export
 
-plot.backf <- function(object, which=1:np, ask=FALSE,...){
+plot.margint <- function(object, which=1:np, ask=FALSE,...){
   Xp <- object$Xp
   np <- dim(Xp)[2]
   opar <- par(ask=ask)
@@ -1031,7 +1031,7 @@ plot.backf <- function(object, which=1:np, ask=FALSE,...){
         x_name <- colnames(Xp)[i]
       }
       y_name <- bquote(paste(hat('g')[.(i)]))
-      res <- object$yp - rowSums(object$g.matrix[,-i, drop=FALSE])-object$alpha
+      res <- object$yp - rowSums(object$g.matrix[,-i, drop=FALSE])-object$mu
       lim_cl <- c(min(res), max(res))
       plot(Xp[ord,i],object$g.matrix[ord,i],type="l",lwd=3,main="",xlab=x_name,ylab=y_name, ylim=lim_cl)
       points(Xp[,i], res, pch=20,col='gray45')
@@ -1043,7 +1043,7 @@ plot.backf <- function(object, which=1:np, ask=FALSE,...){
 #' @return value
 #' @export
 
-summary.backf <- function(object,...){
+summary.margint <- function(object,...){
   NextMethod()
 }
 
@@ -1051,8 +1051,8 @@ summary.backf <- function(object,...){
 #' @return value
 #' @export
 
-summary.backf.cl <- function(object,...){
-  message("Estimate of the intercept: ", round(object$alpha,5))
+summary.margint.cl <- function(object,...){
+  message("Estimate of the intercept: ", round(object$mu,5))
   res <- residuals(object)
   message("Residuals:")
   summary(res)
@@ -1062,8 +1062,8 @@ summary.backf.cl <- function(object,...){
 #' @return value
 #' @export
 
-summary.backf.rob <- function(object,...){
-  message("Estimate of the intercept: ", round(object$alpha,5))
+summary.margint.rob <- function(object,...){
+  message("Estimate of the intercept: ", round(object$mu,5))
   message("Estimate of the residual standard error: ", round(object$sigma,5))
   res <- residuals(object)
   message("Residuals:")
