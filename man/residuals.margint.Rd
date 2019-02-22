@@ -17,20 +17,22 @@ residuals(object, ...)
 \arguments{
   \item{object}{an object of class \code{margint}, a result of a call to \code{\link{margint.cl}} or \code{\link{margint.rob}}.}
 %%     ~~Describe \code{object} here~~
-\item{...}{other arguments.}
+\item{...}{additional other arguments.}
 }
 
 \details{
-This function returns the residuals of the fitted additive model using one of the three different types of classical or robust estimators based on the marginal integration procedure.
+This function returns the residuals of the fitted additive model using one of the three different types of classical or robust estimators based on the marginal integration procedure, as computed with \code{\link{margint.cl}} or \code{\link{margint.rob}}
 %%  ~~ If necessary, more details than the description above ~~
 }
-%%\value{
-%%\item{mu }{Estimate for the intercept.}}
+\value{
+A vector of residuals.
+}
+
 
 \references{
 %% ~put references to the literature/web site here ~
 }
-\author{Alejandra Martinez, Matias Salibian-Barrera.
+\author{Alejandra Martinez \email{alemartinez@unlu.edu.ar}
 %%  ~~who you are~~
 }
 \note{

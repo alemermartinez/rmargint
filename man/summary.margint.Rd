@@ -1,10 +1,10 @@
 \name{summary.margint}
 \alias{summary.margint}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{Summarizing fits of additive models using a marginal integration procedure
+\title{Summary for additive models fits using a marginal integration procedure
 %%  ~~function to do ... ~~
 }
-\description{summary method for class \code{margint}.
+\description{Summary method for class \code{margint}.
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
 }
 \usage{
@@ -18,7 +18,7 @@ summary(object, ...)
   \item{object}{an object of class \code{margint}, a result of a call to \code{\link{margint.cl}} or \code{\link{margint.rob}}.
 %%     ~~Describe \code{object} here~~
 }
-\item{...}{other arguments.}
+\item{...}{additional other arguments.}
 }
 
 \details{
@@ -31,7 +31,7 @@ This function returns the estimation of the intercept and also the five-number s
 \references{
 %% ~put references to the literature/web site here ~
 }
-\author{Alejandra Martinez, Matias Salibian-Barrera.
+\author{Alejandra Martinez \email{alemartinez@unlu.edu.ar}
 %%  ~~who you are~~
 }
 \note{

@@ -1,10 +1,10 @@
 \name{predict.margint}
 \alias{predict.margint}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{Prediction from the additive model using a marginal integration procedure
+\title{Fitted values for objects of class \code{margint}
 %%  ~~function to do ... ~~
 }
-\description{predict method for class \code{margint}.
+\description{This function returns the fitted values given the covariates of the original sample under an additive model using a classical or robust marginal integration procedure estimator computed with \code{\link{margint.cl}} or \code{\link{margint.rob}}.
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
 }
 \usage{
@@ -18,20 +18,20 @@ predict(object, ...)
   \item{object}{an object of class \code{margint}, a result of a call to \code{\link{margint.cl}} or \code{\link{margint.rob}}.
 %%     ~~Describe \code{object} here~~
 }
-\item{...}{other arguments.}
+\item{...}{additional other arguments.}
 }
 
 \details{
 This function returns the predicted values given the covariates of the original sample under an additive model using one of the three possible the classical or robust marginal integration procedures.
 %%  ~~ If necessary, more details than the description above ~~
 }
-%%\value{
-%%\item{mu }{Estimate for the intercept.}}
-
+\value{
+A vector of fitted values.
+}
 \references{
 %% ~put references to the literature/web site here ~
 }
-\author{Alejandra Martinez, Matias Salibian-Barrera.
+\author{Alejandra Martinez \email{alemartinez@unlu.edu.ar}
 %%  ~~who you are~~
 }
 \note{
