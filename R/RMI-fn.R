@@ -1,8 +1,15 @@
-#' @param variable
-#' @return value
+#' @useDynLib RMI, .registration = TRUE
+#' @import stats graphics
+
+
+#' @title Derivative of Tukey's bi-square loss function
+#' @description Derivative of Tukey's bi-square loss function.
+#' @param r A real number.
+#' @param k Tuning constant.
+#' @author Alejandra Martinez, Matias Salibian-Barrera
+#' @return A real number.
 #' @export
 
-# Tukey's Psi
 psi.tukey <- function(r, k=4.685){
   u <- abs(r/k)
   w <- r*((1-u)*(1+u))^2
@@ -10,8 +17,15 @@ psi.tukey <- function(r, k=4.685){
   return(w)
 }
 
-#' @param variable
-#' @return value
+
+
+#' @title Tukey bi-square weight function
+#' @description Tukey bi-square weight function.
+#' @param r A real number.
+#' @param k Tuning constant.
+#' @details he weight function used in the re-weighted least squares iterations.
+#' @return A real number.
+#' @author Alejandra Martinez, Matias Salibian-Barrera
 #' @export
 
 #Tukey's weight function "Psi(r)/r"
@@ -23,8 +37,13 @@ psi.w <- function(r, k= 4.685){
 }
 
 
-#' @param variable
-#' @return value
+#' @title Derivative of Huber's loss function
+#' @description Derivative of Huber's loss function.
+#' @param r A real number.
+#' @param k Tuning constant.
+#' @details The weight function used in the re-weighted least squares iterations.
+#' @return A real number.
+#' @author Alejandra Martinez, Matias Salibian-Barrera
 #' @export
 
 # Huber's Psi
@@ -32,24 +51,40 @@ psi.huber <- function(r, k=1.345)
   pmin(k, pmax(-k, r))
 
 
-#' @param variable
-#' @return value
+#' @title Huber weight function
+#' @description Huber weight function.
+#' @param r A real number.
+#' @param k Tuning constant.
+#' @details The weight function used in the re-weighted least squares iterations.
+#' @return A real number.
+#' @author Alejandra Martinez, Matias Salibian-Barrera
 #' @export
+
 
 #Huber's weight function "Psi(r)/r"
 psi.huber.w <- function(r, k=1.345)
   pmin(1, k/abs(r))
 
 
-#' @param variable
-#' @return value
+#' @title Euclidean norm of a vector
+#' @description Euclidean norm of a vector.
+#' @param x A real vector.
+#' @return The Euclidean norm of the input vector.
+#' @author Alejandra Martinez, Matias Salibian-Barrera
 #' @export
+
 
 #Euclidean norm
 my.norm.2 <- function(x) sqrt(sum(x^2))
 
-#' @param variable
-#' @return value
+
+#' @title Epanechnikov kernel
+#' @description Epanechnikov kernel.
+#' @usage k.epan(x)
+#' kernel2(x)
+#' @param x A real number.
+#' @author Alejandra Martinez, Matias Salibian-Barrera
+#' @return 0 if abs(x) > 1 and 0.75 * (1 - x^2) otherwise.
 #' @export
 
 #Epanechnikov kernel
@@ -59,8 +94,7 @@ k.epan<-function(x) {
   return(tmp)
 }
 
-#' @param variable
-#' @return value
+
 #' @export
 
 #Order 2 kernel = Epanechnikov kernel
@@ -71,8 +105,13 @@ kernel2<-function(t){
 
 #- Higher order kernels -#
 
-#' @param variable
-#' @return value
+
+#' @title Order 4 kernel
+#' @description A kernel of order 4.
+#' @param x A real number.
+#' @author Alejandra Martinez, Matias Salibian-Barrera
+#' @return 0 if abs(x) > 1 and ( 15/32 ) * ( 1 - x^2 ) * ( 3 - 7 * x^2 ) otherwise.
+#' @details A kernel L is a kernel of order 4 if it integrates 1, the integrals of u^j L(u) are 0 for 1 <= j < 4 (j integer) and the integral of u^4 L(u) is different from 0.
 #' @export
 
 #Order 4
@@ -82,8 +121,13 @@ kernel4<-function(x) {
   return(tmp)
 }
 
-#' @param variable
-#' @return value
+
+#' @title Order 6 kernel
+#' @description A kernel of order 6.
+#' @param x A real number.
+#' @author Alejandra Martinez, Matias Salibian-Barrera
+#' @return 0 if abs(x) > 1 and ( 105/256 ) * ( 1 - x^2 ) * ( 5 - 30 * x^2 + 33 * x^4 ) otherwise.
+#' @details A kernel L is a kernel of order 6 if it integrates 1, the integrals of u^j L(u) are 0 for 1 <= j < 6 (j integer) and the integral of u^6 L(u) is different from 0.
 #' @export
 
 #Order 6
@@ -93,9 +137,14 @@ kernel6<-function(x) {
   return(tmp)
 }
 
-#' @param variable
-#' @return value
+#' @title Order 8 kernel
+#' @description A kernel of order 8.
+#' @param x A real number.
+#' @author Alejandra Martinez, Matias Salibian-Barrera
+#' @return 0 if abs(x) > 1 and ( 315/4096 ) * ( 1 - x^2 ) * ( 35 - 385 * x^2 + 1001 * x^4 - 715 * x^6 ) otherwise.
+#' @details A kernel L is a kernel of order 8 if it integrates 1, the integrals of u^j L(u) are 0 for 1 <= j < 8 (j integer) and the integral of u^8 L(u) is different from 0.
 #' @export
+
 
 #Order 8
 kernel8<-function(x) {
@@ -104,8 +153,12 @@ kernel8<-function(x) {
   return(tmp)
 }
 
-#' @param variable
-#' @return value
+#' @title Order 10 kernel
+#' @description A kernel of order 10.
+#' @param x A real number.
+#' @author Alejandra Martinez, Matias Salibian-Barrera
+#' @return 0 if abs(x) > 1 and 0.75 * ( 1 - x^2 ) * ( 315/128 - 105/32 * x^2 + 63/64 * x^4 - 3/32 * x^6 - 1/384 * x^8 ) otherwise.
+#' @details A kernel L is a kernel of order 10 if it integrates 1, the integrals of u^j L(u) are 0 for 1 <= j < 10 (j integer) and the integral of u^10 L(u) is different from 0.
 #' @export
 
 #Order 10
@@ -115,8 +168,32 @@ kernel10<-function(x) {
   return(tmp)
 }
 
-#' @param variable
-#' @return value
+#' @title Classic marginal integration procedures for additive models
+#' @description Standard marginal integration procedures for additive models.
+#' @param Xp Matrix of explanatory variables (n by p).
+#' @param yp  Vector of responses (missing values are allowed).
+#' @param point Matrix of points where predictions will be computed and returned.
+#' @param windows Vector or a squared matrix of bandwidths for the smoothing estimation procedure.
+#' @param epsilon Convergence criterion.
+#' @param prob Probabilities of observing each response (n). Defaults to ``NULL''.
+#' @param type Three different type of estimators can be selected: type '0' (local constant on all the covariates), type '1' (local linear smoother on all the covariates), type 'alpha' (local polynomial smoother only on the direction of interest).
+#' @param degree Degree of the local polynomial smoother in the direction of interest when using the estimator of type 'alpha'. Defaults to ``NULL'' for the case when using estimators of type '0' or '1'.
+#' @param orderkernel Order of the kernel used in the nuisance directions when using the estimator of type 'alpha'. Defaults to ``2''.
+#' @param qderivate If TRUE, it calculates g^(q+1)/(q+1)! for each component only for the type 'alpha' method. Defaults to ``FALSE''.
+#' @param Qmeasure A matrix of points where the integration procedure ocurrs. Defaults to ``NULL'' for calcuting the integrals over the sample.
+#' @details Three types of classical marginal integration procedures for additive models, that is, considering a squared loss function.
+#' @return
+#' \item{mu}{Estimate for the intercept.}
+#' \item{g.matrix}{Matrix of estimated additive components (n by p).}
+#' \item{prediction }{Matrix of estimated additive components for the points listed in the argument point.}
+#' \item{mul}{A vector of size p showing in each component the estimated intercept that considers only that direction of interest when using the type 'alpha' method.}
+#' \item{g.derivative }{Matrix of estimated derivatives of the additive components (only when qderivate is ``TRUE'') (n by p).}
+#' \item{prediction.derivate }{Matrix of estimated derivatives of the additive components for the points listed in the argument point (only when qderivate is ``TRUE'').}
+#' \item{Xp}{Matrix of explanatory variables.}
+#' \item{yp}{Vector of responses.}
+#'
+#' @keywords Additive Models
+#' @author Alejandra Martinez, Matias Salibian-Barrera
 #' @export
 
 ## Classic Marginal Integration
@@ -449,9 +526,41 @@ margint.cl <- function(Xp, yp, point=NULL, windows, epsilon=1e-6, prob=NULL,
   }
 }
 
-#' @param variable
-#' @return value
+#' @title Robust marginal integration procedures for additive models
+#' @description Robust marginal integration procedures for additive models.
+#' @param Xp Matrix of explanatory variables (n by p).
+#' @param yp  Vector of responses (missing values are allowed).
+#' @param point Matrix of points where predictions will be computed and returned.
+#' @param windows Vector or a squared matrix of bandwidths for the smoothing estimation procedure.
+#' @param prob Probabilities of observing each response (n). Defaults to ``NULL''.
+#' @param sigma.hat Estimate of the residual standard error. If NULL we use the mad of the residuals obtained with local medians.
+#' @param win.sigma Vector of bandwidths for estimating sigma.hat. If NULL it uses the argument windows if it is a vector or its diagonal if it is a matrix.
+#' @param epsilon Convergence criterion.
+#' @param type Three different type of estimators can be selected: type '0' (local constant on all the covariates), type '1' (local linear smoother on all the covariates), type 'alpha' (local polynomial smoother only on the direction of interest).
+#' @param degree Degree of the local polynomial smoother in the direction of interest when using the estimator of type 'alpha'. Defaults to ``NULL'' for the case when using estimators of type '0' or '1'.
+#' @param typePhi One of either ``Tukey'' or ``Huber''.
+#' @param k.h Tuning constant for a Huber-type loss function. Defaults to ``1.345''.
+#' @param k.t Tuning constant for a Tukey-type loss function. Defaults to ``4.685''.
+#' @param max.it Maximum number of iterations for the algorithm.
+#' @param qderivate If TRUE, it calculates g^(q+1)/(q+1)! for each component only for the type 'alpha' method. Defaults to ``FALSE''.
+#' @param orderkernel Order of the kernel used in the nuisance directions when using the estimator of type 'alpha'. Defaults to ``2''.
+#' @param Qmeasure A matrix of points where the integration procedure ocurrs. Defaults to ``NULL'' for calcuting the integrals over the sample.
+#' @details Three types of robust marginal integration procedures for additive models.
+#' @return
+#' \item{mu }{Estimate for the intercept.}
+#' \item{g.matrix }{Matrix of estimated additive components (n by p).}
+#' \item{sigma.hat }{Estimate of the residual standard error.}
+#' \item{prediction }{Matrix of estimated additive components for the points listed in the argument point.}
+#' \item{mul }{A vector of size p showing in each component the estimated intercept that considers only that direction of interest when using the type 'alpha' method.}
+#' \item{g.derivative }{Matrix of estimated derivatives of the additive components (only when qderivate is ``TRUE'') (n by p).}
+#' \item{prediction.derivate }{Matrix of estimated derivatives of the additive components for the points listed in the argument point (only when qderivate is ``TRUE'').}
+#' \item{Xp}{Matrix of explanatory variables.}
+#' \item{yp}{Vector of responses.}
+#'
+#' @keywords Additive Models
+#' @author Alejandra Martinez, Matias Salibian-Barrera
 #' @export
+
 
 
 ## Robust Marginal Integration
@@ -1008,8 +1117,19 @@ margint.rob <- function(Xp, yp, point=NULL, windows, prob=NULL, sigma.hat=NULL,
 
 #S3 Methods
 
-#' @param variable
-#' @return value
+#' Residuals of a marginal integration fit in an additive model
+#'
+#' This function returns the residuals of the fitted additive model using one of the three
+#' classical or robust marginal integration estimators, as computed with \code{\link{margint.cl}} or
+#' \code{\link{margint.rob}}.
+#'
+#' @param object an object of class \code{margint}, a result of a call to \code{\link{margint.cl}} or \code{\link{margint.rob}}.
+#' @param ... additional other arguments.
+#'
+#' @return A vector of residuals.
+#'
+#' @author Alejandra Mercedes Martinez \email{alemartinez@unlu.edu.ar}
+#'
 #' @export
 
 residuals.margint <- function(object, ...){
@@ -1017,18 +1137,35 @@ residuals.margint <- function(object, ...){
 }
 
 
-#' @param variable
-#' @return value
+#' Fitted values for objects of class \code{margint}
+#'
+#' This function returns the fitted values given the covariates of the original sample under an additive model using a classical or robust marginal integration procedure estimator computed with \code{\link{margint.cl}} or \code{\link{margint.rob}}.
+#'
+#' @param object an object of class \code{margint}, a result of a call to \code{\link{margint.cl}} or \code{\link{margint.rob}}.
+#' @param ... additional other arguments.
+#'
+#' @return A vector of fitted values.
+#'
+#' @author Alejandra Mercedes Martinez \email{alemartinez@unlu.edu.ar}
+#'
 #' @export
 
 predict.margint <- function(object, ...){
   return( rowSums(object$g.matrix) + object$mu )
 }
 
-#' @param variable
-#' @return value
+#' Diagnostic plots for objects of class \code{margint}
+#'
+#' Plot method for class \code{margint}.
+#'
+#' @param object an object of class \code{margint}, a result of a call to \code{\link{margint.cl}} or \code{\link{margint.rob}}.
+#' @param which vector of indices of explanatory variables for which partial residuals plots will be generated. Defaults to all available explanatory variables.
+#' @param ask logical value. If \code{TRUE}, the graphical device will prompt before going to the next page/screen of output.
+#' @param ... additional other arguments.
+#'
+#' @author Alejandra Mercedes Martinez \email{alemartinez@unlu.edu.ar}
+#'
 #' @export
-
 plot.margint <- function(object, which=1:np, ask=FALSE,...){
   Xp <- object$Xp
   np <- dim(Xp)[2]
@@ -1054,9 +1191,19 @@ plot.margint <- function(object, which=1:np, ask=FALSE,...){
   }
 }
 
-#' @param variable
-#' @return value
+#' Summary for additive models fits using a marginal integration procedure
+#'
+#' Summary method for class \code{margint}.
+#'
+#' This function returns the estimation of the intercept and also the five-number summary and the mean of the residuals for both classical and robust estimators. For the robust estimator it also returns the estimate of the residual standard error.
+#'
+#' @param object an object of class \code{margint}, a result of a call to \code{\link{margint.cl}} or \code{\link{margint.rob}}.
+#' @param ... additional other arguments.
+#'
+#' @author Alejandra Mercedes Martinez \email{alemartinez@unlu.edu.ar}
+#'
 #' @export
+#' @aliases summary.margint summary.margint.cl summary.margint.rob
 
 summary.margint <- function(object,...){
   NextMethod()
