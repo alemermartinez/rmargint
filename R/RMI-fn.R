@@ -1209,6 +1209,7 @@ summary.margint <- function(object,...){
   NextMethod()
 }
 
+
 #' @export
 
 summary.margint.cl <- function(object,...){
@@ -1217,6 +1218,7 @@ summary.margint.cl <- function(object,...){
   message("Residuals:")
   summary(res)
 }
+
 
 #' @export
 
