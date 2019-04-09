@@ -1159,6 +1159,7 @@ predict.margint <- function(object, ...){
 #' Plot method for class \code{margint}.
 #'
 #' @param object an object of class \code{margint}, a result of a call to \code{\link{margint.cl}} or \code{\link{margint.rob}}.
+#' @param derivative if TRUE, it plots the q-th derivatives. Defaults to FALSE.
 #' @param which vector of indices of explanatory variables for which partial residuals plots will be generated. Defaults to all available explanatory variables.
 #' @param ask logical value. If \code{TRUE}, the graphical device will prompt before going to the next page/screen of output.
 #' @param ... additional other arguments.
@@ -1166,27 +1167,43 @@ predict.margint <- function(object, ...){
 #' @author Alejandra Mercedes Martinez \email{alemartinez@unlu.edu.ar}
 #'
 #' @export
-plot.margint <- function(object, which=1:np, ask=FALSE,...){
+plot.margint <- function(object, derivative=FALSE, which=1:np, ask=FALSE,...){
   Xp <- object$Xp
   np <- dim(Xp)[2]
   opar <- par(ask=ask)
   on.exit(par(opar))
   these <- rep(FALSE, np)
   these[ which ] <- TRUE
-  for(i in 1:np) {
-    if(these[i]) {
-      ord <- order(Xp[,i])
-      if (is.null(colnames(Xp)) ){
-        x_name <- bquote(paste('x')[.(i)])
-        #paste("x",i,sep="")
-      } else {
-        x_name <- colnames(Xp)[i]
+  if(!derivative){
+    for(i in 1:np) {
+      if(these[i]) {
+        ord <- order(Xp[,i])
+        if (is.null(colnames(Xp)) ){
+          x_name <- bquote(paste('x')[.(i)])
+          #paste("x",i,sep="")
+        } else {
+          x_name <- colnames(Xp)[i]
+        }
+        y_name <- bquote(paste(hat('g')[.(i)]))
+        res <- object$yp - rowSums(object$g.matrix[,-i, drop=FALSE])-object$mu
+        lim_cl <- c(min(res), max(res))
+        plot(Xp[,i], res, pch=20,col='gray45',main="",xlab=x_name,ylab=y_name, ylim=lim_cl,cex.lab=0.8)
+        lines(Xp[ord,i],object$g.matrix[ord,i],lwd=3)
       }
-      y_name <- bquote(paste(hat('g')[.(i)]))
-      res <- object$yp - rowSums(object$g.matrix[,-i, drop=FALSE])-object$mu
-      lim_cl <- c(min(res), max(res))
-      plot(Xp[ord,i],object$g.matrix[ord,i],type="l",lwd=3,main="",xlab=x_name,ylab=y_name, ylim=lim_cl)
-      points(Xp[,i], res, pch=20,col='gray45')
+    }
+  }else{
+    for(i in 1:np) {
+      if(these[i]) {
+        ord <- order(Xp[,i])
+        if (is.null(colnames(Xp)) ){
+          x_name <- bquote(paste('x')[.(i)])
+          #paste("x",i,sep="")
+        } else {
+          x_name <- colnames(Xp)[i]
+        }
+        y_name <- bquote(paste('g'[.(i)]^('q')))
+        plot(Xp[ord,i], object$g.derivate[ord,i], type='l',lwd=3, main="",xlab=x_name,ylab=y_name,cex.lab=0.8)
+      }
     }
   }
 }

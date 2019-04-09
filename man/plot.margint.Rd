@@ -4,10 +4,13 @@
 \alias{plot.margint}
 \title{Diagnostic plots for objects of class \code{margint}}
 \usage{
-\method{plot}{margint}(object, which = 1:np, ask = FALSE, ...)
+\method{plot}{margint}(object, derivative = FALSE, which = 1:np,
+  ask = FALSE, ...)
 }
 \arguments{
 \item{object}{an object of class \code{margint}, a result of a call to \code{\link{margint.cl}} or \code{\link{margint.rob}}.}
+
+\item{derivative}{if TRUE, it plots the q-th derivatives. Defaults to FALSE.}
 
 \item{which}{vector of indices of explanatory variables for which partial residuals plots will be generated. Defaults to all available explanatory variables.}
 
