@@ -4,10 +4,10 @@
 \alias{margint.rob}
 \title{Robust marginal integration procedures for additive models}
 \usage{
-margint.rob(Xp, yp, point = NULL, windows, prob = NULL, sigma.hat = NULL,
-  win.sigma = NULL, epsilon = 1e-06, type = "0", degree = NULL,
-  typePhi = "Huber", k.h = 1.345, k.t = 4.685, max.it = 20,
-  qderivate = FALSE, orderkernel = 2, Qmeasure = NULL)
+margint.rob(Xp, yp, point = NULL, windows, prob = NULL,
+  sigma.hat = NULL, win.sigma = NULL, epsilon = 1e-06, type = "0",
+  degree = NULL, typePhi = "Huber", k.h = 1.345, k.t = 4.685,
+  max.it = 20, qderivate = FALSE, orderkernel = 2, Qmeasure = NULL)
 }
 \arguments{
 \item{Xp}{Matrix of explanatory variables (n by p).}

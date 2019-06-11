@@ -4,9 +4,9 @@
 \alias{margint.cl}
 \title{Classic marginal integration procedures for additive models}
 \usage{
-margint.cl(Xp, yp, point = NULL, windows, epsilon = 1e-06, prob = NULL,
-  type = "0", degree = NULL, qderivate = FALSE, orderkernel = 2,
-  Qmeasure = NULL)
+margint.cl(Xp, yp, point = NULL, windows, epsilon = 1e-06,
+  prob = NULL, type = "0", degree = NULL, qderivate = FALSE,
+  orderkernel = 2, Qmeasure = NULL)
 }
 \arguments{
 \item{Xp}{Matrix of explanatory variables (n by p).}
