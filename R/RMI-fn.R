@@ -27,22 +27,7 @@ psi.tukey <- function(r, k=4.685){
 
 
 
-#' Tukey bi-square weight function
-#' 
-#' This function evaluates the Tukey bi-square weight function defined as Psi(r)/r where Psi is the first derivative of the Tukey loss function. It is used in the re-weighted least squares iterations.
-#' 
-#' @param r A vector of real numbers.
-#' @param k A positive tuning constant.
-#' 
-#' @return A vector of the same length as \code{r}.
-#' 
-#' @author Matias Salibian-Barrera, \email{matias@stat.ubc.ca}, Alejandra Martinez
-#' 
-#' @examples
-#' x <- seq(-2, 2, length=10)
-#' psi.w(r=x, k = 1.5)
-#' 
-#' @export
+# Tukey's weight function "Psi(r)/r"
 psi.w <- function(r, k= 4.685){
   u <- abs(r/k)
   w <- ((1 + u) * (1 - u))^2
@@ -73,22 +58,7 @@ psi.huber <- function(r, k=1.345)
   pmin(k, pmax(-k, r))
 
 
-#' Huber weight function
-#' 
-#' This function evaluates the Huber weight function defined as Psi(r)/r where Psi is the first derivative of the Tukey loss function. It is used in the re-weighted least squares iterations.
-#' 
-#' @param r A vector of real numbers.
-#' @param k A positive tuning constant.
-#' 
-#' @return A vector of the same length as \code{r}.
-#' 
-#' @author Matias Salibian-Barrera, \email{matias@stat.ubc.ca}, Alejandra Martinez
-#' 
-#' @examples
-#' x <- seq(-2, 2, length=10)
-#' psi.huber.w(r=x, k = 1.5)
-#' 
-#' @export
+#Huber's weight function "Psi(r)/r"
 psi.huber.w <- function(r, k=1.345)
   pmin(1, k/abs(r))
 
