@@ -1,15 +1,23 @@
-#' @useDynLib RMI, .registration = TRUE
-#' @import stats graphics
-
-
-#' @title Derivative of Tukey's bi-square loss function
-#' @description Derivative of Tukey's bi-square loss function.
-#' @param r A real number.
-#' @param k Tuning constant.
-#' @author Alejandra Martinez, Matias Salibian-Barrera
-#' @return A real number.
+#' Derivative of Tukey's bi-square loss function.
+#'
+#' This function evaluates the first derivative of Tukey's bi-square loss function.
+#'
+#' This function evaluates the first derivative of Tukey's bi-square loss function.
+#'
+#' @param r A vector of real numbers
+#' @param k A positive tuning constant.
+#'
+#' @return A vector of the same length as \code{r}.
+#'
+#' @author Matias Salibian-Barrera, \email{matias@stat.ubc.ca}, Alejandra Martinez
+#'
+#' @examples
+#' x <- seq(-2, 2, length=10)
+#' psi.tukey(r=x, k = 1.5)
+#'
 #' @export
-
+#' @import stats graphics
+#' @useDynLib RMI, .registration = TRUE
 psi.tukey <- function(r, k=4.685){
   u <- abs(r/k)
   w <- r*((1-u)*(1+u))^2
@@ -19,15 +27,18 @@ psi.tukey <- function(r, k=4.685){
 
 
 
-#' @title Tukey bi-square weight function
-#' @description Tukey bi-square weight function.
-#' @param r A real number.
+#' Tukey bi-square weight function
+#' 
+#' This function evaluates the Tukey bi-square weight function defined as Psi(r)/r where Psi is the first derivative of the Tukey loss function. It is used in the re-weighted least squares iterations.
+#' 
+#' @param r A vector of real numbers.
 #' @param k Tuning constant.
-#' @details he weight function used in the re-weighted least squares iterations.
-#' @return A real number.
-#' @author Alejandra Martinez, Matias Salibian-Barrera
+#' 
+#' @return A vector of the same length as \code{r}.
+#' 
+#' @author Matias Salibian-Barrera, \email{matias@stat.ubc.ca}, Alejandra Martinez
+#' 
 #' @export
-
 #Tukey's weight function "Psi(r)/r"
 psi.w <- function(r, k= 4.685){
   u <- abs(r/k)
