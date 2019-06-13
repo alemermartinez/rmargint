@@ -108,7 +108,7 @@ c(function.g1.prime(point[1]), function.g2.prime(point[2]))
 
 The following figures plot the estimated (in blue) and true (in black) curves for each derivative additive function:
 
-```{r plot of derivatives}
+```{r plotderivatives}
 par(mfrow=c(1,2))
 lim.rob <- matrix(0, 2, 2)
 functions.g.prime <- cbind(function.g1.prime(X[,1]), function.g2.prime(X[,2]))

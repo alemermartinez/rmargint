@@ -131,4 +131,4 @@ for(j in 1:2) {
 }
 ```
 
-![](README_files/figure-markdown_github/plot%20of%20derivatives-1.png)
+![](README_files/figure-markdown_github/plotderivatives-1.png)
