@@ -32,14 +32,17 @@ psi.tukey <- function(r, k=4.685){
 #' This function evaluates the Tukey bi-square weight function defined as Psi(r)/r where Psi is the first derivative of the Tukey loss function. It is used in the re-weighted least squares iterations.
 #' 
 #' @param r A vector of real numbers.
-#' @param k Tuning constant.
+#' @param k A positive tuning constant.
 #' 
 #' @return A vector of the same length as \code{r}.
 #' 
 #' @author Matias Salibian-Barrera, \email{matias@stat.ubc.ca}, Alejandra Martinez
 #' 
+#' @examples
+#' x <- seq(-2, 2, length=10)
+#' psi.w(r=x, k = 1.5)
+#' 
 #' @export
-#Tukey's weight function "Psi(r)/r"
 psi.w <- function(r, k= 4.685){
   u <- abs(r/k)
   w <- ((1 + u) * (1 - u))^2
@@ -48,57 +51,84 @@ psi.w <- function(r, k= 4.685){
 }
 
 
-#' @title Derivative of Huber's loss function
-#' @description Derivative of Huber's loss function.
-#' @param r A real number.
-#' @param k Tuning constant.
-#' @details The weight function used in the re-weighted least squares iterations.
-#' @return A real number.
-#' @author Alejandra Martinez, Matias Salibian-Barrera
+#' Derivative of Huber's loss function.
+#' 
+#' This function evaluates the first derivative of Huber's loss function.
+#'
+#' This function evaluates the first derivative of Huber's loss function.
+#' 
+#' @param r A vector of real numbers.
+#' @param k A positive tuning constant.
+#' 
+#' @return A vector of the same length as \code{r}.
+#' 
+#' @author Matias Salibian-Barrera, \email{matias@stat.ubc.ca}, Alejandra Martinez
+#' 
+#' @examples
+#' x <- seq(-2, 2, length=10)
+#' psi.huber(r=x, k = 1.5)
+#' 
 #' @export
-
-# Huber's Psi
 psi.huber <- function(r, k=1.345)
   pmin(k, pmax(-k, r))
 
 
-#' @title Huber weight function
-#' @description Huber weight function.
-#' @param r A real number.
-#' @param k Tuning constant.
-#' @details The weight function used in the re-weighted least squares iterations.
-#' @return A real number.
-#' @author Alejandra Martinez, Matias Salibian-Barrera
+#' Huber weight function
+#' 
+#' This function evaluates the Huber weight function defined as Psi(r)/r where Psi is the first derivative of the Tukey loss function. It is used in the re-weighted least squares iterations.
+#' 
+#' @param r A vector of real numbers.
+#' @param k A positive tuning constant.
+#' 
+#' @return A vector of the same length as \code{r}.
+#' 
+#' @author Matias Salibian-Barrera, \email{matias@stat.ubc.ca}, Alejandra Martinez
+#' 
+#' @examples
+#' x <- seq(-2, 2, length=10)
+#' psi.huber.w(r=x, k = 1.5)
+#' 
 #' @export
-
-
-#Huber's weight function "Psi(r)/r"
 psi.huber.w <- function(r, k=1.345)
   pmin(1, k/abs(r))
 
 
-#' @title Euclidean norm of a vector
-#' @description Euclidean norm of a vector.
+#' Euclidean norm of a vector
+#' 
+#' This function calculates the Euclidean norm of a vector.
+#' 
 #' @param x A real vector.
+#' 
 #' @return The Euclidean norm of the input vector.
-#' @author Alejandra Martinez, Matias Salibian-Barrera
+#' 
+#' @author Matias Salibian-Barrera, \email{matias@stat.ubc.ca}, Alejandra Martinez
+#' 
+#' @examples 
+#' x <- seq(-2, 2, length=10)
+#' my.norm.2(x)
+#' 
 #' @export
-
-
-#Euclidean norm
 my.norm.2 <- function(x) sqrt(sum(x^2))
 
 
-#' @title Epanechnikov kernel
-#' @description Epanechnikov kernel.
-#' @usage k.epan(x)
-#' kernel2(x)
-#' @param x A real number.
-#' @author Alejandra Martinez, Matias Salibian-Barrera
-#' @return 0 if abs(x) > 1 and 0.75 * (1 - x^2) otherwise.
+#' Epanechnikov kernel
+#'
+#' This function evaluates an Epanechnikov kernel
+#'
+#' This function evaluates an Epanechnikov kernel
+#'
+#' @param x a vector of real numbers
+#'
+#' @return A vector of the same length as \code{x} where each entry is
+#' \code{0.75 * (1 - x^2)} if \code{x < 1} and 0 otherwise.
+#'
+#' @author Matias Salibian-Barrera, \email{matias@stat.ubc.ca}, Alejandra Martinez
+#'
+#' @examples
+#' x <- seq(-2, 2, length=10)
+#' k.epan(x)
+#'
 #' @export
-
-#Epanechnikov kernel
 k.epan<-function(x) {
   a <- 0.75*(1-x^2)
   tmp <- a*(abs(x)<=1)
@@ -107,22 +137,27 @@ k.epan<-function(x) {
 
 
 #' @export
-
 #Order 2 kernel = Epanechnikov kernel
 kernel2<-function(t){
   nucleo<- (3/4)*(1-t^2)*(abs(t)<=1)
   nucleo
 }
 
+
 #- Higher order kernels -#
 
-
-#' @title Order 4 kernel
-#' @description A kernel of order 4.
-#' @param x A real number.
-#' @author Alejandra Martinez, Matias Salibian-Barrera
+#' Order 4 kernel
+#' 
+#' This functions evaluates a kernel of order 4.
+#' 
+#' This functions evaluates a kernel of order 4. A kernel L is a kernel of order 4 if it integrates 1, the integrals of u^j L(u) are 0 for 1 <= j < 4 (j integer) and the integral of u^4 L(u) is different from 0.
+#' 
+#' @param x A vector of real numbers.
+#' 
+#' @author Alejandra Martinez, \email{ale_m_martinez@hotmail.com}, Matias Salibian-Barrera
+#' 
 #' @return 0 if abs(x) > 1 and ( 15/32 ) * ( 1 - x^2 ) * ( 3 - 7 * x^2 ) otherwise.
-#' @details A kernel L is a kernel of order 4 if it integrates 1, the integrals of u^j L(u) are 0 for 1 <= j < 4 (j integer) and the integral of u^4 L(u) is different from 0.
+#' 
 #' @export
 
 #Order 4
