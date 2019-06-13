@@ -247,17 +247,16 @@ kernel10<-function(x) {
 #' @examples 
 #' function.g1 <- function(x1) 24*(x1-1/2)^2-2
 #' function.g2 <- function(x2) 2*pi*sin(pi*x2)-4
-#' set.seed(140)
-#' n <- 500
+#' n <- 200
 #' x1 <- runif(n)
 #' x2 <- runif(n)
 #' X <- cbind(x1, x2)
 #' eps <- rnorm(n,0,sd=0.15)
 #' regresion <- function.g1(x1) + function.g2(x2)
 #' y <- regresion + eps
-#' bandw <- matrix(0.1,2,2)
+#' bandw <- matrix(0.2,2,2)
 #' set.seed(8090)
-#' nQ <- 200 
+#' nQ <- 100 
 #' Qmeasure <- matrix(runif(nQ*2), nQ, 2)
 #' fit.cl <- margint.cl(Xp=X, yp=y, windows=bandw, type='alpha', degree=1, Qmeasure=Qmeasure)
 #' 
@@ -618,18 +617,18 @@ margint.cl <- function(Xp, yp, point=NULL, windows, epsilon=1e-6, prob=NULL,
 #' function.g1 <- function(x1) 24*(x1-1/2)^2-2
 #' function.g2 <- function(x2) 2*pi*sin(pi*x2)-4
 #' set.seed(140)
-#' n <- 500
+#' n <- 200
 #' x1 <- runif(n)
 #' x2 <- runif(n)
 #' X <- cbind(x1, x2)
 #' eps <- rnorm(n,0,sd=0.15)
 #' regresion <- function.g1(x1) + function.g2(x2)
 #' y <- regresion + eps
-#' bandw <- matrix(0.1,2,2)
+#' bandw <- matrix(0.2,2,2)
 #' set.seed(8090)
-#' nQ <- 200 
+#' nQ <- 100 
 #' Qmeasure <- matrix(runif(nQ*2), nQ, 2)
-#' fit.rob <- margint.rob(Xp=X, yp=y, windows=rep(0.1,2), type='alpha', degree=1, Qmeasure=Qmeasure)
+#' fit.rob <- margint.rob(Xp=X, yp=y, windows=bandw, type='alpha', degree=1, Qmeasure=Qmeasure)#' 
 #' 
 #' @export
 margint.rob <- function(Xp, yp, point=NULL, windows, prob=NULL, sigma.hat=NULL,
@@ -1212,19 +1211,19 @@ predict.margint <- function(object, ...){
 #' function.g1 <- function(x1) 24*(x1-1/2)^2-2
 #' function.g2 <- function(x2) 2*pi*sin(pi*x2)-4
 #' set.seed(140)
-#' n <- 500
+#' n <- 200
 #' x1 <- runif(n)
 #' x2 <- runif(n)
 #' X <- cbind(x1, x2)
 #' eps <- rnorm(n,0,sd=0.15)
 #' regresion <- function.g1(x1) + function.g2(x2)
 #' y <- regresion + eps
-#' bandw <- rep(0.1,2)
+#' bandw <- matrix(0.2,2,2)
 #' set.seed(8090)
-#' nQ <- 200 
+#' nQ <- 100 
 #' Qmeasure <- matrix(runif(nQ*2), nQ, 2)
 #' fit.rob <- margint.rob(Xp=X, yp=y, windows=bandw, type='alpha', degree=1, Qmeasure=Qmeasure)
-#' plot(fit.rob, which=1)
+#' plot(fit.rob,which=1)
 #' 
 #' @export
 plot.margint <- function(x, derivative=FALSE, which=1:np, ask=FALSE,...){
