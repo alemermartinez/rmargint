@@ -77,7 +77,7 @@ bandw <- matrix(0.1,2,2)
 set.seed(8090)
 nQ <- 200 
 Qmeasure <- matrix(runif(nQ*2), nQ, 2)
-fit.rob <- margint.rob(Xp=X, yp=y, windows=rep(0.1,2), type='alpha', degree=1, typePhi='Huber', Qmeasure=Qmeasure)
+fit.rob <- margint.rob(Xp=X, yp=y, windows=rep(0.1,2), type='alpha', degree=1, Qmeasure=Qmeasure)
 
 }
 \references{
