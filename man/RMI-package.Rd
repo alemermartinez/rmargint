@@ -3,10 +3,10 @@
 \alias{RMI}
 \docType{package}
 \title{
-Robust marginal integration procedures for additive models
+Robust marginal integration procedures for additive models.
 }
 \description{
-Robust marginal integration procedures for additive models
+Robust marginal integration procedures for additive models.
 }
 \details{
 \tabular{ll}{
