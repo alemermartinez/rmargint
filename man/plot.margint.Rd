@@ -8,6 +8,8 @@
   ask = FALSE, ...)
 }
 \arguments{
+\item{x}{an object of class \code{margint}, a result of a call to \code{\link{margint.cl}} or \code{\link{margint.rob}}.}
+
 \item{derivative}{if TRUE, it plots the q-th derivatives. Defaults to FALSE.}
 
 \item{which}{vector of indices of explanatory variables for which partial residuals plots will be generated. Defaults to all available explanatory variables.}
@@ -15,8 +17,6 @@
 \item{ask}{logical value. If \code{TRUE}, the graphical device will prompt before going to the next page/screen of output.}
 
 \item{...}{additional other arguments.}
-
-\item{object}{an object of class \code{margint}, a result of a call to \code{\link{margint.cl}} or \code{\link{margint.rob}}.}
 }
 \description{
 Plot method for class \code{margint}.
@@ -32,11 +32,11 @@ X <- cbind(x1, x2)
 eps <- rnorm(n,0,sd=0.15)
 regresion <- function.g1(x1) + function.g2(x2)
 y <- regresion + eps
-bandw <- matrix(0.1,2,2)
+bandw <- rep(0.1,2)
 set.seed(8090)
 nQ <- 200 
 Qmeasure <- matrix(runif(nQ*2), nQ, 2)
-fit.rob <- margint.rob(Xp=X, yp=y, windows=rep(0.1,2), epsilon=1e-10, type='alpha', degree=1, orderkernel = 2, typePhi='Huber', Qmeasure=Qmeasure)
+fit.rob <- margint.rob(Xp=X, yp=y, windows=bandw, type='alpha', degree=1, typePhi='Huber', Qmeasure=Qmeasure)
 plot(fit.rob, which=1)
 
 }
