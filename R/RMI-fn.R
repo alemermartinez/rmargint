@@ -136,7 +136,6 @@ k.epan<-function(x) {
 }
 
 
-#' @export
 #Order 2 kernel = Epanechnikov kernel
 kernel2<-function(t){
   nucleo<- (3/4)*(1-t^2)*(abs(t)<=1)
@@ -290,7 +289,7 @@ kernel10<-function(x) {
 #' set.seed(8090)
 #' nQ <- 200 
 #' Qmeasure <- matrix(runif(nQ*2), nQ, 2)
-#' fit.cl <- margint.cl(Xp=X, yp=y, windows=bandw, epsilon=1e-10, type='alpha', degree=1, orderkernel=2, Qmeasure=Qmeasure)
+#' fit.cl <- margint.cl(Xp=X, yp=y, windows=bandw, type='alpha', degree=1, Qmeasure=Qmeasure)
 #' 
 #' @export
 margint.cl <- function(Xp, yp, point=NULL, windows, epsilon=1e-6, prob=NULL,
@@ -300,20 +299,20 @@ margint.cl <- function(Xp, yp, point=NULL, windows, epsilon=1e-6, prob=NULL,
   if(!is.null(dim(Xp))){
     if(type=='alpha'){
       if(is.null(degree)){
-        stop("Degree of local polynomial missing")
+        return("Degree of local polynomial missing") #stop("Degree of local polynomial missing")
       }else{
         if( length(windows)==1 ){
-          stop("Windows should be a vector o a matrix")
+          return("Windows should be a vector o a matrix") #stop("Windows should be a vector o a matrix")
         }
       }
     }else{
       if( (is.matrix(windows)) | (length(windows)==1)  ){
-        stop("Windows should be a vector")
+        return("Windows should be a vector") #stop("Windows should be a vector")
       }
     }
   }else{
     if(!is.null(dim(windows))){
-      stop("Windows should be a number")
+      return("Windows should be a number") #stop("Windows should be a number")
     }
   }
 
@@ -660,7 +659,7 @@ margint.cl <- function(Xp, yp, point=NULL, windows, epsilon=1e-6, prob=NULL,
 #' set.seed(8090)
 #' nQ <- 200 
 #' Qmeasure <- matrix(runif(nQ*2), nQ, 2)
-#' fit.rob <- margint.rob(Xp=X, yp=y, windows=rep(0.1,2), epsilon=1e-10, type='alpha', degree=1, orderkernel = 2, typePhi='Huber', Qmeasure=Qmeasure)
+#' fit.rob <- margint.rob(Xp=X, yp=y, windows=rep(0.1,2), type='alpha', degree=1, Qmeasure=Qmeasure)
 #' 
 #' @export
 margint.rob <- function(Xp, yp, point=NULL, windows, prob=NULL, sigma.hat=NULL,
@@ -672,20 +671,20 @@ margint.rob <- function(Xp, yp, point=NULL, windows, prob=NULL, sigma.hat=NULL,
   if(!is.null(dim(Xp))){
     if(type=='alpha'){
       if(is.null(degree)){
-        stop("Degree of local polynomial missing")
+        return("Degree of local polynomial missing") #stop("Degree of local polynomial missing")
       }else{
         if( length(windows)==1 ){
-          stop("Windows should be a vector or a matrix")
+          return("Windows should be a vector or a matrix") #stop("Windows should be a vector or a matrix")
         }
       }
     }else{
       if( (is.matrix(windows)) | (length(windows)==1) ){
-        stop("Windows should be a vector")
+        return("Windows should be a vector") #stop("Windows should be a vector")
       }
     }
   }else{
     if(!is.null(dim(windows))){
-      stop("Windows should be a number")
+      return("Windows should be a number") #stop("Windows should be a number")
     }
   }
 
@@ -1231,7 +1230,7 @@ predict.margint <- function(object, ...){
 #'
 #' Plot method for class \code{margint}.
 #'
-#' @param object an object of class \code{margint}, a result of a call to \code{\link{margint.cl}} or \code{\link{margint.rob}}.
+#' @param x an object of class \code{margint}, a result of a call to \code{\link{margint.cl}} or \code{\link{margint.rob}}.
 #' @param derivative if TRUE, it plots the q-th derivatives. Defaults to FALSE.
 #' @param which vector of indices of explanatory variables for which partial residuals plots will be generated. Defaults to all available explanatory variables.
 #' @param ask logical value. If \code{TRUE}, the graphical device will prompt before going to the next page/screen of output.
@@ -1250,11 +1249,11 @@ predict.margint <- function(object, ...){
 #' eps <- rnorm(n,0,sd=0.15)
 #' regresion <- function.g1(x1) + function.g2(x2)
 #' y <- regresion + eps
-#' bandw <- matrix(0.1,2,2)
+#' bandw <- rep(0.1,2)
 #' set.seed(8090)
 #' nQ <- 200 
 #' Qmeasure <- matrix(runif(nQ*2), nQ, 2)
-#' fit.rob <- margint.rob(Xp=X, yp=y, windows=rep(0.1,2), epsilon=1e-10, type='alpha', degree=1, orderkernel = 2, typePhi='Huber', Qmeasure=Qmeasure)
+#' fit.rob <- margint.rob(Xp=X, yp=y, windows=bandw, type='alpha', degree=1, Qmeasure=Qmeasure)
 #' plot(fit.rob, which=1)
 #' 
 #' @export
