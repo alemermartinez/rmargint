@@ -63,7 +63,7 @@ bandw <- matrix(0.1,2,2)
 set.seed(8090)
 nQ <- 200 
 Qmeasure <- matrix(runif(nQ*2), nQ, 2)
-fit.cl <- margint.cl(Xp=X, yp=y, windows=bandw, epsilon=1e-10, type='alpha', degree=1, orderkernel=2, Qmeasure=Qmeasure)
+fit.cl <- margint.cl(Xp=X, yp=y, windows=bandw, type='alpha', degree=1, Qmeasure=Qmeasure)
 
 }
 \references{
