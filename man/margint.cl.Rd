@@ -9,7 +9,7 @@ margint.cl(Xp, yp, point = NULL, windows, epsilon = 1e-06,
   orderkernel = 2, Qmeasure = NULL)
 }
 \arguments{
-\item{Xp}{Matrix of explanatory variables (n by p).}
+\item{Xp}{Matrix (n by p) of explanatory variables.}
 
 \item{yp}{Vector of responses (missing values are allowed).}
 
@@ -19,7 +19,7 @@ margint.cl(Xp, yp, point = NULL, windows, epsilon = 1e-06,
 
 \item{epsilon}{Convergence criterion.}
 
-\item{prob}{Probabilities of observing each response (n). Defaults to ``NULL''.}
+\item{prob}{Vector of robabilities of observing each response (n). Defaults to ``NULL''.}
 
 \item{type}{Three different type of estimators can be selected: type '0' (local constant on all the covariates), type '1' (local linear smoother on all the covariates), type 'alpha' (local polynomial smoother only on the direction of interest).}
 
@@ -32,6 +32,7 @@ margint.cl(Xp, yp, point = NULL, windows, epsilon = 1e-06,
 \item{Qmeasure}{A matrix of points where the integration procedure ocurrs. Defaults to ``NULL'' for calcuting the integrals over the sample.}
 }
 \value{
+A list with the following components:
 \item{mu}{Estimate for the intercept.}
 \item{g.matrix}{Matrix of estimated additive components (n by p).}
 \item{prediction }{Matrix of estimated additive components for the points listed in the argument point.}
@@ -42,13 +43,35 @@ margint.cl(Xp, yp, point = NULL, windows, epsilon = 1e-06,
 \item{yp}{Vector of responses.}
 }
 \description{
-Standard marginal integration procedures for additive models.
+This function computes the standard marginal integration procedures for additive models.
 }
 \details{
-Three types of classical marginal integration procedures for additive models, that is, considering a squared loss function.
+This function computes three types of classical marginal integration procedures for additive models, that is, considering a squared loss function.
+}
+\examples{
+function.g1 <- function(x1) 24*(x1-1/2)^2-2
+function.g2 <- function(x2) 2*pi*sin(pi*x2)-4
+set.seed(140)
+n <- 500
+x1 <- runif(n)
+x2 <- runif(n)
+X <- cbind(x1, x2)
+eps <- rnorm(n,0,sd=0.15)
+regresion <- function.g1(x1) + function.g2(x2)
+y <- regresion + eps
+bandw <- matrix(0.1,2,2)
+set.seed(8090)
+nQ <- 200 
+Qmeasure <- matrix(runif(nQ*2), nQ, 2)
+fit.cl <- margint.cl(Xp=X, yp=y, windows=bandw, epsilon=1e-10, type='alpha', degree=1, orderkernel=2, Qmeasure=Qmeasure)
+
+}
+\references{
+Chen R, Härdle W, Linton OB, Severance-Lossin E (1996). Nonparametric estimation of additive separable regression models. Physica-Verlag HD, Switzerland. 
+Linton O, Nielsen J (1995). A kernel method of estimating structured nonparametric regression based on marginal integration. Biometrika, 82(1), 93–101.
+Serverance-Lossin E, Sperlich S (1999). Estimation of derivatives for additive separable models. Statistics, 33(3), 241–265.
+Tjøstheim D, Auestad B (1994). Nonparametric identification of nonlinear time series: Selecting significant lags. Journal of the American Statistical Association, 89(428), 1410–1430.
 }
 \author{
-Alejandra Martinez, Matias Salibian-Barrera
+Alejandra Martinez, \email{ale_m_martinez@hotmail.com}, Matias Salibian-Barrera
 }
-\keyword{Additive}
-\keyword{Models}

@@ -9,13 +9,18 @@ psi.w(r, k = 4.685)
 \arguments{
 \item{r}{A vector of real numbers.}
 
-\item{k}{Tuning constant.}
+\item{k}{A positive tuning constant.}
 }
 \value{
 A vector of the same length as \code{r}.
 }
 \description{
 This function evaluates the Tukey bi-square weight function defined as Psi(r)/r where Psi is the first derivative of the Tukey loss function. It is used in the re-weighted least squares iterations.
+}
+\examples{
+x <- seq(-2, 2, length=10)
+psi.w(r=x, k = 1.5)
+
 }
 \author{
 Matias Salibian-Barrera, \email{matias@stat.ubc.ca}, Alejandra Martinez

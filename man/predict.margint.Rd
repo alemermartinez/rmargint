@@ -9,7 +9,7 @@
 \arguments{
 \item{object}{an object of class \code{margint}, a result of a call to \code{\link{margint.cl}} or \code{\link{margint.rob}}.}
 
-\item{...}{additional other arguments.}
+\item{...}{additional other arguments. Currently ignored.}
 }
 \value{
 A vector of fitted values.
@@ -18,5 +18,5 @@ A vector of fitted values.
 This function returns the fitted values given the covariates of the original sample under an additive model using a classical or robust marginal integration procedure estimator computed with \code{\link{margint.cl}} or \code{\link{margint.rob}}.
 }
 \author{
-Alejandra Mercedes Martinez \email{alemartinez@unlu.edu.ar}
+Alejandra Mercedes Martinez \email{ale_m_martinez@hotmail.com}
 }

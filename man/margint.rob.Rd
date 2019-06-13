@@ -10,7 +10,7 @@ margint.rob(Xp, yp, point = NULL, windows, prob = NULL,
   max.it = 20, qderivate = FALSE, orderkernel = 2, Qmeasure = NULL)
 }
 \arguments{
-\item{Xp}{Matrix of explanatory variables (n by p).}
+\item{Xp}{Matrix (n by p) of explanatory variables.}
 
 \item{yp}{Vector of responses (missing values are allowed).}
 
@@ -45,6 +45,7 @@ margint.rob(Xp, yp, point = NULL, windows, prob = NULL,
 \item{Qmeasure}{A matrix of points where the integration procedure ocurrs. Defaults to ``NULL'' for calcuting the integrals over the sample.}
 }
 \value{
+A list with the following components:
 \item{mu }{Estimate for the intercept.}
 \item{g.matrix }{Matrix of estimated additive components (n by p).}
 \item{sigma.hat }{Estimate of the residual standard error.}
@@ -56,13 +57,32 @@ margint.rob(Xp, yp, point = NULL, windows, prob = NULL,
 \item{yp}{Vector of responses.}
 }
 \description{
-Robust marginal integration procedures for additive models.
+This function computes robust marginal integration procedures for additive models.
 }
 \details{
-Three types of robust marginal integration procedures for additive models.
+This function computes three types of robust marginal integration procedures for additive models.
+}
+\examples{
+function.g1 <- function(x1) 24*(x1-1/2)^2-2
+function.g2 <- function(x2) 2*pi*sin(pi*x2)-4
+set.seed(140)
+n <- 500
+x1 <- runif(n)
+x2 <- runif(n)
+X <- cbind(x1, x2)
+eps <- rnorm(n,0,sd=0.15)
+regresion <- function.g1(x1) + function.g2(x2)
+y <- regresion + eps
+bandw <- matrix(0.1,2,2)
+set.seed(8090)
+nQ <- 200 
+Qmeasure <- matrix(runif(nQ*2), nQ, 2)
+fit.rob <- margint.rob(Xp=X, yp=y, windows=rep(0.1,2), epsilon=1e-10, type='alpha', degree=1, orderkernel = 2, typePhi='Huber', Qmeasure=Qmeasure)
+
+}
+\references{
+Boente G, Martinez A (2017). Marginal integration M−estimators for additive models. TEST, 26(2), 231–260. https://doi:10.1007/s11749-016-0508-0.
 }
 \author{
-Alejandra Martinez, Matias Salibian-Barrera
+Alejandra Martinez, \email{ale_m_martinez@hotmail.com}, Matias Salibian-Barrera
 }
-\keyword{Additive}
-\keyword{Models}

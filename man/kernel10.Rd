@@ -7,17 +7,22 @@
 kernel10(x)
 }
 \arguments{
-\item{x}{A real number.}
+\item{x}{A vector of real numbers.}
 }
 \value{
 0 if abs(x) > 1 and 0.75 * ( 1 - x^2 ) * ( 315/128 - 105/32 * x^2 + 63/64 * x^4 - 3/32 * x^6 - 1/384 * x^8 ) otherwise.
 }
 \description{
-A kernel of order 10.
+This function evaluates a kernel of order 10. A kernel of order 10.
 }
 \details{
-A kernel L is a kernel of order 10 if it integrates 1, the integrals of u^j L(u) are 0 for 1 <= j < 10 (j integer) and the integral of u^10 L(u) is different from 0.
+This function evaluates a kernel of order 10. A kernel L is a kernel of order 10 if it integrates 1, the integrals of u^j L(u) are 0 for 1 <= j < 10 (j integer) and the integral of u^10 L(u) is different from 0.
+}
+\examples{
+x <- seq(-2,2,length=10)
+kernel10(x)
+
 }
 \author{
-Alejandra Martinez, Matias Salibian-Barrera
+Alejandra Martinez, \email{ale_m_martinez@hotmail.com}, Matias Salibian-Barrera
 }

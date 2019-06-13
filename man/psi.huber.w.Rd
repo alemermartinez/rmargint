@@ -7,19 +7,21 @@
 psi.huber.w(r, k = 1.345)
 }
 \arguments{
-\item{r}{A real number.}
+\item{r}{A vector of real numbers.}
 
-\item{k}{Tuning constant.}
+\item{k}{A positive tuning constant.}
 }
 \value{
-A real number.
+A vector of the same length as \code{r}.
 }
 \description{
-Huber weight function.
+This function evaluates the Huber weight function defined as Psi(r)/r where Psi is the first derivative of the Tukey loss function. It is used in the re-weighted least squares iterations.
 }
-\details{
-The weight function used in the re-weighted least squares iterations.
+\examples{
+x <- seq(-2, 2, length=10)
+psi.huber.w(r=x, k = 1.5)
+
 }
 \author{
-Alejandra Martinez, Matias Salibian-Barrera
+Matias Salibian-Barrera, \email{matias@stat.ubc.ca}, Alejandra Martinez
 }

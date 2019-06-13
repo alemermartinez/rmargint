@@ -5,17 +5,25 @@
 \title{Epanechnikov kernel}
 \usage{
 k.epan(x)
-kernel2(x)
 }
 \arguments{
-\item{x}{A real number.}
+\item{x}{a vector of real numbers}
 }
 \value{
-0 if abs(x) > 1 and 0.75 * (1 - x^2) otherwise.
+A vector of the same length as \code{x} where each entry is
+\code{0.75 * (1 - x^2)} if \code{x < 1} and 0 otherwise.
 }
 \description{
-Epanechnikov kernel.
+This function evaluates an Epanechnikov kernel
+}
+\details{
+This function evaluates an Epanechnikov kernel.
+}
+\examples{
+x <- seq(-2, 2, length=10)
+k.epan(x)
+
 }
 \author{
-Alejandra Martinez, Matias Salibian-Barrera
+Matias Salibian-Barrera, \email{matias@stat.ubc.ca}, Alejandra Martinez
 }

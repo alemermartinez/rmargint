@@ -2,14 +2,14 @@
 % Please edit documentation in R/RMI-fn.R
 \name{residuals.margint}
 \alias{residuals.margint}
-\title{Residuals of a marginal integration fit in an additive model}
+\title{Residuals for objects of class \code{margint}}
 \usage{
 \method{residuals}{margint}(object, ...)
 }
 \arguments{
 \item{object}{an object of class \code{margint}, a result of a call to \code{\link{margint.cl}} or \code{\link{margint.rob}}.}
 
-\item{...}{additional other arguments.}
+\item{...}{additional other arguments. Currently ignored.}
 }
 \value{
 A vector of residuals.
@@ -20,5 +20,5 @@ classical or robust marginal integration estimators, as computed with \code{\lin
 \code{\link{margint.rob}}.
 }
 \author{
-Alejandra Mercedes Martinez \email{alemartinez@unlu.edu.ar}
+Alejandra Mercedes Martinez \email{ale_m_martinez@hotmail.com}
 }

@@ -2,24 +2,29 @@
 % Please edit documentation in R/RMI-fn.R
 \name{psi.huber}
 \alias{psi.huber}
-\title{Derivative of Huber's loss function}
+\title{Derivative of Huber's loss function.}
 \usage{
 psi.huber(r, k = 1.345)
 }
 \arguments{
-\item{r}{A real number.}
+\item{r}{A vector of real numbers.}
 
-\item{k}{Tuning constant.}
+\item{k}{A positive tuning constant.}
 }
 \value{
-A real number.
+A vector of the same length as \code{r}.
 }
 \description{
-Derivative of Huber's loss function.
+This function evaluates the first derivative of Huber's loss function.
 }
 \details{
-The weight function used in the re-weighted least squares iterations.
+This function evaluates the first derivative of Huber's loss function.
+}
+\examples{
+x <- seq(-2, 2, length=10)
+psi.huber(r=x, k = 1.5)
+
 }
 \author{
-Alejandra Martinez, Matias Salibian-Barrera
+Matias Salibian-Barrera, \email{matias@stat.ubc.ca}, Alejandra Martinez
 }

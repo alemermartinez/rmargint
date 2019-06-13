@@ -7,17 +7,22 @@
 kernel4(x)
 }
 \arguments{
-\item{x}{A real number.}
+\item{x}{A vector of real numbers.}
 }
 \value{
 0 if abs(x) > 1 and ( 15/32 ) * ( 1 - x^2 ) * ( 3 - 7 * x^2 ) otherwise.
 }
 \description{
-A kernel of order 4.
+This function evaluates a kernel of order 4.
 }
 \details{
-A kernel L is a kernel of order 4 if it integrates 1, the integrals of u^j L(u) are 0 for 1 <= j < 4 (j integer) and the integral of u^4 L(u) is different from 0.
+This function evaluates a kernel of order 4. A kernel L is a kernel of order 4 if it integrates 1, the integrals of u^j L(u) are 0 for 1 <= j < 4 (j integer) and the integral of u^4 L(u) is different from 0.
+}
+\examples{
+x <- seq(-2,2,length=10)
+kernel4(x)
+
 }
 \author{
-Alejandra Martinez, Matias Salibian-Barrera
+Alejandra Martinez, \email{ale_m_martinez@hotmail.com}, Matias Salibian-Barrera
 }

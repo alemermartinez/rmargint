@@ -13,8 +13,13 @@ my.norm.2(x)
 The Euclidean norm of the input vector.
 }
 \description{
-Euclidean norm of a vector.
+This function calculates the Euclidean norm of a vector.
+}
+\examples{
+x <- seq(-2, 2, length=10)
+my.norm.2(x)
+
 }
 \author{
-Alejandra Martinez, Matias Salibian-Barrera
+Matias Salibian-Barrera, \email{matias@stat.ubc.ca}, Alejandra Martinez
 }
