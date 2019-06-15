@@ -1,6 +1,6 @@
-Package: RMI
+Package: RMIE
 Type: Package
-Title: Robust marginal integration
+Title: Robust Marginal Integration Estimators
 Version: 1.0.0
 Date: 2019-06-11
 Authors@R: c(person("Alejandra", "Martinez", role=c("cre"), email="ale_m_martinez@hotmail.com"),
