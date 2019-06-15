@@ -11,7 +11,7 @@ output:
 
 This repository contains an <code>R</code> package with the classical and robust marginal integration procedures for estimating the additive components in an additive model, implementing the proposal of Graciela Boente and Alejandra Martinez in
 
-> Boente G. and Martínez A. (2017). Marginal integration M−estimators for additive models. TEST, 26, 231-260.
+> Boente G. and Martinez A. (2017). Marginal integration M−estimators for additive models. TEST, 26, 231-260.
 
 The package can be install from <code>R</code> by using
 
