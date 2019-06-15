@@ -1,4 +1,4 @@
-Package: RMIE
+Package: RMI
 Type: Package
 Title: Robust Marginal Integration Estimators
 Version: 1.0.0
