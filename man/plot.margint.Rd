@@ -37,7 +37,7 @@ set.seed(8090)
 nQ <- 100 
 Qmeasure <- matrix(runif(nQ*2), nQ, 2)
 fit.rob <- margint.rob(Xp=X, yp=y, windows=bandw, type='alpha', degree=1, Qmeasure=Qmeasure)
-plot(fit.rob,which=1)
+plot(fit.rob, which=1)
 
 }
 \author{
