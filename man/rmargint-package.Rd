@@ -1,6 +1,6 @@
-\name{RMI-package}
-\alias{RMI-package}
-\alias{RMI}
+\name{rmargint-package}
+\alias{rmargint-package}
+\alias{rmargint}
 \docType{package}
 \title{
 Robust marginal integration estimators for additive models.
@@ -10,7 +10,7 @@ Robust marginal integration estimators for additive models.
 }
 \details{
 \tabular{ll}{
-Package: \tab RMI\cr
+Package: \tab rmargint\cr
 Type: \tab Package\cr
 Version: \tab 1.0\cr
 Date: \tab 2019-06-15\cr

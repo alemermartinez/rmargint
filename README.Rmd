@@ -17,7 +17,7 @@ The package can be install from <code>R</code> by using
 
 ```{r installation, results='hide', cache=FALSE, results=FALSE, warning=FALSE, comment=FALSE, message=FALSE}
 library(devtools)
-install_github("alemermartinez/RMI")
+install_github("alemermartinez/rmargint")
 ```
 
 The following example corresponds to one of the 2-dimensional simulated samples considered in the paper.
@@ -25,7 +25,7 @@ The following example corresponds to one of the 2-dimensional simulated samples 
 Let begin by defining the additive functions and then generating the simulated sample.
 
 ```{r generating data}
-library(RMI)
+library(rmargint)
 
 function.g1 <- function(x1) 24*(x1-1/2)^2-2
 function.g2 <- function(x2) 2*pi*sin(pi*x2)-4

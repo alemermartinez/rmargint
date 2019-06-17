@@ -17,7 +17,7 @@
 #'
 #' @export
 #' @import stats graphics
-#' @useDynLib RMI, .registration = TRUE
+#' @useDynLib rmargint, .registration = TRUE
 psi.tukey <- function(r, k=4.685){
   u <- abs(r/k)
   w <- r*((1-u)*(1+u))^2
