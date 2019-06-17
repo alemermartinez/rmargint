@@ -3,7 +3,7 @@
 // #include <math.h>
 
 #include <R.h>
-#include "RMI.h"
+#include "rmargint.h"
 
 #define ZERO 1e-10
 #define TOL_INVERSE ZERO
