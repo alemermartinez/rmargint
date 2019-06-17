@@ -51,14 +51,14 @@ This function computes three types of classical marginal integration procedures 
 \examples{
 function.g1 <- function(x1) 24*(x1-1/2)^2-2
 function.g2 <- function(x2) 2*pi*sin(pi*x2)-4
-n <- 200
+n <- 150
 x1 <- runif(n)
 x2 <- runif(n)
 X <- cbind(x1, x2)
 eps <- rnorm(n,0,sd=0.15)
 regresion <- function.g1(x1) + function.g2(x2)
 y <- regresion + eps
-bandw <- matrix(0.2,2,2)
+bandw <- matrix(0.25,2,2)
 set.seed(8090)
 nQ <- 80 
 Qmeasure <- matrix(runif(nQ*2), nQ, 2)
