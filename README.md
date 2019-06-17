@@ -1,5 +1,5 @@
-A marginal integration procedure
---------------------------------
+Marginal integration procedures
+-------------------------------
 
 This repository contains an <code>R</code> package with the classical and robust marginal integration procedures for estimating the additive components in an additive model, implementing the proposal of Graciela Boente and Alejandra Martinez in
 
@@ -9,7 +9,7 @@ The package can be install from <code>R</code> by using
 
 ``` r
 library(devtools)
-install_github("alemermartinez/RMI")
+install_github("alemermartinez/rmargint")
 ```
 
 The following example corresponds to one of the 2-dimensional simulated samples considered in the paper.
@@ -17,7 +17,7 @@ The following example corresponds to one of the 2-dimensional simulated samples 
 Let begin by defining the additive functions and then generating the simulated sample.
 
 ``` r
-library(RMI)
+library(rmargint)
 
 function.g1 <- function(x1) 24*(x1-1/2)^2-2
 function.g2 <- function(x2) 2*pi*sin(pi*x2)-4

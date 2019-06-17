@@ -7,7 +7,7 @@ output:
     variant: markdown_github
 ---
 
-## A marginal integration procedure
+## Marginal integration procedures
 
 This repository contains an <code>R</code> package with the classical and robust marginal integration procedures for estimating the additive components in an additive model, implementing the proposal of Graciela Boente and Alejandra Martinez in
 
