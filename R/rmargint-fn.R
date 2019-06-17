@@ -22,7 +22,7 @@ psi.tukey <- function(r, k=4.685){
   u <- abs(r/k)
   w <- r*((1-u)*(1+u))^2
   w[u>1] <- 0
-  return(w)
+  return(w) 
 }
 
 
