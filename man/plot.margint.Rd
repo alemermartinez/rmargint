@@ -34,7 +34,7 @@ regresion <- function.g1(x1) + function.g2(x2)
 y <- regresion + eps
 bandw <- matrix(0.2,2,2)
 set.seed(8090)
-nQ <- 100 
+nQ <- 80 
 Qmeasure <- matrix(runif(nQ*2), nQ, 2)
 fit.rob <- margint.rob(Xp=X, yp=y, windows=bandw, type='alpha', degree=1, Qmeasure=Qmeasure)
 plot(fit.rob, which=1)

@@ -238,9 +238,9 @@ kernel10<-function(x) {
 #' 
 #' @references 
 #' Chen R., Hardle W., Linton O.B., Severance-Lossin E. (1996). Nonparametric estimation of additive separable regression models. Physica-Verlag HD, Switzerland. 
-#' Linton O., Nielsen J .(1995). A kernel method of estimating structured nonparametric regression based on marginal integration. Biometrika, 82(1), 93-101.
+#' Linton O., Nielsen J. (1995). A kernel method of estimating structured nonparametric regression based on marginal integration. Biometrika, 82(1), 93-101.
 #' Serverance-Lossin E., Sperlich S. (1999). Estimation of derivatives for additive separable models. Statistics, 33(3), 241-265.
-#' Tjostheim D, Auestad B. (1994). Nonparametric identification of nonlinear time series: Selecting significant lags. Journal of the American Statistical Association, 89(428), 1410-1430.
+#' Tjostheim D., Auestad B. (1994). Nonparametric identification of nonlinear time series: Selecting significant lags. Journal of the American Statistical Association, 89(428), 1410-1430.
 #' 
 #' @author Alejandra Martinez, \email{ale_m_martinez@hotmail.com}, Matias Salibian-Barrera
 #' 
@@ -256,7 +256,7 @@ kernel10<-function(x) {
 #' y <- regresion + eps
 #' bandw <- matrix(0.2,2,2)
 #' set.seed(8090)
-#' nQ <- 100 
+#' nQ <- 80 
 #' Qmeasure <- matrix(runif(nQ*2), nQ, 2)
 #' fit.cl <- margint.cl(Xp=X, yp=y, windows=bandw, type='alpha', degree=1, Qmeasure=Qmeasure)
 #' 
@@ -626,7 +626,7 @@ margint.cl <- function(Xp, yp, point=NULL, windows, epsilon=1e-6, prob=NULL,
 #' y <- regresion + eps
 #' bandw <- matrix(0.2,2,2)
 #' set.seed(8090)
-#' nQ <- 100 
+#' nQ <- 80 
 #' Qmeasure <- matrix(runif(nQ*2), nQ, 2)
 #' fit.rob <- margint.rob(Xp=X, yp=y, windows=bandw, type='alpha', degree=1, Qmeasure=Qmeasure) 
 #' 
@@ -1220,7 +1220,7 @@ predict.margint <- function(object, ...){
 #' y <- regresion + eps
 #' bandw <- matrix(0.2,2,2)
 #' set.seed(8090)
-#' nQ <- 100 
+#' nQ <- 80 
 #' Qmeasure <- matrix(runif(nQ*2), nQ, 2)
 #' fit.rob <- margint.rob(Xp=X, yp=y, windows=bandw, type='alpha', degree=1, Qmeasure=Qmeasure)
 #' plot(fit.rob, which=1)
