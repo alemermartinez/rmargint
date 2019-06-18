@@ -123,7 +123,7 @@ kernel2<-function(t){
 #' 
 #' @param x A vector of real numbers.
 #' 
-#' @return \code{0} if \code{abs(x) > 1} and \code{( 15/32 ) * ( 1 - x^2 ) * ( 3 - 7 * x^2 )} otherwise.
+#' @return A vector of the same length as \code{x} where each entry is \code{( 15/32 ) * ( 1 - x^2 ) * ( 3 - 7 * x^2 )} if \code{abs(x) < 1} and 0 otherwise.
 #' 
 #' @author Alejandra Martinez, \email{ale_m_martinez@hotmail.com}, Matias Salibian-Barrera
 #' 
@@ -148,7 +148,7 @@ kernel4<-function(x) {
 #' 
 #' @param x A vector of real numbers.
 #' 
-#' @return \code{0} if \code{abs(x) > 1} and \code{( 105/256 ) * ( 1 - x^2 ) * ( 5 - 30 * x^2 + 33 * x^4 )} otherwise.
+#' @return A vector of the same length as \code{x} where each entry is \code{( 105/256 ) * ( 1 - x^2 ) * ( 5 - 30 * x^2 + 33 * x^4 )} if \code{abs(x) < 1} and 0 otherwise.
 #' 
 #' @author Alejandra Martinez, \email{ale_m_martinez@hotmail.com}, Matias Salibian-Barrera
 #' 
@@ -171,7 +171,7 @@ kernel6<-function(x) {
 #' 
 #' @param x A vector of real numbers.
 #' 
-#' @return \code{0} if \code{abs(x) > 1} and \code{( 315/4096 ) * ( 1 - x^2 ) * ( 35 - 385 * x^2 + 1001 * x^4 - 715 * x^6 )} otherwise.
+#' @return A vector of the same length as \code{x} where each entry is \code{( 315/4096 ) * ( 1 - x^2 ) * ( 35 - 385 * x^2 + 1001 * x^4 - 715 * x^6 )} and 0 otherwise.
 #' 
 #' @author Alejandra Martinez, \email{ale_m_martinez@hotmail.com}, Matias Salibian-Barrera
 #' 
@@ -193,7 +193,7 @@ kernel8<-function(x) {
 #' 
 #' @param x A vector of real numbers.
 #' 
-#' @return \code{0} if \code{abs(x) > 1} and \code{0.75 * ( 1 - x^2 ) * ( 315/128 - 105/32 * x^2 + 63/64 * x^4 - 3/32 * x^6 - 1/384 * x^8 )} otherwise.
+#' @return A vector of the same length as \code{x} where each entry is \code{0.75 * ( 1 - x^2 ) * ( 315/128 - 105/32 * x^2 + 63/64 * x^4 - 3/32 * x^6 - 1/384 * x^8 )} and 0 otherwise.
 #' 
 #' @author Alejandra Martinez, \email{ale_m_martinez@hotmail.com}, Matias Salibian-Barrera
 #' 
