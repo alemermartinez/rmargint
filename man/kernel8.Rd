@@ -10,7 +10,7 @@ kernel8(x)
 \item{x}{A vector of real numbers.}
 }
 \value{
-0 if abs(x) > 1 and ( 315/4096 ) * ( 1 - x^2 ) * ( 35 - 385 * x^2 + 1001 * x^4 - 715 * x^6 ) otherwise.
+A vector of the same length as \code{x} where each entry is \code{( 315/4096 ) * ( 1 - x^2 ) * ( 35 - 385 * x^2 + 1001 * x^4 - 715 * x^6 )} and 0 otherwise.
 }
 \description{
 This function evaluates a kernel of order 8.

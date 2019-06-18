@@ -10,7 +10,7 @@ kernel6(x)
 \item{x}{A vector of real numbers.}
 }
 \value{
-0 if abs(x) > 1 and ( 105/256 ) * ( 1 - x^2 ) * ( 5 - 30 * x^2 + 33 * x^4 ) otherwise.
+A vector of the same length as \code{x} where each entry is \code{( 105/256 ) * ( 1 - x^2 ) * ( 5 - 30 * x^2 + 33 * x^4 )} if \code{abs(x) < 1} and 0 otherwise.
 }
 \description{
 This function evaluates a kernel of order 6.

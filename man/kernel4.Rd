@@ -10,7 +10,7 @@ kernel4(x)
 \item{x}{A vector of real numbers.}
 }
 \value{
-0 if abs(x) > 1 and ( 15/32 ) * ( 1 - x^2 ) * ( 3 - 7 * x^2 ) otherwise.
+A vector of the same length as \code{x} where each entry is \code{( 15/32 ) * ( 1 - x^2 ) * ( 3 - 7 * x^2 )} if \code{abs(x) < 1} and 0 otherwise.
 }
 \description{
 This function evaluates a kernel of order 4.

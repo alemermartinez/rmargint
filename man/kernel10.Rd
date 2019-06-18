@@ -10,7 +10,7 @@ kernel10(x)
 \item{x}{A vector of real numbers.}
 }
 \value{
-0 if abs(x) > 1 and 0.75 * ( 1 - x^2 ) * ( 315/128 - 105/32 * x^2 + 63/64 * x^4 - 3/32 * x^6 - 1/384 * x^8 ) otherwise.
+A vector of the same length as \code{x} where each entry is \code{0.75 * ( 1 - x^2 ) * ( 315/128 - 105/32 * x^2 + 63/64 * x^4 - 3/32 * x^6 - 1/384 * x^8 )} and 0 otherwise.
 }
 \description{
 This function evaluates a kernel of order 10. A kernel of order 10.
