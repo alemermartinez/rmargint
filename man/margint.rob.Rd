@@ -18,31 +18,31 @@ margint.rob(Xp, yp, point = NULL, windows, prob = NULL,
 
 \item{windows}{Vector or a squared matrix of bandwidths for the smoothing estimation procedure.}
 
-\item{prob}{Probabilities of observing each response (n). Defaults to ``NULL''.}
+\item{prob}{Probabilities of observing each response (n). Defaults to \code{NULL}.}
 
-\item{sigma.hat}{Estimate of the residual standard error. If NULL we use the mad of the residuals obtained with local medians.}
+\item{sigma.hat}{Estimate of the residual standard error. If \code{NULL} we use the mad of the residuals obtained with local medians.}
 
-\item{win.sigma}{Vector of bandwidths for estimating sigma.hat. If NULL it uses the argument windows if it is a vector or its diagonal if it is a matrix.}
+\item{win.sigma}{Vector of bandwidths for estimating sigma.hat. If \code{NULL} it uses the argument windows if it is a vector or its diagonal if it is a matrix.}
 
 \item{epsilon}{Convergence criterion.}
 
-\item{type}{Three different type of estimators can be selected: type '0' (local constant on all the covariates), type '1' (local linear smoother on all the covariates), type 'alpha' (local polynomial smoother only on the direction of interest).}
+\item{type}{Three different type of estimators can be selected: type \code{'0'} (local constant on all the covariates), type \code{'1'} (local linear smoother on all the covariates), type \code{'alpha'} (local polynomial smoother only on the direction of interest).}
 
-\item{degree}{Degree of the local polynomial smoother in the direction of interest when using the estimator of type 'alpha'. Defaults to ``NULL'' for the case when using estimators of type '0' or '1'.}
+\item{degree}{Degree of the local polynomial smoother in the direction of interest when using the estimator of type \code{'alpha'}. Defaults to \code{NULL} for the case when using estimators of type \code{'0'} or \code{'1'}.}
 
-\item{typePhi}{One of either ``Tukey'' or ``Huber''.}
+\item{typePhi}{One of either \code{'Tukey'} or \code{'Huber'}.}
 
-\item{k.h}{Tuning constant for a Huber-type loss function. Defaults to ``1.345''.}
+\item{k.h}{Tuning constant for a Huber-type loss function. Defaults to \code{1.345}.}
 
-\item{k.t}{Tuning constant for a Tukey-type loss function. Defaults to ``4.685''.}
+\item{k.t}{Tuning constant for a Tukey-type loss function. Defaults to \code{4.685}.}
 
 \item{max.it}{Maximum number of iterations for the algorithm.}
 
-\item{qderivate}{If TRUE, it calculates g^(q+1)/(q+1)! for each component only for the type 'alpha' method. Defaults to ``FALSE''.}
+\item{qderivate}{If TRUE, it calculates \code{g^(q+1)/(q+1)!} for each component only for the type \code{'alpha'} method. Defaults to \code{FALSE}.}
 
-\item{orderkernel}{Order of the kernel used in the nuisance directions when using the estimator of type 'alpha'. Defaults to ``2''.}
+\item{orderkernel}{Order of the kernel used in the nuisance directions when using the estimator of type \code{'alpha'}. Defaults to \code{2}.}
 
-\item{Qmeasure}{A matrix of points where the integration procedure ocurrs. Defaults to ``NULL'' for calcuting the integrals over the sample.}
+\item{Qmeasure}{A matrix of points where the integration procedure ocurrs. Defaults to \code{NULL} for calcuting the integrals over the sample.}
 }
 \value{
 A list with the following components:
@@ -50,9 +50,9 @@ A list with the following components:
 \item{g.matrix }{Matrix of estimated additive components (n by p).}
 \item{sigma.hat }{Estimate of the residual standard error.}
 \item{prediction }{Matrix of estimated additive components for the points listed in the argument point.}
-\item{mul }{A vector of size p showing in each component the estimated intercept that considers only that direction of interest when using the type 'alpha' method.}
-\item{g.derivative }{Matrix of estimated derivatives of the additive components (only when qderivate is ``TRUE'') (n by p).}
-\item{prediction.derivate }{Matrix of estimated derivatives of the additive components for the points listed in the argument point (only when qderivate is ``TRUE'').}
+\item{mul }{A vector of size p showing in each component the estimated intercept that considers only that direction of interest when using the type \code{'alpha'} method.}
+\item{g.derivative }{Matrix of estimated derivatives of the additive components (only when qderivate is \code{TRUE}) (n by p).}
+\item{prediction.derivate }{Matrix of estimated derivatives of the additive components for the points listed in the argument point (only when qderivate is \code{TRUE}).}
 \item{Xp}{Matrix of explanatory variables.}
 \item{yp}{Vector of responses.}
 }
@@ -81,7 +81,7 @@ fit.rob <- margint.rob(Xp=X, yp=y, windows=bandw, type='alpha', degree=1, Qmeasu
 
 }
 \references{
-Boente G., Martinez A. (2017). Marginal integration M-estimators for additive models. TEST, 26(2), 231-260. https://doi:10.1007/s11749-016-0508-0.
+Boente G. and Martinez A. (2017). Marginal integration M-estimators for additive models. TEST, 26(2), 231-260. https://doi.org/10.1007/s11749-016-0508-0
 }
 \author{
 Alejandra Martinez, \email{ale_m_martinez@hotmail.com}, Matias Salibian-Barrera
