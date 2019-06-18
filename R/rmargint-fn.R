@@ -123,7 +123,7 @@ kernel2<-function(t){
 #' 
 #' @param x A vector of real numbers.
 #' 
-#' @return 0 if abs(x) > 1 and ( 15/32 ) * ( 1 - x^2 ) * ( 3 - 7 * x^2 ) otherwise.
+#' @return \code{0} if \code{abs(x) > 1} and \code{( 15/32 ) * ( 1 - x^2 ) * ( 3 - 7 * x^2 )} otherwise.
 #' 
 #' @author Alejandra Martinez, \email{ale_m_martinez@hotmail.com}, Matias Salibian-Barrera
 #' 
@@ -148,7 +148,7 @@ kernel4<-function(x) {
 #' 
 #' @param x A vector of real numbers.
 #' 
-#' @return 0 if abs(x) > 1 and ( 105/256 ) * ( 1 - x^2 ) * ( 5 - 30 * x^2 + 33 * x^4 ) otherwise.
+#' @return \code{0} if \code{abs(x) > 1} and \code{( 105/256 ) * ( 1 - x^2 ) * ( 5 - 30 * x^2 + 33 * x^4 )} otherwise.
 #' 
 #' @author Alejandra Martinez, \email{ale_m_martinez@hotmail.com}, Matias Salibian-Barrera
 #' 
@@ -171,7 +171,7 @@ kernel6<-function(x) {
 #' 
 #' @param x A vector of real numbers.
 #' 
-#' @return 0 if abs(x) > 1 and ( 315/4096 ) * ( 1 - x^2 ) * ( 35 - 385 * x^2 + 1001 * x^4 - 715 * x^6 ) otherwise.
+#' @return \code{0} if \code{abs(x) > 1} and \code{( 315/4096 ) * ( 1 - x^2 ) * ( 35 - 385 * x^2 + 1001 * x^4 - 715 * x^6 )} otherwise.
 #' 
 #' @author Alejandra Martinez, \email{ale_m_martinez@hotmail.com}, Matias Salibian-Barrera
 #' 
@@ -193,7 +193,7 @@ kernel8<-function(x) {
 #' 
 #' @param x A vector of real numbers.
 #' 
-#' @return 0 if abs(x) > 1 and 0.75 * ( 1 - x^2 ) * ( 315/128 - 105/32 * x^2 + 63/64 * x^4 - 3/32 * x^6 - 1/384 * x^8 ) otherwise.
+#' @return \code{0} if \code{abs(x) > 1} and \code{0.75 * ( 1 - x^2 ) * ( 315/128 - 105/32 * x^2 + 63/64 * x^4 - 3/32 * x^6 - 1/384 * x^8 )} otherwise.
 #' 
 #' @author Alejandra Martinez, \email{ale_m_martinez@hotmail.com}, Matias Salibian-Barrera
 #' 
@@ -219,28 +219,28 @@ kernel10<-function(x) {
 #' @param point Matrix of points where predictions will be computed and returned.
 #' @param windows Vector or a squared matrix of bandwidths for the smoothing estimation procedure.
 #' @param epsilon Convergence criterion.
-#' @param prob Vector of robabilities of observing each response (n). Defaults to ``NULL''.
-#' @param type Three different type of estimators can be selected: type '0' (local constant on all the covariates), type '1' (local linear smoother on all the covariates), type 'alpha' (local polynomial smoother only on the direction of interest).
-#' @param degree Degree of the local polynomial smoother in the direction of interest when using the estimator of type 'alpha'. Defaults to ``NULL'' for the case when using estimators of type '0' or '1'.
-#' @param orderkernel Order of the kernel used in the nuisance directions when using the estimator of type 'alpha'. Defaults to ``2''.
-#' @param qderivate If TRUE, it calculates g^(q+1)/(q+1)! for each component only for the type 'alpha' method. Defaults to ``FALSE''.
-#' @param Qmeasure A matrix of points where the integration procedure ocurrs. Defaults to ``NULL'' for calcuting the integrals over the sample.
+#' @param prob Vector of robabilities of observing each response (n). Defaults to \code{NULL}.
+#' @param type Three different type of estimators can be selected: type \code{'0'} (local constant on all the covariates), type \code{'1'} (local linear smoother on all the covariates), type \code{'alpha'} (local polynomial smoother only on the direction of interest).
+#' @param degree Degree of the local polynomial smoother in the direction of interest when using the estimator of type \code{'alpha'}. Defaults to \code{NULL} for the case when using estimators of type \code{'0'} or \code{'1'}.
+#' @param orderkernel Order of the kernel used in the nuisance directions when using the estimator of type \code{'alpha'}. Defaults to \code{2}.
+#' @param qderivate If TRUE, it calculates \code{g^(q+1)/(q+1)!} for each component only for the type \code{'alpha'} method. Defaults to \code{FALSE}.
+#' @param Qmeasure A matrix of points where the integration procedure ocurrs. Defaults to \code{NULL} for calcuting the integrals over the sample.
 #' 
 #' @return A list with the following components:
 #' \item{mu}{Estimate for the intercept.}
 #' \item{g.matrix}{Matrix of estimated additive components (n by p).}
 #' \item{prediction }{Matrix of estimated additive components for the points listed in the argument point.}
-#' \item{mul}{A vector of size p showing in each component the estimated intercept that considers only that direction of interest when using the type 'alpha' method.}
-#' \item{g.derivative }{Matrix of estimated derivatives of the additive components (only when qderivate is ``TRUE'') (n by p).}
-#' \item{prediction.derivate }{Matrix of estimated derivatives of the additive components for the points listed in the argument point (only when qderivate is ``TRUE'').}
+#' \item{mul}{A vector of size p showing in each component the estimated intercept that considers only that direction of interest when using the type \code{'alpha'} method.}
+#' \item{g.derivative }{Matrix of estimated derivatives of the additive components (only when qderivate is \code{TRUE}) (n by p).}
+#' \item{prediction.derivate }{Matrix of estimated derivatives of the additive components for the points listed in the argument point (only when qderivate is \code{TRUE}).}
 #' \item{Xp}{Matrix of explanatory variables.}
 #' \item{yp}{Vector of responses.}
 #' 
 #' @references 
-#' Chen R., Hardle W., Linton O.B., Severance-Lossin E. (1996). Nonparametric estimation of additive separable regression models. Physica-Verlag HD, Switzerland. 
-#' Linton O., Nielsen J. (1995). A kernel method of estimating structured nonparametric regression based on marginal integration. Biometrika, 82(1), 93-101.
-#' Serverance-Lossin E., Sperlich S. (1999). Estimation of derivatives for additive separable models. Statistics, 33(3), 241-265.
-#' Tjostheim D., Auestad B. (1994). Nonparametric identification of nonlinear time series: Selecting significant lags. Journal of the American Statistical Association, 89(428), 1410-1430.
+#' Chen R., Hardle W., Linton O.B. and Severance-Lossin E. (1996). Nonparametric estimation of additive separable regression models. Physica-Verlag HD, Switzerland.
+#' Linton O. and Nielsen J. (1995). A kernel method of estimating structured nonparametric regression based on marginal integration. Biometrika, 82(1), 93-101.
+#' Severance-Lossin E. and Sperlich S. (1999). Estimation of derivatives for additive separable models. Statistics, 33(3), 241-265.
+#' Tjostheim D. and Auestad B. (1994). Nonparametric identification of nonlinear time series: Selecting significant lags. Journal of the American Statistical Association, 89(428), 1410-1430.
 #' 
 #' @author Alejandra Martinez, \email{ale_m_martinez@hotmail.com}, Matias Salibian-Barrera
 #' 
@@ -583,35 +583,34 @@ margint.cl <- function(Xp, yp, point=NULL, windows, epsilon=1e-6, prob=NULL,
 #' @param yp  Vector of responses (missing values are allowed).
 #' @param point Matrix of points where predictions will be computed and returned.
 #' @param windows Vector or a squared matrix of bandwidths for the smoothing estimation procedure.
-#' @param prob Probabilities of observing each response (n). Defaults to ``NULL''.
-#' @param sigma.hat Estimate of the residual standard error. If NULL we use the mad of the residuals obtained with local medians.
-#' @param win.sigma Vector of bandwidths for estimating sigma.hat. If NULL it uses the argument windows if it is a vector or its diagonal if it is a matrix.
+#' @param prob Probabilities of observing each response (n). Defaults to \code{NULL}.
+#' @param sigma.hat Estimate of the residual standard error. If \code{NULL} we use the mad of the residuals obtained with local medians.
+#' @param win.sigma Vector of bandwidths for estimating sigma.hat. If \code{NULL} it uses the argument windows if it is a vector or its diagonal if it is a matrix.
 #' @param epsilon Convergence criterion.
-#' @param type Three different type of estimators can be selected: type '0' (local constant on all the covariates), type '1' (local linear smoother on all the covariates), type 'alpha' (local polynomial smoother only on the direction of interest).
-#' @param degree Degree of the local polynomial smoother in the direction of interest when using the estimator of type 'alpha'. Defaults to ``NULL'' for the case when using estimators of type '0' or '1'.
-#' @param typePhi One of either ``Tukey'' or ``Huber''.
-#' @param k.h Tuning constant for a Huber-type loss function. Defaults to ``1.345''.
-#' @param k.t Tuning constant for a Tukey-type loss function. Defaults to ``4.685''.
+#' @param type Three different type of estimators can be selected: type \code{'0'} (local constant on all the covariates), type \code{'1'} (local linear smoother on all the covariates), type \code{'alpha'} (local polynomial smoother only on the direction of interest).
+#' @param degree Degree of the local polynomial smoother in the direction of interest when using the estimator of type \code{'alpha'}. Defaults to \code{NULL} for the case when using estimators of type \code{'0'} or \code{'1'}.
+#' @param typePhi One of either \code{'Tukey'} or \code{'Huber'}.
+#' @param k.h Tuning constant for a Huber-type loss function. Defaults to \code{1.345}.
+#' @param k.t Tuning constant for a Tukey-type loss function. Defaults to \code{4.685}.
 #' @param max.it Maximum number of iterations for the algorithm.
-#' @param qderivate If TRUE, it calculates g^(q+1)/(q+1)! for each component only for the type 'alpha' method. Defaults to ``FALSE''.
-#' @param orderkernel Order of the kernel used in the nuisance directions when using the estimator of type 'alpha'. Defaults to ``2''.
-#' @param Qmeasure A matrix of points where the integration procedure ocurrs. Defaults to ``NULL'' for calcuting the integrals over the sample.
+#' @param qderivate If TRUE, it calculates \code{g^(q+1)/(q+1)!} for each component only for the type \code{'alpha'} method. Defaults to \code{FALSE}.
+#' @param orderkernel Order of the kernel used in the nuisance directions when using the estimator of type \code{'alpha'}. Defaults to \code{2}.
+#' @param Qmeasure A matrix of points where the integration procedure ocurrs. Defaults to \code{NULL} for calcuting the integrals over the sample.
 #' 
 #' @return A list with the following components:
 #' \item{mu }{Estimate for the intercept.}
 #' \item{g.matrix }{Matrix of estimated additive components (n by p).}
 #' \item{sigma.hat }{Estimate of the residual standard error.}
 #' \item{prediction }{Matrix of estimated additive components for the points listed in the argument point.}
-#' \item{mul }{A vector of size p showing in each component the estimated intercept that considers only that direction of interest when using the type 'alpha' method.}
-#' \item{g.derivative }{Matrix of estimated derivatives of the additive components (only when qderivate is ``TRUE'') (n by p).}
-#' \item{prediction.derivate }{Matrix of estimated derivatives of the additive components for the points listed in the argument point (only when qderivate is ``TRUE'').}
+#' \item{mul }{A vector of size p showing in each component the estimated intercept that considers only that direction of interest when using the type \code{'alpha'} method.}
+#' \item{g.derivative }{Matrix of estimated derivatives of the additive components (only when qderivate is \code{TRUE}) (n by p).}
+#' \item{prediction.derivate }{Matrix of estimated derivatives of the additive components for the points listed in the argument point (only when qderivate is \code{TRUE}).}
 #' \item{Xp}{Matrix of explanatory variables.}
 #' \item{yp}{Vector of responses.}
 #'
 #' @author Alejandra Martinez, \email{ale_m_martinez@hotmail.com}, Matias Salibian-Barrera
 #' 
-#' @references Boente G., Martinez A. (2017). Marginal integration M-estimators for additive models. TEST, 26(2), 231-260. https://doi:10.1007/s11749-016-0508-0.
-#' 
+#' @references Boente G. and Martinez A. (2017). Marginal integration M-estimators for additive models. TEST, 26(2), 231-260. https://doi.org/10.1007/s11749-016-0508-0
 #' 
 #' @examples 
 #' function.g1 <- function(x1) 24*(x1-1/2)^2-2
