@@ -268,20 +268,20 @@ margint.cl <- function(Xp, yp, point=NULL, windows, epsilon=1e-6, prob=NULL,
   if(!is.null(dim(Xp))){
     if(type=='alpha'){
       if(is.null(degree)){
-        return("Degree of local polynomial missing") #stop("Degree of local polynomial missing")
+        stop("Degree of local polynomial missing")
       }else{
         if( length(windows)==1 ){
-          return("Windows should be a vector o a matrix") #stop("Windows should be a vector o a matrix")
+          stop("Windows should be a vector o a matrix")
         }
       }
     }else{
       if( (is.matrix(windows)) | (length(windows)==1)  ){
-        return("Windows should be a vector") #stop("Windows should be a vector")
+        stop("Windows should be a vector")
       }
     }
   }else{
     if(!is.null(dim(windows))){
-      return("Windows should be a number") #stop("Windows should be a number")
+      stop("Windows should be a number")
     }
   }
 
@@ -302,7 +302,7 @@ margint.cl <- function(Xp, yp, point=NULL, windows, epsilon=1e-6, prob=NULL,
   } else {
     prob <- prob[tmp]
   }
-  if(dim(t(as.matrix(windows)))[2]!=q){return("Error Dimension of Bandwidths")}
+  if(dim(t(as.matrix(windows)))[2]!=q){stop("Error Dimension of Bandwidths")}
 
 
   #Initializations
@@ -639,20 +639,20 @@ margint.rob <- function(Xp, yp, point=NULL, windows, prob=NULL, sigma.hat=NULL,
   if(!is.null(dim(Xp))){
     if(type=='alpha'){
       if(is.null(degree)){
-        return("Degree of local polynomial missing") #stop("Degree of local polynomial missing")
+        stop("Degree of local polynomial missing")
       }else{
         if( length(windows)==1 ){
-          return("Windows should be a vector or a matrix") #stop("Windows should be a vector or a matrix")
+          stop("Windows should be a vector or a matrix")
         }
       }
     }else{
       if( (is.matrix(windows)) | (length(windows)==1) ){
-        return("Windows should be a vector") #stop("Windows should be a vector")
+        stop("Windows should be a vector")
       }
     }
   }else{
     if(!is.null(dim(windows))){
-      return("Windows should be a number") #stop("Windows should be a number")
+      stop("Windows should be a number")
     }
   }
 
@@ -680,7 +680,7 @@ margint.rob <- function(Xp, yp, point=NULL, windows, prob=NULL, sigma.hat=NULL,
   }else{
     prob <- prob[tmp]
   }
-  if(dim(t(as.matrix(windows)))[2]!=q){return("Error Dimension of Bandwidths")}
+  if(dim(t(as.matrix(windows)))[2]!=q){stop("Error Dimension of Bandwidths")}
 
   #Initializations
   puntoj <- rep(0,q)
