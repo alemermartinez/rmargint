@@ -4,14 +4,12 @@
 \alias{margint.cl}
 \title{Classic marginal integration procedures for additive models}
 \usage{
-margint.cl(Xp, yp, point = NULL, windows, epsilon = 1e-06,
+margint.cl(formula, point = NULL, windows, epsilon = 1e-06,
   prob = NULL, type = "0", degree = NULL, qderivate = FALSE,
   orderkernel = 2, Qmeasure = NULL)
 }
 \arguments{
-\item{Xp}{Matrix (n by p) of explanatory variables.}
-
-\item{yp}{Vector of responses (missing values are allowed).}
+\item{formula}{An object of class "formula".}
 
 \item{point}{Matrix of points where predictions will be computed and returned.}
 

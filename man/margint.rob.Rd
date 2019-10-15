@@ -4,15 +4,13 @@
 \alias{margint.rob}
 \title{Robust marginal integration procedures for additive models}
 \usage{
-margint.rob(Xp, yp, point = NULL, windows, prob = NULL,
+margint.rob(formula, point = NULL, windows, prob = NULL,
   sigma.hat = NULL, win.sigma = NULL, epsilon = 1e-06, type = "0",
   degree = NULL, typePhi = "Huber", k.h = 1.345, k.t = 4.685,
   max.it = 20, qderivate = FALSE, orderkernel = 2, Qmeasure = NULL)
 }
 \arguments{
-\item{Xp}{Matrix (n by p) of explanatory variables.}
-
-\item{yp}{Vector of responses (missing values are allowed).}
+\item{formula}{An object of class "formula".}
 
 \item{point}{Matrix of points where predictions will be computed and returned.}
 
