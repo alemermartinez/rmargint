@@ -214,8 +214,7 @@ kernel10<-function(x) {
 #' 
 #' This function computes three types of classical marginal integration procedures for additive models, that is, considering a squared loss function.
 #' 
-#' @param Xp Matrix (n by p) of explanatory variables.
-#' @param yp  Vector of responses (missing values are allowed).
+#' @param formula An object of class "formula".
 #' @param point Matrix of points where predictions will be computed and returned.
 #' @param windows Vector or a squared matrix of bandwidths for the smoothing estimation procedure.
 #' @param epsilon Convergence criterion.
@@ -261,10 +260,12 @@ kernel10<-function(x) {
 #' fit.cl <- margint.cl(Xp=X, yp=y, windows=bandw, type='alpha', degree=1, Qmeasure=Qmeasure)
 #' 
 #' @export
-margint.cl <- function(Xp, yp, point=NULL, windows, epsilon=1e-6, prob=NULL,
+margint.cl <- function(formula, point=NULL, windows, epsilon=1e-6, prob=NULL,
                        type='0', degree=NULL, qderivate=FALSE, orderkernel=2,
                        Qmeasure=NULL) {
-
+  AUX <- get_all_vars(formula)
+  yp <- AUX[,1]
+  Xp <- AUX[,-1]
   if(!is.null(dim(Xp))){
     if(type=='alpha'){
       if(is.null(degree)){
@@ -579,8 +580,7 @@ margint.cl <- function(Xp, yp, point=NULL, windows, epsilon=1e-6, prob=NULL,
 #' 
 #' This function computes three types of robust marginal integration procedures for additive models.
 #' 
-#' @param Xp Matrix (n by p) of explanatory variables.
-#' @param yp  Vector of responses (missing values are allowed).
+#' @param formula An object of class "formula".
 #' @param point Matrix of points where predictions will be computed and returned.
 #' @param windows Vector or a squared matrix of bandwidths for the smoothing estimation procedure.
 #' @param prob Probabilities of observing each response (n). Defaults to \code{NULL}.
@@ -630,12 +630,14 @@ margint.cl <- function(Xp, yp, point=NULL, windows, epsilon=1e-6, prob=NULL,
 #' fit.rob <- margint.rob(Xp=X, yp=y, windows=bandw, type='alpha', degree=1, Qmeasure=Qmeasure) 
 #' 
 #' @export
-margint.rob <- function(Xp, yp, point=NULL, windows, prob=NULL, sigma.hat=NULL,
+margint.rob <- function(formula, point=NULL, windows, prob=NULL, sigma.hat=NULL,
                         win.sigma=NULL, epsilon=1e-06, type='0', degree=NULL, typePhi='Huber',
                         k.h=1.345, k.t = 4.685, max.it=20, qderivate=FALSE, orderkernel=2,
                         Qmeasure=NULL){
 
-  
+  AUX <- get_all_vars(formula)
+  yp <- AUX[,1]
+  Xp <- AUX[,-1]
   if(!is.null(dim(Xp))){
     if(type=='alpha'){
       if(is.null(degree)){
