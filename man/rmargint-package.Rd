@@ -12,8 +12,8 @@ Robust marginal integration estimators for additive models.
 \tabular{ll}{
 Package: \tab rmargint\cr
 Type: \tab Package\cr
-Version: \tab 1.0\cr
-Date: \tab 2019-06-15\cr
+Version: \tab 1.1\cr
+Date: \tab 2019-10-15\cr
 License: \tab GPL 3.0\cr
 }
 }
