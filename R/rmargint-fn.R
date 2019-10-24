@@ -542,32 +542,32 @@ margint.cl <- function(formula, point=NULL, windows, epsilon=1e-6, prob=NULL,
   if(!is.null(point)){
     if(type=='alpha'){
       if(!qderivate){
-        object <- list(mu=alpha,g.matrix=g.matriz, prediction=prediccion, mul=alphal, Xp=Xp, yp=yp)
+        object <- list(mu=alpha,g.matrix=g.matriz, prediction=prediccion, mul=alphal, Xp=Xp, yp=yp, formula=formula)
         class(object) <- c("margint.cl", "margint", "list")
         return(object)
       } else {
-        object <- list(mu=alpha,g.matrix=g.matriz, prediction=prediccion, mul=alphal,g.derivate=g.derivate, prediction.derivate=prediccion.deri, Xp=Xp, yp=yp)
+        object <- list(mu=alpha,g.matrix=g.matriz, prediction=prediccion, mul=alphal,g.derivate=g.derivate, prediction.derivate=prediccion.deri, Xp=Xp, yp=yp, formula=formula)
         class(object) <- c("margint.cl", "margint", "list")
         return(object)
       }
     } else {
-      object <- list(mu=alpha,g.matrix=g.matriz, prediction=prediccion, Xp=Xp, yp=yp)
+      object <- list(mu=alpha,g.matrix=g.matriz, prediction=prediccion, Xp=Xp, yp=yp, formula=formula)
       class(object) <- c("margint.cl", "margint", "list")
       return(object)
     }
   } else {
     if(type=='alpha'){
       if(!qderivate){
-        object <- list(mu=alpha,g.matrix=g.matriz, mul=alphal, Xp=Xp, yp=yp)
+        object <- list(mu=alpha,g.matrix=g.matriz, mul=alphal, Xp=Xp, yp=yp, formula=formula)
         class(object) <- c("margint.cl", "margint", "list")
         return(object)
       } else {
-        object <- list(mu=alpha,g.matrix=g.matriz, mul=alphal,g.derivate=g.derivate, Xp=Xp, yp=yp)
+        object <- list(mu=alpha,g.matrix=g.matriz, mul=alphal,g.derivate=g.derivate, Xp=Xp, yp=yp, formula=formula)
         class(object) <- c("margint.cl", "margint", "list")
         return(object)
       }
     } else {
-      object <- list(mu=alpha,g.matrix=g.matriz, Xp=Xp, yp=yp)
+      object <- list(mu=alpha,g.matrix=g.matriz, Xp=Xp, yp=yp, formula=formula)
       class(object) <- c("margint.cl", "margint", "list")
       return(object)
     }
@@ -1126,32 +1126,32 @@ margint.rob <- function(formula, point=NULL, windows, prob=NULL, sigma.hat=NULL,
   if(!is.null(point)){
     if(type=='alpha'){
       if(!qderivate){
-        object <- list(mu=alpha, g.matrix=g.matriz, sigma.hat=sigma.hat, prediction=prediccion, mul=alphal, Xp=Xp, yp=yp)
+        object <- list(mu=alpha, g.matrix=g.matriz, sigma.hat=sigma.hat, prediction=prediccion, mul=alphal, Xp=Xp, yp=yp, formula=formula)
         class(object) <- c("margint.rob", "margint", "list")
         return(object)
       } else {
-        object <- list(mu=alpha, g.matrix=g.matriz, sigma.hat=sigma.hat, prediction=prediccion, mul=alphal, g.derivate=g.derivate, prediction.derivate=prediccion.deri, Xp=Xp, yp=yp)
+        object <- list(mu=alpha, g.matrix=g.matriz, sigma.hat=sigma.hat, prediction=prediccion, mul=alphal, g.derivate=g.derivate, prediction.derivate=prediccion.deri, Xp=Xp, yp=yp, formula=formula)
         class(object) <- c("margint.rob", "margint", "list")
         return(object)
       }
     } else {
-      object <- list(mu=alpha, g.matrix=g.matriz, sigma.hat=sigma.hat, prediction=prediccion, Xp=Xp, yp=yp)
+      object <- list(mu=alpha, g.matrix=g.matriz, sigma.hat=sigma.hat, prediction=prediccion, Xp=Xp, yp=yp, formula=formula)
       class(object) <- c("margint.rob", "margint", "list")
       return(object)
     }
   } else {
     if(type=='alpha'){
       if(!qderivate){
-        object <- list(mu=alpha, g.matrix=g.matriz, sigma.hat=sigma.hat, mul=alphal, Xp=Xp, yp=yp)
+        object <- list(mu=alpha, g.matrix=g.matriz, sigma.hat=sigma.hat, mul=alphal, Xp=Xp, yp=yp, formula=formula)
         class(object) <- c("margint.rob", "margint", "list")
         return(object)
       } else {
-        object <- list(mu=alpha, g.matrix=g.matriz, sigma.hat=sigma.hat, mul=alphal,g.derivate=g.derivate, Xp=Xp, yp=yp)
+        object <- list(mu=alpha, g.matrix=g.matriz, sigma.hat=sigma.hat, mul=alphal,g.derivate=g.derivate, Xp=Xp, yp=yp, formula=formula)
         class(object) <- c("margint.rob", "margint", "list")
         return(object)
       }
     } else {
-      object <- list(mu=alpha, g.matrix=g.matriz, sigma.hat=sigma.hat, Xp=Xp, yp=yp)
+      object <- list(mu=alpha, g.matrix=g.matriz, sigma.hat=sigma.hat, Xp=Xp, yp=yp, formula=formula)
       class(object) <- c("margint.rob", "margint", "list")
       return(object)
     }
@@ -1178,6 +1178,24 @@ margint.rob <- function(formula, point=NULL, windows, prob=NULL, sigma.hat=NULL,
 residuals.margint <- function(object, ...){
   return( object$yp - rowSums(object$g.matrix) -object$mu )
 }
+
+
+#' Additive model formula
+#'
+#' Description of the additive model formula extracted from an object of class \code{margint}.
+#'
+#' @param object an object of class \code{margint}, a result of a call to \code{\link{margint.cl}} or \code{\link{margint.rob}}.
+#' @param ... additional other arguments. Currently ignored.
+#'
+#' @return A model formula.
+#'
+#' @author Alejandra Mercedes Martinez \email{ale_m_martinez@hotmail.com}
+#'
+#' @export
+formula.margint <- function(object, ...){
+  return( object$formula )
+}
+
 
 
 #' Fitted values for objects of class \code{margint}
