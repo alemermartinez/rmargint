@@ -1373,4 +1373,8 @@ print.margint <- function(object, ...){
 }
 
 
+#' @export
+fitted.values.margint <- function(object,...){
+  return(predict(object))
+}
 
