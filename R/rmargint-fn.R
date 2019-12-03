@@ -1324,3 +1324,20 @@ summary.margint.rob <- function(object,...){
 }
 
 
+#' Deviance for objects of class \code{margint}
+#'
+#' This function returns the deviance of the fitted additive model using one of the three
+#' classical or robust marginal integration estimators, as computed with \code{\link{margint.cl}} or
+#' \code{\link{margint.rob}}.
+#'
+#' @param object an object of class \code{margint}, a result of a call to \code{\link{margint.cl}} or \code{\link{margint.rob}}.
+#' @param ... additional other arguments. Currently ignored.
+#'
+#' @return A real number.
+#'
+#' @author Alejandra Mercedes Martinez \email{ale_m_martinez@hotmail.com}
+#'
+#' @export
+deviance.margint <- function(object, ...){
+  return( sum(residuals(object)^2) )
+}
