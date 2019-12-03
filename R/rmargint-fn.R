@@ -291,6 +291,11 @@ margint.cl <- function(formula, point=NULL, windows, epsilon=1e-6, prob=NULL,
   Xp <- as.matrix(Xp)
   q <- dim(Xp)[2]
   corte <- 10*epsilon
+  if(q==1){
+    if(!is.null(point)){
+      point <- as.matrix(point)
+    }
+  }
   punto <- point
 
   # Remove observations with missing responses
@@ -662,6 +667,11 @@ margint.rob <- function(formula, point=NULL, windows, prob=NULL, sigma.hat=NULL,
   Xp <- as.matrix(Xp)
   q <- dim(Xp)[2]
   corte <- 10*epsilon
+  if(q==1){
+    if(!is.null(point)){
+      point <- as.matrix(point)
+    }
+  }
   punto <- point
 
   if(is.null(win.sigma)){
@@ -1339,5 +1349,25 @@ summary.margint.rob <- function(object,...){
 #'
 #' @export
 deviance.margint <- function(object, ...){
-  return( sum(residuals(object)^2) )
+  return( sum( (residuals(object))^2) )
+}
+
+
+
+#' Print an Marginal Integration procedure
+#'
+#' The default print method for a \code{margint} object.
+#'
+#' @param object an object of class \code{margint}, a result of a call to \code{\link{margint.cl}} or \code{\link{margint.rob}}.
+#' @param ... additional other arguments. Currently ignored.
+#'
+#' @return A real number.
+#'
+#' @author Alejandra Mercedes Martinez \email{ale_m_martinez@hotmail.com}
+#'
+#' @export
+print.margint <- function(object, ...){
+  cat("Formula:\n")
+  print(formula(object))
+  #cat("\n")
 }
