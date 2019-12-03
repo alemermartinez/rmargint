@@ -1371,3 +1371,6 @@ print.margint <- function(object, ...){
   print(formula(object))
   #cat("\n")
 }
+
+
+
