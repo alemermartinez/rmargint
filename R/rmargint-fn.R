@@ -1329,8 +1329,19 @@ plot.margint <- function(x, derivative=FALSE, which=1:np, ask=FALSE,...){
   }
 }
 
+#Multiple R-squared 
+R2 <- function(object,...){
+  yp <- object$yp
+  y <- yp[ tmp<-!is.na(yp) ]
+  n <- length(y)
+  res <- residuals(object)
+  S02 <- sum((y-mean(y))^2)
+  S2 <- sum(res^2)
+  R2 <- (S02-S2)/S02
+  return(R2)
+}
 
-#Robust R-square
+#Robust multiple R-squared
 R2.rob <- function(object,...){
   yp <- object$yp
   y <- yp[ tmp<-!is.na(yp) ]
@@ -1380,6 +1391,7 @@ summary.margint <- function(object,...){
 #' @export
 summary.margint.cl <- function(object,...){
   message("Estimate of the intercept: ", round(object$mu,5))
+  message("Multiple R-squared: ", round(R2(object),5))
   res <- residuals(object)
   message("Residuals:")
   summary(res)
@@ -1390,11 +1402,10 @@ summary.margint.cl <- function(object,...){
 summary.margint.rob <- function(object,...){
   message("Estimate of the intercept: ", round(object$mu,5))
   message("Estimate of the residual standard error: ", round(object$sigma,5))
+  message("Robust multiple R-squared: ", round(R2.rob(object),5))
   res <- residuals(object)
   message("Residuals:")
   summary(res)
-  message("Robust multiple R-squared:")
-  R2.rob(object)
 }
 
 
