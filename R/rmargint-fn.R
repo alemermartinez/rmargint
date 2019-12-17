@@ -1354,14 +1354,14 @@ R2.rob <- function(object,...){
   pos <- pos.estimate(y,ini=NULL,sigma.hat, epsilon=1e-6, iter.max=50,typePhi=typePhi)
   if(typePhi=='Tukey'){
     for(i in 1:n){
-      S02 <- S02 + rho.tukey(y[i]-pos)
-      S2 <- S2 + rho.tukey(res[i])
+      S02 <- S02 + rho.tukey((y[i]-pos)/sigma.hat)
+      S2 <- S2 + rho.tukey(res[i]/sigma.hat)
     }
   }
   if(typePhi=='Huber'){
     for(i in 1:n){
-      S02 <- S02 + rho.huber(y[i]-pos)
-      S2 <- S2 + rho.huber(res[i])
+      S02 <- S02 + rho.huber((y[i]-pos)/sigma.hat)
+      S2 <- S2 + rho.huber(res[i]/sigma.hat)
     }
   }
   R2.rob <- (S02-S2)/S02
