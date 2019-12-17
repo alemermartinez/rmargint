@@ -35,6 +35,16 @@ psi.w <- function(r, k= 4.685){
   return(w)
 }
 
+#Tukey's loss function
+rho.tukey <- function(r, k=4.685){
+  if(abs(r)<=k){
+    return( 1-(1-(r/k)^2)^3 )
+  }else{
+    return(1)
+  }
+}
+
+
 
 #' Derivative of Huber's loss function.
 #' 
@@ -61,6 +71,15 @@ psi.huber <- function(r, k=1.345)
 #Huber's weight function "Psi(r)/r"
 psi.huber.w <- function(r, k=1.345)
   pmin(1, k/abs(r))
+
+#Huber's loss function
+rho.huber <- function(r, k=1.345){
+  if(abs(r)<=k){
+    return(r^2)
+  }else{
+    return(2*k*abs(r)-k^2)
+  }
+}
 
 
 #' Euclidean norm of a vector
