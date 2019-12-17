@@ -1329,6 +1329,36 @@ plot.margint <- function(x, derivative=FALSE, which=1:np, ask=FALSE,...){
   }
 }
 
+
+#Robust R-square
+R2.rob <- function(object,...){
+  yp <- object$yp
+  y <- yp[ tmp<-!is.na(yp) ]
+  n <- length(y)
+  S02 <- 0
+  S2 <- 0
+  res <- residuals(object)
+  sigma.hat <- object$sigma.hat
+  typePhi <- object$typePhi
+  pos <- pos.estimate(y,ini=NULL,sigma.hat, epsilon=1e-6, iter.max=50,typePhi=typePhi)
+  if(typePhi=='Tukey'){
+    for(i in 1:n){
+      S02 <- S02 + rho.tukey(y[i]-pos)
+      S2 <- S2 + rho.tukey(res[i])
+    }
+  }
+  if(typePhi=='Huber'){
+    for(i in 1:n){
+      S02 <- S02 + rho.huber(y[i]-pos)
+      S2 <- S2 + rho.huber(res[i])
+    }
+  }
+  R2.rob <- (S02-S2)/S02
+  return(R2.rob)
+}
+
+
+
 #' Summary for additive models fits using a marginal integration procedure
 #'
 #' Summary method for class \code{margint}.
