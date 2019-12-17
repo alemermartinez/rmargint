@@ -1151,11 +1151,34 @@ margint.rob <- function(formula, point=NULL, windows, prob=NULL, sigma.hat=NULL,
         return(object)
       }
     } else {
-      object <- list(mu=alpha, g.matrix=g.matriz, sigma.hat=sigma.hat, Xp=Xp, yp=yp, formula=formula)
+      object <- list(mu=alpha, g.matrix=g.matriz, sigma.hat=sigma.hat, Xp=Xp, yp=yp, formula=formula, typePhi=typePhi)
       class(object) <- c("margint.rob", "margint", "list")
       return(object)
     }
   }
+}
+
+
+pos.estimate <- function(y,ini=NULL,sigma.hat, epsilon=1e-6, iter.max=10,typePhi){
+  yp <- y[ tmp<-!is.na(y) ]
+  if(is.null(ini)){
+    ini <- median(yp)
+  }
+  corte <- 10
+  iter <- 0
+  n <- length(yp)
+  prob <- rep(1,n)
+  k.h <- 1.345
+  k.t <- 4.685
+  if(typePhi=='Huber'){
+    beta <- .C("huber_pos", as.integer(n), as.double(yp), as.double(ini), as.double(epsilon), 
+               as.double(sigma.hat), as.double(prob), as.double(k.h), as.integer(iter.max), salida=as.double(0) )$salida
+  }
+  if(typePhi=='Tukey'){
+    beta <- .C("tukey_pos", as.integer(n), as.double(yp), as.double(ini), as.double(epsilon), 
+               as.double(sigma.hat), as.double(prob), as.double(k.t), as.integer(iter.max), salida=as.double(0) )$salida
+  }
+  return(beta)
 }
 
 
