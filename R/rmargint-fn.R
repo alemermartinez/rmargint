@@ -1393,6 +1393,8 @@ summary.margint.rob <- function(object,...){
   res <- residuals(object)
   message("Residuals:")
   summary(res)
+  message("Robust multiple R-squared:")
+  R2.rob(object)
 }
 
 
