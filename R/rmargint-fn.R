@@ -291,11 +291,6 @@ margint.cl <- function(formula, point=NULL, windows, epsilon=1e-6, prob=NULL,
   Xp <- as.matrix(Xp)
   q <- dim(Xp)[2]
   corte <- 10*epsilon
-  if(q==1){
-    if(!is.null(point)){
-      point <- as.matrix(point)
-    }
-  }
   punto <- point
 
   # Remove observations with missing responses
@@ -453,7 +448,7 @@ margint.cl <- function(formula, point=NULL, windows, epsilon=1e-6, prob=NULL,
     aa.deri <- rep(0,nq)
     if(!is.null(punto)) {
       if(is.null(dim(punto))) {
-        prediccion <- mpunto <- t(as.matrix(punto))
+        prediccion <- mpunto <- as.matrix(punto)
         if(qderivate){
           prediccion.deri <- prediccion
         }
@@ -500,7 +495,7 @@ margint.cl <- function(formula, point=NULL, windows, epsilon=1e-6, prob=NULL,
     aa.deri <- rep(0,n)
     if(!is.null(punto)){
       if(is.null(dim(punto))){
-        prediccion <- mpunto <- t(as.matrix(punto))
+        prediccion <- mpunto <- as.matrix(punto)
         if(qderivate){
           prediccion.deri <- prediccion
         }
@@ -667,11 +662,6 @@ margint.rob <- function(formula, point=NULL, windows, prob=NULL, sigma.hat=NULL,
   Xp <- as.matrix(Xp)
   q <- dim(Xp)[2]
   corte <- 10*epsilon
-  if(q==1){
-    if(!is.null(point)){
-      point <- as.matrix(point)
-    }
-  }
   punto <- point
 
   if(is.null(win.sigma)){
@@ -947,7 +937,7 @@ margint.rob <- function(formula, point=NULL, windows, prob=NULL, sigma.hat=NULL,
     aa.deri <- rep(0,nq)
     if(!is.null(punto)) {
       if(is.null(dim(punto))){
-        prediccion <- mpunto <- t(as.matrix(punto))
+        prediccion <- mpunto <- as.matrix(punto)
         if(qderivate){
           prediccion.deri <- prediccion
         }
@@ -1041,7 +1031,7 @@ margint.rob <- function(formula, point=NULL, windows, prob=NULL, sigma.hat=NULL,
     aa.deri <- rep(0,n)
     if(!is.null(punto)) {
       if(is.null(dim(punto))){
-        prediccion <- mpunto <- t(as.matrix(punto))
+        prediccion <- mpunto <- as.matrix(punto)
         if(qderivate){
           prediccion.deri <- prediccion
         }
