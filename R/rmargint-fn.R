@@ -276,7 +276,7 @@ kernel10<-function(x) {
 #' set.seed(8090)
 #' nQ <- 80 
 #' Qmeasure <- matrix(runif(nQ*2), nQ, 2)
-#' fit.cl <- margint.cl(Xp=X, yp=y, windows=bandw, type='alpha', degree=1, Qmeasure=Qmeasure)
+#' fit.cl <- margint.cl(y ~ X, windows=bandw, type='alpha', degree=1, Qmeasure=Qmeasure)
 #' 
 #' @export
 margint.cl <- function(formula, point=NULL, windows, epsilon=1e-6, prob=NULL,
@@ -646,7 +646,7 @@ margint.cl <- function(formula, point=NULL, windows, epsilon=1e-6, prob=NULL,
 #' set.seed(8090)
 #' nQ <- 80 
 #' Qmeasure <- matrix(runif(nQ*2), nQ, 2)
-#' fit.rob <- margint.rob(Xp=X, yp=y, windows=bandw, type='alpha', degree=1, Qmeasure=Qmeasure) 
+#' fit.rob <- margint.rob(y ~ X, windows=bandw, type='alpha', degree=1, Qmeasure=Qmeasure) 
 #' 
 #' @export
 margint.rob <- function(formula, point=NULL, windows, prob=NULL, sigma.hat=NULL,
@@ -1283,7 +1283,7 @@ predict.margint <- function(object, ...){
 #' set.seed(8090)
 #' nQ <- 80 
 #' Qmeasure <- matrix(runif(nQ*2), nQ, 2)
-#' fit.rob <- margint.rob(Xp=X, yp=y, windows=bandw, type='alpha', degree=1, Qmeasure=Qmeasure)
+#' fit.rob <- margint.rob(y ~ X, windows=bandw, type='alpha', degree=1, Qmeasure=Qmeasure)
 #' plot(fit.rob, which=1)
 #' 
 #' @export
