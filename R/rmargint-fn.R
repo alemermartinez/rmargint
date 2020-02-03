@@ -467,7 +467,7 @@ margint.cl <- function(formula, point=NULL, windows, epsilon=1e-6, prob=NULL,
     aa.deri <- rep(0,nq)
     if(!is.null(punto)) {
       if(is.null(dim(punto))) {
-        prediccion <- mpunto <- as.matrix(punto)
+        prediccion <- mpunto <- t(as.matrix(punto)) #Agregué un t
         if(qderivate){
           prediccion.deri <- prediccion
         }
@@ -514,7 +514,7 @@ margint.cl <- function(formula, point=NULL, windows, epsilon=1e-6, prob=NULL,
     aa.deri <- rep(0,n)
     if(!is.null(punto)){
       if(is.null(dim(punto))){
-        prediccion <- mpunto <- as.matrix(punto)
+        prediccion <- mpunto <- t(as.matrix(punto)) #Agregué una t
         if(qderivate){
           prediccion.deri <- prediccion
         }
@@ -1235,7 +1235,7 @@ residuals.margint <- function(object, ...){
 #'
 #' @export
 formula.margint <- function(object, ...){
-  return( object$formula )
+  object$formula #return( 
 }
 
 
@@ -1428,8 +1428,7 @@ deviance.margint <- function(object, ...){
 }
 
 
-
-#' Print an Marginal Integration procedure
+#' Print a Marginal Integration procedure
 #'
 #' The default print method for a \code{margint} object.
 #'
@@ -1443,9 +1442,10 @@ deviance.margint <- function(object, ...){
 #' @export
 print.margint <- function(object, ...){
   cat("Formula:\n")
-  print(formula(object))
+  object$formula
   #cat("\n")
 }
+
 
 
 #' @export
