@@ -2,7 +2,7 @@
 % Please edit documentation in R/rmargint-fn.R
 \name{print.margint}
 \alias{print.margint}
-\title{Print an Marginal Integration procedure}
+\title{Print a Marginal Integration procedure}
 \usage{
 \method{print}{margint}(object, ...)
 }
