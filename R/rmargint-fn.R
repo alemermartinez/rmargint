@@ -467,7 +467,11 @@ margint.cl <- function(formula, point=NULL, windows, epsilon=1e-6, prob=NULL,
     aa.deri <- rep(0,nq)
     if(!is.null(punto)) {
       if(is.null(dim(punto))) {
-        prediccion <- mpunto <- t(as.matrix(punto)) #Agregué un t
+        if(q==1){
+          prediccion <- mpunto <- as.matrix(punto)
+        }else{
+          prediccion <- mpunto <- t(as.matrix(punto))
+        }
         if(qderivate){
           prediccion.deri <- prediccion
         }
@@ -514,7 +518,11 @@ margint.cl <- function(formula, point=NULL, windows, epsilon=1e-6, prob=NULL,
     aa.deri <- rep(0,n)
     if(!is.null(punto)){
       if(is.null(dim(punto))){
-        prediccion <- mpunto <- t(as.matrix(punto)) #Agregué una t
+        if(q==1){
+          prediccion <- mpunto <- as.matrix(punto)
+        }else{
+          prediccion <- mpunto <- t(as.matrix(punto))
+        }
         if(qderivate){
           prediccion.deri <- prediccion
         }
@@ -956,7 +964,11 @@ margint.rob <- function(formula, point=NULL, windows, prob=NULL, sigma.hat=NULL,
     aa.deri <- rep(0,nq)
     if(!is.null(punto)) {
       if(is.null(dim(punto))){
-        prediccion <- mpunto <- as.matrix(punto)
+        if(q==1){
+          prediccion <- mpunto <- as.matrix(punto)
+        }else{
+          prediccion <- mpunto <- t(as.matrix(punto))
+        }
         if(qderivate){
           prediccion.deri <- prediccion
         }
@@ -1050,7 +1062,11 @@ margint.rob <- function(formula, point=NULL, windows, prob=NULL, sigma.hat=NULL,
     aa.deri <- rep(0,n)
     if(!is.null(punto)) {
       if(is.null(dim(punto))){
-        prediccion <- mpunto <- as.matrix(punto)
+        if(q==1){
+          prediccion <- mpunto <- as.matrix(punto)
+        }else{
+          prediccion <- mpunto <- t(as.matrix(punto))
+        }
         if(qderivate){
           prediccion.deri <- prediccion
         }
@@ -1145,27 +1161,27 @@ margint.rob <- function(formula, point=NULL, windows, prob=NULL, sigma.hat=NULL,
   if(!is.null(point)){
     if(type=='alpha'){
       if(!qderivate){
-        object <- list(mu=alpha, g.matrix=g.matriz, sigma.hat=sigma.hat, prediction=prediccion, mul=alphal, Xp=Xp, yp=yp, formula=formula)
+        object <- list(mu=alpha, g.matrix=g.matriz, sigma.hat=sigma.hat, prediction=prediccion, mul=alphal, Xp=Xp, yp=yp, formula=formula, typePhi=typePhi)
         class(object) <- c("margint.rob", "margint", "list")
         return(object)
       } else {
-        object <- list(mu=alpha, g.matrix=g.matriz, sigma.hat=sigma.hat, prediction=prediccion, mul=alphal, g.derivate=g.derivate, prediction.derivate=prediccion.deri, Xp=Xp, yp=yp, formula=formula)
+        object <- list(mu=alpha, g.matrix=g.matriz, sigma.hat=sigma.hat, prediction=prediccion, mul=alphal, g.derivate=g.derivate, prediction.derivate=prediccion.deri, Xp=Xp, yp=yp, formula=formula, typePhi=typePhi)
         class(object) <- c("margint.rob", "margint", "list")
         return(object)
       }
     } else {
-      object <- list(mu=alpha, g.matrix=g.matriz, sigma.hat=sigma.hat, prediction=prediccion, Xp=Xp, yp=yp, formula=formula)
+      object <- list(mu=alpha, g.matrix=g.matriz, sigma.hat=sigma.hat, prediction=prediccion, Xp=Xp, yp=yp, formula=formula, typePhi=typePhi)
       class(object) <- c("margint.rob", "margint", "list")
       return(object)
     }
   } else {
     if(type=='alpha'){
       if(!qderivate){
-        object <- list(mu=alpha, g.matrix=g.matriz, sigma.hat=sigma.hat, mul=alphal, Xp=Xp, yp=yp, formula=formula)
+        object <- list(mu=alpha, g.matrix=g.matriz, sigma.hat=sigma.hat, mul=alphal, Xp=Xp, yp=yp, formula=formula, typePhi=typePhi)
         class(object) <- c("margint.rob", "margint", "list")
         return(object)
       } else {
-        object <- list(mu=alpha, g.matrix=g.matriz, sigma.hat=sigma.hat, mul=alphal,g.derivate=g.derivate, Xp=Xp, yp=yp, formula=formula)
+        object <- list(mu=alpha, g.matrix=g.matriz, sigma.hat=sigma.hat, mul=alphal,g.derivate=g.derivate, Xp=Xp, yp=yp, formula=formula, typePhi=typePhi)
         class(object) <- c("margint.rob", "margint", "list")
         return(object)
       }
@@ -1235,7 +1251,7 @@ residuals.margint <- function(object, ...){
 #'
 #' @export
 formula.margint <- function(object, ...){
-  object$formula #return( 
+  return(object$formula )
 }
 
 
@@ -1442,7 +1458,7 @@ deviance.margint <- function(object, ...){
 #' @export
 print.margint <- function(object, ...){
   cat("Formula:\n")
-  object$formula
+  print(object$formula)
   #cat("\n")
 }
 
