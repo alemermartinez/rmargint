@@ -36,7 +36,7 @@ bandw <- matrix(0.25,2,2)
 set.seed(8090)
 nQ <- 80 
 Qmeasure <- matrix(runif(nQ*2), nQ, 2)
-fit.rob <- margint.rob(Xp=X, yp=y, windows=bandw, type='alpha', degree=1, Qmeasure=Qmeasure)
+fit.rob <- margint.rob(y ~ X, windows=bandw, type='alpha', degree=1, Qmeasure=Qmeasure)
 plot(fit.rob, which=1)
 
 }
