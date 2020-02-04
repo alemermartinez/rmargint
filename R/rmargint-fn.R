@@ -1238,21 +1238,6 @@ residuals.margint <- function(object, ...){
 }
 
 
-#' Additive model formula
-#'
-#' Description of the additive model formula extracted from an object of class \code{margint}.
-#'
-#' @param object an object of class \code{margint}, a result of a call to \code{\link{margint.cl}} or \code{\link{margint.rob}}.
-#' @param ... additional other arguments. Currently ignored.
-#'
-#' @return A model formula.
-#'
-#' @author Alejandra Mercedes Martinez \email{ale_m_martinez@hotmail.com}
-#'
-#' @export
-formula.margint <- function(object, ...){
-  return(object$formula )
-}
 
 
 
@@ -1444,6 +1429,29 @@ deviance.margint <- function(object, ...){
 }
 
 
+#' @export
+fitted.values.margint <- function(object,...){
+  return(predict(object))
+}
+
+
+#' Additive model formula
+#'
+#' Description of the additive model formula extracted from an object of class \code{margint}.
+#'
+#' @param object an object of class \code{margint}, a result of a call to \code{\link{margint.cl}} or \code{\link{margint.rob}}.
+#' @param ... additional other arguments. Currently ignored.
+#'
+#' @return A model formula.
+#'
+#' @author Alejandra Mercedes Martinez \email{ale_m_martinez@hotmail.com}
+#'
+#' @export
+formula.margint <- function(object, ...){
+  return(object$formula )
+}
+
+
 #' Print a Marginal Integration procedure
 #'
 #' The default print method for a \code{margint} object.
@@ -1456,16 +1464,11 @@ deviance.margint <- function(object, ...){
 #' @author Alejandra Mercedes Martinez \email{ale_m_martinez@hotmail.com}
 #'
 #' @export
-print.margint <- function(object, ...){
+printed.margint <- function(object, ...){
   cat("Formula:\n")
   print(object$formula)
   #cat("\n")
 }
 
 
-
-#' @export
-fitted.values.margint <- function(object,...){
-  return(predict(object))
-}
 
