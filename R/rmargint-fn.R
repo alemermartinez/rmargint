@@ -1435,11 +1435,12 @@ fitted.values.margint <- function(object,...){
 }
 
 
+
 #' Additive model formula
 #'
 #' Description of the additive model formula extracted from an object of class \code{margint}.
 #'
-#' @param object an object of class \code{margint}, a result of a call to \code{\link{margint.cl}} or \code{\link{margint.rob}}.
+#' @param x an object of class \code{margint}, a result of a call to \code{\link{margint.cl}} or \code{\link{margint.rob}}.
 #' @param ... additional other arguments. Currently ignored.
 #'
 #' @return A model formula.
@@ -1447,8 +1448,8 @@ fitted.values.margint <- function(object,...){
 #' @author Alejandra Mercedes Martinez \email{ale_m_martinez@hotmail.com}
 #'
 #' @export
-formula.margint <- function(object, ...){
-  return(object$formula )
+formula.margint <- function(x, ...){
+  return(x$formula )
 }
 
 
@@ -1456,7 +1457,7 @@ formula.margint <- function(object, ...){
 #'
 #' The default print method for a \code{margint} object.
 #'
-#' @param object an object of class \code{margint}, a result of a call to \code{\link{margint.cl}} or \code{\link{margint.rob}}.
+#' @param x an object of class \code{margint}, a result of a call to \code{\link{margint.cl}} or \code{\link{margint.rob}}.
 #' @param ... additional other arguments. Currently ignored.
 #'
 #' @return A real number.
@@ -1464,9 +1465,9 @@ formula.margint <- function(object, ...){
 #' @author Alejandra Mercedes Martinez \email{ale_m_martinez@hotmail.com}
 #'
 #' @export
-printed.margint <- function(object, ...){
+print.margint <- function(x, ...){
   cat("Formula:\n")
-  print(object$formula)
+  print(x$formula)
   #cat("\n")
 }
 
