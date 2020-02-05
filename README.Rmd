@@ -57,7 +57,7 @@ Now we will use the robust marginal integration procedure to fit an additive mod
 
 ```{r robust fit}
 point <- c(0.7, 0.6)
-robust.fit <- margint.rob(Xp=X, yp=y, point=point, windows=bandw, epsilon=1e-10, degree=1,
+robust.fit <- margint.rob(y ~ X, point=point, windows=bandw, epsilon=1e-10, degree=1,
                           type='alpha', orderkernel=2, typePhi='Huber', Qmeasure=Qmeasure)
 ```
 
@@ -92,7 +92,7 @@ halpha <- 0.15
 bandw <- matrix(htilde,2,2)
 diag(bandw) <- rep(halpha,2)
 
-robust.fit2 <- margint.rob(Xp=X, yp=y, point=point, windows=bandw, epsilon=1e-10, degree=1, type='alpha',
+robust.fit2 <- margint.rob(y ~ X, point=point, windows=bandw, epsilon=1e-10, degree=1, type='alpha',
                           orderkernel=2, typePhi='Huber', Qmeasure=Qmeasure, qderivate=TRUE)
 ```
 
