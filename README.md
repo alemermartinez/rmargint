@@ -3,7 +3,7 @@ Marginal integration procedures
 
 This repository contains an <code>R</code> package with the classical and robust marginal integration procedures for estimating the additive components in an additive model, implementing the proposal of Graciela Boente and Alejandra Martinez in
 
-> Boente G. and Martinez A. (2017). Marginal integration M−estimators for additive models. TEST, 26, 231-260.
+> Boente G. and Martinez A. (2017). Marginal integration M-estimators for additive models. TEST, 26, 231-260.
 
 The package can be install from <code>R</code> by using
 
@@ -49,7 +49,7 @@ Now we will use the robust marginal integration procedure to fit an additive mod
 
 ``` r
 point <- c(0.7, 0.6)
-robust.fit <- margint.rob(Xp=X, yp=y, point=point, windows=bandw, epsilon=1e-10, degree=1,
+robust.fit <- margint.rob(y ~ X, point=point, windows=bandw, epsilon=1e-10, degree=1,
                           type='alpha', orderkernel=2, typePhi='Huber', Qmeasure=Qmeasure)
 ```
 
@@ -94,7 +94,7 @@ halpha <- 0.15
 bandw <- matrix(htilde,2,2)
 diag(bandw) <- rep(halpha,2)
 
-robust.fit2 <- margint.rob(Xp=X, yp=y, point=point, windows=bandw, epsilon=1e-10, degree=1, type='alpha',
+robust.fit2 <- margint.rob(y ~ X, point=point, windows=bandw, epsilon=1e-10, degree=1, type='alpha',
                           orderkernel=2, typePhi='Huber', Qmeasure=Qmeasure, qderivate=TRUE)
 ```
 
