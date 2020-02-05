@@ -35,6 +35,16 @@ psi.w <- function(r, k= 4.685){
   return(w)
 }
 
+#Tukey's loss function
+rho.tukey <- function(r, k=4.685){
+  if(abs(r)<=k){
+    return( 1-(1-(r/k)^2)^3 )
+  }else{
+    return(1)
+  }
+}
+
+
 
 #' Derivative of Huber's loss function.
 #' 
@@ -61,6 +71,15 @@ psi.huber <- function(r, k=1.345)
 #Huber's weight function "Psi(r)/r"
 psi.huber.w <- function(r, k=1.345)
   pmin(1, k/abs(r))
+
+#Huber's loss function
+rho.huber <- function(r, k=1.345){
+  if(abs(r)<=k){
+    return(r^2)
+  }else{
+    return(2*k*abs(r)-k^2)
+  }
+}
 
 
 #' Euclidean norm of a vector
@@ -214,8 +233,7 @@ kernel10<-function(x) {
 #' 
 #' This function computes three types of classical marginal integration procedures for additive models, that is, considering a squared loss function.
 #' 
-#' @param Xp Matrix (n by p) of explanatory variables.
-#' @param yp  Vector of responses (missing values are allowed).
+#' @param formula An object of class "formula".
 #' @param point Matrix of points where predictions will be computed and returned.
 #' @param windows Vector or a squared matrix of bandwidths for the smoothing estimation procedure.
 #' @param epsilon Convergence criterion.
@@ -258,13 +276,15 @@ kernel10<-function(x) {
 #' set.seed(8090)
 #' nQ <- 80 
 #' Qmeasure <- matrix(runif(nQ*2), nQ, 2)
-#' fit.cl <- margint.cl(Xp=X, yp=y, windows=bandw, type='alpha', degree=1, Qmeasure=Qmeasure)
+#' fit.cl <- margint.cl(y ~ X, windows=bandw, type='alpha', degree=1, Qmeasure=Qmeasure)
 #' 
 #' @export
-margint.cl <- function(Xp, yp, point=NULL, windows, epsilon=1e-6, prob=NULL,
+margint.cl <- function(formula, point=NULL, windows, epsilon=1e-6, prob=NULL,
                        type='0', degree=NULL, qderivate=FALSE, orderkernel=2,
                        Qmeasure=NULL) {
-
+  AUX <- get_all_vars(formula)
+  yp <- AUX[,1]
+  Xp <- AUX[,-1]
   if(!is.null(dim(Xp))){
     if(type=='alpha'){
       if(is.null(degree)){
@@ -447,7 +467,11 @@ margint.cl <- function(Xp, yp, point=NULL, windows, epsilon=1e-6, prob=NULL,
     aa.deri <- rep(0,nq)
     if(!is.null(punto)) {
       if(is.null(dim(punto))) {
-        prediccion <- mpunto <- t(as.matrix(punto))
+        if(q==1){
+          prediccion <- mpunto <- as.matrix(punto)
+        }else{
+          prediccion <- mpunto <- t(as.matrix(punto))
+        }
         if(qderivate){
           prediccion.deri <- prediccion
         }
@@ -494,7 +518,11 @@ margint.cl <- function(Xp, yp, point=NULL, windows, epsilon=1e-6, prob=NULL,
     aa.deri <- rep(0,n)
     if(!is.null(punto)){
       if(is.null(dim(punto))){
-        prediccion <- mpunto <- t(as.matrix(punto))
+        if(q==1){
+          prediccion <- mpunto <- as.matrix(punto)
+        }else{
+          prediccion <- mpunto <- t(as.matrix(punto))
+        }
         if(qderivate){
           prediccion.deri <- prediccion
         }
@@ -541,32 +569,32 @@ margint.cl <- function(Xp, yp, point=NULL, windows, epsilon=1e-6, prob=NULL,
   if(!is.null(point)){
     if(type=='alpha'){
       if(!qderivate){
-        object <- list(mu=alpha,g.matrix=g.matriz, prediction=prediccion, mul=alphal, Xp=Xp, yp=yp)
+        object <- list(mu=alpha,g.matrix=g.matriz, prediction=prediccion, mul=alphal, Xp=Xp, yp=yp, formula=formula)
         class(object) <- c("margint.cl", "margint", "list")
         return(object)
       } else {
-        object <- list(mu=alpha,g.matrix=g.matriz, prediction=prediccion, mul=alphal,g.derivate=g.derivate, prediction.derivate=prediccion.deri, Xp=Xp, yp=yp)
+        object <- list(mu=alpha,g.matrix=g.matriz, prediction=prediccion, mul=alphal,g.derivate=g.derivate, prediction.derivate=prediccion.deri, Xp=Xp, yp=yp, formula=formula)
         class(object) <- c("margint.cl", "margint", "list")
         return(object)
       }
     } else {
-      object <- list(mu=alpha,g.matrix=g.matriz, prediction=prediccion, Xp=Xp, yp=yp)
+      object <- list(mu=alpha,g.matrix=g.matriz, prediction=prediccion, Xp=Xp, yp=yp, formula=formula)
       class(object) <- c("margint.cl", "margint", "list")
       return(object)
     }
   } else {
     if(type=='alpha'){
       if(!qderivate){
-        object <- list(mu=alpha,g.matrix=g.matriz, mul=alphal, Xp=Xp, yp=yp)
+        object <- list(mu=alpha,g.matrix=g.matriz, mul=alphal, Xp=Xp, yp=yp, formula=formula)
         class(object) <- c("margint.cl", "margint", "list")
         return(object)
       } else {
-        object <- list(mu=alpha,g.matrix=g.matriz, mul=alphal,g.derivate=g.derivate, Xp=Xp, yp=yp)
+        object <- list(mu=alpha,g.matrix=g.matriz, mul=alphal,g.derivate=g.derivate, Xp=Xp, yp=yp, formula=formula)
         class(object) <- c("margint.cl", "margint", "list")
         return(object)
       }
     } else {
-      object <- list(mu=alpha,g.matrix=g.matriz, Xp=Xp, yp=yp)
+      object <- list(mu=alpha,g.matrix=g.matriz, Xp=Xp, yp=yp, formula=formula)
       class(object) <- c("margint.cl", "margint", "list")
       return(object)
     }
@@ -579,8 +607,7 @@ margint.cl <- function(Xp, yp, point=NULL, windows, epsilon=1e-6, prob=NULL,
 #' 
 #' This function computes three types of robust marginal integration procedures for additive models.
 #' 
-#' @param Xp Matrix (n by p) of explanatory variables.
-#' @param yp  Vector of responses (missing values are allowed).
+#' @param formula An object of class "formula".
 #' @param point Matrix of points where predictions will be computed and returned.
 #' @param windows Vector or a squared matrix of bandwidths for the smoothing estimation procedure.
 #' @param prob Probabilities of observing each response (n). Defaults to \code{NULL}.
@@ -627,15 +654,17 @@ margint.cl <- function(Xp, yp, point=NULL, windows, epsilon=1e-6, prob=NULL,
 #' set.seed(8090)
 #' nQ <- 80 
 #' Qmeasure <- matrix(runif(nQ*2), nQ, 2)
-#' fit.rob <- margint.rob(Xp=X, yp=y, windows=bandw, type='alpha', degree=1, Qmeasure=Qmeasure) 
+#' fit.rob <- margint.rob(y ~ X, windows=bandw, type='alpha', degree=1, Qmeasure=Qmeasure) 
 #' 
 #' @export
-margint.rob <- function(Xp, yp, point=NULL, windows, prob=NULL, sigma.hat=NULL,
+margint.rob <- function(formula, point=NULL, windows, prob=NULL, sigma.hat=NULL,
                         win.sigma=NULL, epsilon=1e-06, type='0', degree=NULL, typePhi='Huber',
                         k.h=1.345, k.t = 4.685, max.it=20, qderivate=FALSE, orderkernel=2,
                         Qmeasure=NULL){
 
-  
+  AUX <- get_all_vars(formula)
+  yp <- AUX[,1]
+  Xp <- AUX[,-1]
   if(!is.null(dim(Xp))){
     if(type=='alpha'){
       if(is.null(degree)){
@@ -935,7 +964,11 @@ margint.rob <- function(Xp, yp, point=NULL, windows, prob=NULL, sigma.hat=NULL,
     aa.deri <- rep(0,nq)
     if(!is.null(punto)) {
       if(is.null(dim(punto))){
-        prediccion <- mpunto <- t(as.matrix(punto))
+        if(q==1){
+          prediccion <- mpunto <- as.matrix(punto)
+        }else{
+          prediccion <- mpunto <- t(as.matrix(punto))
+        }
         if(qderivate){
           prediccion.deri <- prediccion
         }
@@ -1029,7 +1062,11 @@ margint.rob <- function(Xp, yp, point=NULL, windows, prob=NULL, sigma.hat=NULL,
     aa.deri <- rep(0,n)
     if(!is.null(punto)) {
       if(is.null(dim(punto))){
-        prediccion <- mpunto <- t(as.matrix(punto))
+        if(q==1){
+          prediccion <- mpunto <- as.matrix(punto)
+        }else{
+          prediccion <- mpunto <- t(as.matrix(punto))
+        }
         if(qderivate){
           prediccion.deri <- prediccion
         }
@@ -1124,36 +1161,59 @@ margint.rob <- function(Xp, yp, point=NULL, windows, prob=NULL, sigma.hat=NULL,
   if(!is.null(point)){
     if(type=='alpha'){
       if(!qderivate){
-        object <- list(mu=alpha, g.matrix=g.matriz, sigma.hat=sigma.hat, prediction=prediccion, mul=alphal, Xp=Xp, yp=yp)
+        object <- list(mu=alpha, g.matrix=g.matriz, sigma.hat=sigma.hat, prediction=prediccion, mul=alphal, Xp=Xp, yp=yp, formula=formula, typePhi=typePhi)
         class(object) <- c("margint.rob", "margint", "list")
         return(object)
       } else {
-        object <- list(mu=alpha, g.matrix=g.matriz, sigma.hat=sigma.hat, prediction=prediccion, mul=alphal, g.derivate=g.derivate, prediction.derivate=prediccion.deri, Xp=Xp, yp=yp)
+        object <- list(mu=alpha, g.matrix=g.matriz, sigma.hat=sigma.hat, prediction=prediccion, mul=alphal, g.derivate=g.derivate, prediction.derivate=prediccion.deri, Xp=Xp, yp=yp, formula=formula, typePhi=typePhi)
         class(object) <- c("margint.rob", "margint", "list")
         return(object)
       }
     } else {
-      object <- list(mu=alpha, g.matrix=g.matriz, sigma.hat=sigma.hat, prediction=prediccion, Xp=Xp, yp=yp)
+      object <- list(mu=alpha, g.matrix=g.matriz, sigma.hat=sigma.hat, prediction=prediccion, Xp=Xp, yp=yp, formula=formula, typePhi=typePhi)
       class(object) <- c("margint.rob", "margint", "list")
       return(object)
     }
   } else {
     if(type=='alpha'){
       if(!qderivate){
-        object <- list(mu=alpha, g.matrix=g.matriz, sigma.hat=sigma.hat, mul=alphal, Xp=Xp, yp=yp)
+        object <- list(mu=alpha, g.matrix=g.matriz, sigma.hat=sigma.hat, mul=alphal, Xp=Xp, yp=yp, formula=formula, typePhi=typePhi)
         class(object) <- c("margint.rob", "margint", "list")
         return(object)
       } else {
-        object <- list(mu=alpha, g.matrix=g.matriz, sigma.hat=sigma.hat, mul=alphal,g.derivate=g.derivate, Xp=Xp, yp=yp)
+        object <- list(mu=alpha, g.matrix=g.matriz, sigma.hat=sigma.hat, mul=alphal,g.derivate=g.derivate, Xp=Xp, yp=yp, formula=formula, typePhi=typePhi)
         class(object) <- c("margint.rob", "margint", "list")
         return(object)
       }
     } else {
-      object <- list(mu=alpha, g.matrix=g.matriz, sigma.hat=sigma.hat, Xp=Xp, yp=yp)
+      object <- list(mu=alpha, g.matrix=g.matriz, sigma.hat=sigma.hat, Xp=Xp, yp=yp, formula=formula, typePhi=typePhi)
       class(object) <- c("margint.rob", "margint", "list")
       return(object)
     }
   }
+}
+
+
+pos.estimate <- function(y,ini=NULL,sigma.hat, epsilon=1e-6, iter.max=10,typePhi){
+  yp <- y[ tmp<-!is.na(y) ]
+  if(is.null(ini)){
+    ini <- median(yp)
+  }
+  corte <- 10
+  iter <- 0
+  n <- length(yp)
+  prob <- rep(1,n)
+  k.h <- 1.345
+  k.t <- 4.685
+  if(typePhi=='Huber'){
+    beta <- .C("huber_pos", as.integer(n), as.double(yp), as.double(ini), as.double(epsilon), 
+               as.double(sigma.hat), as.double(prob), as.double(k.h), as.integer(iter.max), salida=as.double(0) )$salida
+  }
+  if(typePhi=='Tukey'){
+    beta <- .C("tukey_pos", as.integer(n), as.double(yp), as.double(ini), as.double(epsilon), 
+               as.double(sigma.hat), as.double(prob), as.double(k.t), as.integer(iter.max), salida=as.double(0) )$salida
+  }
+  return(beta)
 }
 
 
@@ -1176,6 +1236,9 @@ margint.rob <- function(Xp, yp, point=NULL, windows, prob=NULL, sigma.hat=NULL,
 residuals.margint <- function(object, ...){
   return( object$yp - rowSums(object$g.matrix) -object$mu )
 }
+
+
+
 
 
 #' Fitted values for objects of class \code{margint}
@@ -1221,7 +1284,7 @@ predict.margint <- function(object, ...){
 #' set.seed(8090)
 #' nQ <- 80 
 #' Qmeasure <- matrix(runif(nQ*2), nQ, 2)
-#' fit.rob <- margint.rob(Xp=X, yp=y, windows=bandw, type='alpha', degree=1, Qmeasure=Qmeasure)
+#' fit.rob <- margint.rob(y ~ X, windows=bandw, type='alpha', degree=1, Qmeasure=Qmeasure)
 #' plot(fit.rob, which=1)
 #' 
 #' @export
@@ -1267,6 +1330,47 @@ plot.margint <- function(x, derivative=FALSE, which=1:np, ask=FALSE,...){
   }
 }
 
+#Multiple R-squared 
+R2 <- function(object,...){
+  yp <- object$yp
+  y <- yp[ tmp<-!is.na(yp) ]
+  n <- length(y)
+  res <- residuals(object)
+  S02 <- sum((y-mean(y))^2)
+  S2 <- sum(res^2)
+  R2 <- (S02-S2)/S02
+  return(R2)
+}
+
+#Robust multiple R-squared
+R2.rob <- function(object,...){
+  yp <- object$yp
+  y <- yp[ tmp<-!is.na(yp) ]
+  n <- length(y)
+  S02 <- 0
+  S2 <- 0
+  res <- residuals(object)
+  sigma.hat <- object$sigma.hat
+  typePhi <- object$typePhi
+  pos <- pos.estimate(y,ini=NULL,sigma.hat, epsilon=1e-6, iter.max=50,typePhi=typePhi)
+  if(typePhi=='Tukey'){
+    for(i in 1:n){
+      S02 <- S02 + rho.tukey((y[i]-pos)/sigma.hat)
+      S2 <- S2 + rho.tukey(res[i]/sigma.hat)
+    }
+  }
+  if(typePhi=='Huber'){
+    for(i in 1:n){
+      S02 <- S02 + rho.huber((y[i]-pos)/sigma.hat)
+      S2 <- S2 + rho.huber(res[i]/sigma.hat)
+    }
+  }
+  R2.rob <- (S02-S2)/S02
+  return(R2.rob)
+}
+
+
+
 #' Summary for additive models fits using a marginal integration procedure
 #'
 #' Summary method for class \code{margint}.
@@ -1288,6 +1392,7 @@ summary.margint <- function(object,...){
 #' @export
 summary.margint.cl <- function(object,...){
   message("Estimate of the intercept: ", round(object$mu,5))
+  message("Multiple R-squared: ", round(R2(object),5))
   res <- residuals(object)
   message("Residuals:")
   summary(res)
@@ -1298,9 +1403,73 @@ summary.margint.cl <- function(object,...){
 summary.margint.rob <- function(object,...){
   message("Estimate of the intercept: ", round(object$mu,5))
   message("Estimate of the residual standard error: ", round(object$sigma,5))
+  message("Robust multiple R-squared: ", round(R2.rob(object),5))
   res <- residuals(object)
   message("Residuals:")
   summary(res)
 }
+
+
+#' Deviance for objects of class \code{margint}
+#'
+#' This function returns the deviance of the fitted additive model using one of the three
+#' classical or robust marginal integration estimators, as computed with \code{\link{margint.cl}} or
+#' \code{\link{margint.rob}}.
+#'
+#' @param object an object of class \code{margint}, a result of a call to \code{\link{margint.cl}} or \code{\link{margint.rob}}.
+#' @param ... additional other arguments. Currently ignored.
+#'
+#' @return A real number.
+#'
+#' @author Alejandra Mercedes Martinez \email{ale_m_martinez@hotmail.com}
+#'
+#' @export
+deviance.margint <- function(object, ...){
+  return( sum( (residuals(object))^2) )
+}
+
+
+#' @export
+fitted.values.margint <- function(object,...){
+  return(predict(object))
+}
+
+
+
+#' Additive model formula
+#'
+#' Description of the additive model formula extracted from an object of class \code{margint}.
+#'
+#' @param x an object of class \code{margint}, a result of a call to \code{\link{margint.cl}} or \code{\link{margint.rob}}.
+#' @param ... additional other arguments. Currently ignored.
+#'
+#' @return A model formula.
+#'
+#' @author Alejandra Mercedes Martinez \email{ale_m_martinez@hotmail.com}
+#'
+#' @export
+formula.margint <- function(x, ...){
+  return(x$formula )
+}
+
+
+#' Print a Marginal Integration procedure
+#'
+#' The default print method for a \code{margint} object.
+#'
+#' @param x an object of class \code{margint}, a result of a call to \code{\link{margint.cl}} or \code{\link{margint.rob}}.
+#' @param ... additional other arguments. Currently ignored.
+#'
+#' @return A real number.
+#'
+#' @author Alejandra Mercedes Martinez \email{ale_m_martinez@hotmail.com}
+#'
+#' @export
+print.margint <- function(x, ...){
+  cat("Formula:\n")
+  print(x$formula)
+  #cat("\n")
+}
+
 
 
