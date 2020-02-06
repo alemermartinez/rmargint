@@ -1257,6 +1257,29 @@ predict.margint <- function(object, ...){
   return( rowSums(object$g.matrix) + object$mu )
 }
 
+
+#' Fitted values for objects of class \code{margint}
+#'
+#' This function returns the fitted values given the covariates of the original sample under an additive model using a classical or robust marginal integration procedure estimator computed with \code{\link{margint.cl}} or \code{\link{margint.rob}}.
+#'
+#' @param object an object of class \code{margint}, a result of a call to \code{\link{margint.cl}} or \code{\link{margint.rob}}.
+#' @param ... additional other arguments. Currently ignored.
+#'
+#' @return A vector of fitted values.
+#'
+#' @author Alejandra Mercedes Martinez \email{ale_m_martinez@hotmail.com}
+#'
+#' @rawNamespace S3method(fitted.values, margint)
+fitted.values.margint <- function(object,...){
+  UseMethod("fitted")
+}
+
+#' @export
+fitted.margint <- function(object,...){
+  return(predict(object))
+}
+
+
 #' Diagnostic plots for objects of class \code{margint}
 #'
 #' Plot method for class \code{margint}.
@@ -1428,11 +1451,6 @@ deviance.margint <- function(object, ...){
   return( sum( (residuals(object))^2) )
 }
 
-
-#' @export
-fitted.values.margint <- function(object,...){
-  return(predict(object))
-}
 
 
 
