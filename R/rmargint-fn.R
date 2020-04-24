@@ -233,16 +233,18 @@ kernel10<-function(x) {
 #' 
 #' This function computes three types of classical marginal integration procedures for additive models, that is, considering a squared loss function.
 #' 
-#' @param formula An object of class "formula".
-#' @param point Matrix of points where predictions will be computed and returned.
-#' @param windows Vector or a squared matrix of bandwidths for the smoothing estimation procedure.
-#' @param epsilon Convergence criterion.
-#' @param prob Vector of robabilities of observing each response (n). Defaults to \code{NULL}.
-#' @param type Three different type of estimators can be selected: type \code{'0'} (local constant on all the covariates), type \code{'1'} (local linear smoother on all the covariates), type \code{'alpha'} (local polynomial smoother only on the direction of interest).
-#' @param degree Degree of the local polynomial smoother in the direction of interest when using the estimator of type \code{'alpha'}. Defaults to \code{NULL} for the case when using estimators of type \code{'0'} or \code{'1'}.
-#' @param orderkernel Order of the kernel used in the nuisance directions when using the estimator of type \code{'alpha'}. Defaults to \code{2}.
-#' @param qderivate If TRUE, it calculates \code{g^(q+1)/(q+1)!} for each component only for the type \code{'alpha'} method. Defaults to \code{FALSE}.
-#' @param Qmeasure A matrix of points where the integration procedure ocurrs. Defaults to \code{NULL} for calcuting the integrals over the sample.
+#' @param formula an object of class \code{formula} (or one that can be coerced to that class): a symbolic description of the model to be fitted. 
+#' @param data an optional data frame, list or environment (or object coercible by \link{as.data.frame} to a data frame) containing the variables in the model. If not found in \code{data}, the variables are taken from \code{environment(formula)},  typically the environment from which the function was called.
+#' @param subset an optional vector specifying a subset of observations to be used in the fitting process.
+#' @param point a matrix of points where predictions will be computed and returned.
+#' @param windows a vector or a squared matrix of bandwidths for the smoothing estimation procedure.
+#' @param epsilon convergence criterion.
+#' @param prob a vector of probabilities of observing each response (n). Defaults to \code{NULL}.
+#' @param type three different type of estimators can be selected: type \code{'0'} (local constant on all the covariates), type \code{'1'} (local linear smoother on all the covariates), type \code{'alpha'} (local polynomial smoother only on the direction of interest).
+#' @param degree degree of the local polynomial smoother in the direction of interest when using the estimator of type \code{'alpha'}. Defaults to \code{NULL} for the case when using estimators of type \code{'0'} or \code{'1'}.
+#' @param orderkernel order of the kernel used in the nuisance directions when using the estimator of type \code{'alpha'}. Defaults to \code{2}.
+#' @param qderivate if TRUE, it calculates \code{g^(q+1)/(q+1)!} for each component only for the type \code{'alpha'} method. Defaults to \code{FALSE}.
+#' @param Qmeasure a matrix of points where the integration procedure ocurrs. Defaults to \code{NULL} for calcuting the integrals over the sample.
 #' 
 #' @return A list with the following components:
 #' \item{mu}{Estimate for the intercept.}
@@ -279,12 +281,29 @@ kernel10<-function(x) {
 #' fit.cl <- margint.cl(y ~ X, windows=bandw, type='alpha', degree=1, Qmeasure=Qmeasure)
 #' 
 #' @export
-margint.cl <- function(formula, point=NULL, windows, epsilon=1e-6, prob=NULL,
+margint.cl <- function(formula, data, subset, point=NULL, windows, epsilon=1e-6, prob=NULL,
                        type='0', degree=NULL, qderivate=FALSE, orderkernel=2,
                        Qmeasure=NULL) {
-  AUX <- get_all_vars(formula)
-  yp <- AUX[,1]
-  Xp <- AUX[,-1]
+  #AUX <- get_all_vars(formula)
+  #yp <- AUX[,1]
+  #Xp <- AUX[,-1]
+  
+  cl <- match.call()
+  mf <- match.call(expand.dots = FALSE)
+  m <- match(c("formula", "data", "subset"), names(mf), 0)
+  mf <- mf[c(1, m)]
+  mf$drop.unused.levels <- TRUE
+  mf[[1]] <- as.name("model.frame")
+  mf <- eval(mf, parent.frame())
+  mt <- attr(mf, "terms") # allow model.frame to update it
+  yp <- model.response(mf, "numeric")
+  Xp <- model.matrix(mt, mf, NULL) 
+  # above line typically is "model.matrix(mt, mf, contrasts)" and contrasts equals NULL
+  
+  # remove the default intercept, it is estimated separately  
+  if( all( Xp[, 1] == 1 ) ) Xp <- Xp[, -1]
+  
+  
   if(!is.null(dim(Xp))){
     if(type=='alpha'){
       if(is.null(degree)){
@@ -607,22 +626,24 @@ margint.cl <- function(formula, point=NULL, windows, epsilon=1e-6, prob=NULL,
 #' 
 #' This function computes three types of robust marginal integration procedures for additive models.
 #' 
-#' @param formula An object of class "formula".
-#' @param point Matrix of points where predictions will be computed and returned.
-#' @param windows Vector or a squared matrix of bandwidths for the smoothing estimation procedure.
-#' @param prob Probabilities of observing each response (n). Defaults to \code{NULL}.
-#' @param sigma.hat Estimate of the residual standard error. If \code{NULL} we use the mad of the residuals obtained with local medians.
-#' @param win.sigma Vector of bandwidths for estimating sigma.hat. If \code{NULL} it uses the argument windows if it is a vector or its diagonal if it is a matrix.
-#' @param epsilon Convergence criterion.
-#' @param type Three different type of estimators can be selected: type \code{'0'} (local constant on all the covariates), type \code{'1'} (local linear smoother on all the covariates), type \code{'alpha'} (local polynomial smoother only on the direction of interest).
-#' @param degree Degree of the local polynomial smoother in the direction of interest when using the estimator of type \code{'alpha'}. Defaults to \code{NULL} for the case when using estimators of type \code{'0'} or \code{'1'}.
-#' @param typePhi One of either \code{'Tukey'} or \code{'Huber'}.
-#' @param k.h Tuning constant for a Huber-type loss function. Defaults to \code{1.345}.
-#' @param k.t Tuning constant for a Tukey-type loss function. Defaults to \code{4.685}.
-#' @param max.it Maximum number of iterations for the algorithm.
-#' @param qderivate If TRUE, it calculates \code{g^(q+1)/(q+1)!} for each component only for the type \code{'alpha'} method. Defaults to \code{FALSE}.
-#' @param orderkernel Order of the kernel used in the nuisance directions when using the estimator of type \code{'alpha'}. Defaults to \code{2}.
-#' @param Qmeasure A matrix of points where the integration procedure ocurrs. Defaults to \code{NULL} for calcuting the integrals over the sample.
+#' @param formula an object of class \code{formula} (or one that can be coerced to that class): a symbolic description of the model to be fitted. 
+#' @param data an optional data frame, list or environment (or object coercible by \link{as.data.frame} to a data frame) containing the variables in the model. If not found in \code{data}, the variables are taken from \code{environment(formula)}, typically the environment from which the function was called.
+#' @param subset an optional vector specifying a subset of observations to be used in the fitting process.
+#' @param point a matrix of points where predictions will be computed and returned.
+#' @param windows a vector or a squared matrix of bandwidths for the smoothing estimation procedure.
+#' @param prob a vector of probabilities of observing each response (n). Defaults to \code{NULL}.
+#' @param sigma.hat estimate of the residual standard error. If \code{NULL} we use the mad of the residuals obtained with local medians.
+#' @param win.sigma a vector of bandwidths for estimating sigma.hat. If \code{NULL} it uses the argument windows if it is a vector or its diagonal if it is a matrix.
+#' @param epsilon convergence criterion.
+#' @param type three different type of estimators can be selected: type \code{'0'} (local constant on all the covariates), type \code{'1'} (local linear smoother on all the covariates), type \code{'alpha'} (local polynomial smoother only on the direction of interest).
+#' @param degree degree of the local polynomial smoother in the direction of interest when using the estimator of type \code{'alpha'}. Defaults to \code{NULL} for the case when using estimators of type \code{'0'} or \code{'1'}.
+#' @param typePhi one of either \code{'Tukey'} or \code{'Huber'}.
+#' @param k.h tuning constant for a Huber-type loss function. Defaults to \code{1.345}.
+#' @param k.t tuning constant for a Tukey-type loss function. Defaults to \code{4.685}.
+#' @param max.it maximum number of iterations for the algorithm.
+#' @param qderivate if TRUE, it calculates \code{g^(q+1)/(q+1)!} for each component only for the type \code{'alpha'} method. Defaults to \code{FALSE}.
+#' @param orderkernel order of the kernel used in the nuisance directions when using the estimator of type \code{'alpha'}. Defaults to \code{2}.
+#' @param Qmeasure a matrix of points where the integration procedure ocurrs. Defaults to \code{NULL} for calcuting the integrals over the sample.
 #' 
 #' @return A list with the following components:
 #' \item{mu }{Estimate for the intercept.}
@@ -657,14 +678,29 @@ margint.cl <- function(formula, point=NULL, windows, epsilon=1e-6, prob=NULL,
 #' fit.rob <- margint.rob(y ~ X, windows=bandw, type='alpha', degree=1, Qmeasure=Qmeasure) 
 #' 
 #' @export
-margint.rob <- function(formula, point=NULL, windows, prob=NULL, sigma.hat=NULL,
+margint.rob <- function(formula, data, subset, point=NULL, windows, prob=NULL, sigma.hat=NULL,
                         win.sigma=NULL, epsilon=1e-06, type='0', degree=NULL, typePhi='Huber',
                         k.h=1.345, k.t = 4.685, max.it=20, qderivate=FALSE, orderkernel=2,
                         Qmeasure=NULL){
 
-  AUX <- get_all_vars(formula)
-  yp <- AUX[,1]
-  Xp <- AUX[,-1]
+  #AUX <- get_all_vars(formula)
+  #yp <- AUX[,1]
+  #Xp <- AUX[,-1]
+  
+  cl <- match.call()
+  mf <- match.call(expand.dots = FALSE)
+  m <- match(c("formula", "data", "subset"), names(mf), 0)
+  mf <- mf[c(1, m)]
+  mf$drop.unused.levels <- TRUE
+  mf[[1]] <- as.name("model.frame")
+  mf <- eval(mf, parent.frame())
+  mt <- attr(mf, "terms") # allow model.frame to update it
+  yp <- model.response(mf, "numeric")
+  Xp <- model.matrix(mt, mf, NULL) 
+  # above line typically is "model.matrix(mt, mf, contrasts)" and contrasts equals NULL
+  # remove the default intercept, it is estimated separately  
+  if( all( Xp[, 1] == 1 ) ) Xp <- Xp[, -1]
+  
   if(!is.null(dim(Xp))){
     if(type=='alpha'){
       if(is.null(degree)){
@@ -1262,7 +1298,7 @@ predict.margint <- function(object, ...){
 #'
 #' This function returns the fitted values given the covariates of the original sample under an additive model using a classical or robust marginal integration procedure estimator computed with \code{\link{margint.cl}} or \code{\link{margint.rob}}.
 #'
-#' @param object an object of class \code{margint}, a result of a call to \code{\link{margint.cl}} or \code{\link{margint.rob}}.
+#' @param object an object of class \code{margint}, a result of a call to \code{margint.cl} or \code{margint.rob}.
 #' @param ... additional other arguments. Currently ignored.
 #'
 #' @return A vector of fitted values.
