@@ -255,6 +255,7 @@ kernel10<-function(x) {
 #' \item{prediction.derivate }{Matrix of estimated derivatives of the additive components for the points listed in the argument point (only when qderivate is \code{TRUE}).}
 #' \item{Xp}{Matrix of explanatory variables.}
 #' \item{yp}{Vector of responses.}
+#' \item{formula}{Model formula}
 #' 
 #' @references 
 #' Chen R., Hardle W., Linton O.B. and Severance-Lossin E. (1996). Nonparametric estimation of additive separable regression models. Physica-Verlag HD, Switzerland.
@@ -655,6 +656,7 @@ margint.cl <- function(formula, data, subset, point=NULL, windows, epsilon=1e-6,
 #' \item{prediction.derivate }{Matrix of estimated derivatives of the additive components for the points listed in the argument point (only when qderivate is \code{TRUE}).}
 #' \item{Xp}{Matrix of explanatory variables.}
 #' \item{yp}{Vector of responses.}
+#' \item{formula}{Model formula}
 #'
 #' @author Alejandra Martinez, \email{ale_m_martinez@hotmail.com}, Matias Salibian-Barrera
 #' 
