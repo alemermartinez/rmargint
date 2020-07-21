@@ -4,30 +4,34 @@
 \alias{margint.cl}
 \title{Classic marginal integration procedures for additive models}
 \usage{
-margint.cl(formula, point = NULL, windows, epsilon = 1e-06,
-  prob = NULL, type = "0", degree = NULL, qderivate = FALSE,
-  orderkernel = 2, Qmeasure = NULL)
+margint.cl(formula, data, subset, point = NULL, windows,
+  epsilon = 1e-06, prob = NULL, type = "0", degree = NULL,
+  qderivate = FALSE, orderkernel = 2, Qmeasure = NULL)
 }
 \arguments{
-\item{formula}{An object of class "formula".}
+\item{formula}{an object of class \code{formula} (or one that can be coerced to that class): a symbolic description of the model to be fitted.}
 
-\item{point}{Matrix of points where predictions will be computed and returned.}
+\item{data}{an optional data frame, list or environment (or object coercible by \link{as.data.frame} to a data frame) containing the variables in the model. If not found in \code{data}, the variables are taken from \code{environment(formula)},  typically the environment from which the function was called.}
 
-\item{windows}{Vector or a squared matrix of bandwidths for the smoothing estimation procedure.}
+\item{subset}{an optional vector specifying a subset of observations to be used in the fitting process.}
 
-\item{epsilon}{Convergence criterion.}
+\item{point}{a matrix of points where predictions will be computed and returned.}
 
-\item{prob}{Vector of robabilities of observing each response (n). Defaults to \code{NULL}.}
+\item{windows}{a vector or a squared matrix of bandwidths for the smoothing estimation procedure.}
 
-\item{type}{Three different type of estimators can be selected: type \code{'0'} (local constant on all the covariates), type \code{'1'} (local linear smoother on all the covariates), type \code{'alpha'} (local polynomial smoother only on the direction of interest).}
+\item{epsilon}{convergence criterion.}
 
-\item{degree}{Degree of the local polynomial smoother in the direction of interest when using the estimator of type \code{'alpha'}. Defaults to \code{NULL} for the case when using estimators of type \code{'0'} or \code{'1'}.}
+\item{prob}{a vector of probabilities of observing each response (n). Defaults to \code{NULL}.}
 
-\item{qderivate}{If TRUE, it calculates \code{g^(q+1)/(q+1)!} for each component only for the type \code{'alpha'} method. Defaults to \code{FALSE}.}
+\item{type}{three different type of estimators can be selected: type \code{'0'} (local constant on all the covariates), type \code{'1'} (local linear smoother on all the covariates), type \code{'alpha'} (local polynomial smoother only on the direction of interest).}
 
-\item{orderkernel}{Order of the kernel used in the nuisance directions when using the estimator of type \code{'alpha'}. Defaults to \code{2}.}
+\item{degree}{degree of the local polynomial smoother in the direction of interest when using the estimator of type \code{'alpha'}. Defaults to \code{NULL} for the case when using estimators of type \code{'0'} or \code{'1'}.}
 
-\item{Qmeasure}{A matrix of points where the integration procedure ocurrs. Defaults to \code{NULL} for calcuting the integrals over the sample.}
+\item{qderivate}{if TRUE, it calculates \code{g^(q+1)/(q+1)!} for each component only for the type \code{'alpha'} method. Defaults to \code{FALSE}.}
+
+\item{orderkernel}{order of the kernel used in the nuisance directions when using the estimator of type \code{'alpha'}. Defaults to \code{2}.}
+
+\item{Qmeasure}{a matrix of points where the integration procedure ocurrs. Defaults to \code{NULL} for calcuting the integrals over the sample.}
 }
 \value{
 A list with the following components:

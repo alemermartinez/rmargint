@@ -7,7 +7,7 @@
 fitted.values.margint(object, ...)
 }
 \arguments{
-\item{object}{an object of class \code{margint}, a result of a call to \code{\link{margint.cl}} or \code{\link{margint.rob}}.}
+\item{object}{an object of class \code{margint}, a result of a call to \code{margint.cl} or \code{margint.rob}.}
 
 \item{...}{additional other arguments. Currently ignored.}
 }

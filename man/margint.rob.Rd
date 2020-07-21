@@ -4,43 +4,47 @@
 \alias{margint.rob}
 \title{Robust marginal integration procedures for additive models}
 \usage{
-margint.rob(formula, point = NULL, windows, prob = NULL,
+margint.rob(formula, data, subset, point = NULL, windows, prob = NULL,
   sigma.hat = NULL, win.sigma = NULL, epsilon = 1e-06, type = "0",
   degree = NULL, typePhi = "Huber", k.h = 1.345, k.t = 4.685,
   max.it = 20, qderivate = FALSE, orderkernel = 2, Qmeasure = NULL)
 }
 \arguments{
-\item{formula}{An object of class "formula".}
+\item{formula}{an object of class \code{formula} (or one that can be coerced to that class): a symbolic description of the model to be fitted.}
 
-\item{point}{Matrix of points where predictions will be computed and returned.}
+\item{data}{an optional data frame, list or environment (or object coercible by \link{as.data.frame} to a data frame) containing the variables in the model. If not found in \code{data}, the variables are taken from \code{environment(formula)}, typically the environment from which the function was called.}
 
-\item{windows}{Vector or a squared matrix of bandwidths for the smoothing estimation procedure.}
+\item{subset}{an optional vector specifying a subset of observations to be used in the fitting process.}
 
-\item{prob}{Probabilities of observing each response (n). Defaults to \code{NULL}.}
+\item{point}{a matrix of points where predictions will be computed and returned.}
 
-\item{sigma.hat}{Estimate of the residual standard error. If \code{NULL} we use the mad of the residuals obtained with local medians.}
+\item{windows}{a vector or a squared matrix of bandwidths for the smoothing estimation procedure.}
 
-\item{win.sigma}{Vector of bandwidths for estimating sigma.hat. If \code{NULL} it uses the argument windows if it is a vector or its diagonal if it is a matrix.}
+\item{prob}{a vector of probabilities of observing each response (n). Defaults to \code{NULL}.}
 
-\item{epsilon}{Convergence criterion.}
+\item{sigma.hat}{estimate of the residual standard error. If \code{NULL} we use the mad of the residuals obtained with local medians.}
 
-\item{type}{Three different type of estimators can be selected: type \code{'0'} (local constant on all the covariates), type \code{'1'} (local linear smoother on all the covariates), type \code{'alpha'} (local polynomial smoother only on the direction of interest).}
+\item{win.sigma}{a vector of bandwidths for estimating sigma.hat. If \code{NULL} it uses the argument windows if it is a vector or its diagonal if it is a matrix.}
 
-\item{degree}{Degree of the local polynomial smoother in the direction of interest when using the estimator of type \code{'alpha'}. Defaults to \code{NULL} for the case when using estimators of type \code{'0'} or \code{'1'}.}
+\item{epsilon}{convergence criterion.}
 
-\item{typePhi}{One of either \code{'Tukey'} or \code{'Huber'}.}
+\item{type}{three different type of estimators can be selected: type \code{'0'} (local constant on all the covariates), type \code{'1'} (local linear smoother on all the covariates), type \code{'alpha'} (local polynomial smoother only on the direction of interest).}
 
-\item{k.h}{Tuning constant for a Huber-type loss function. Defaults to \code{1.345}.}
+\item{degree}{degree of the local polynomial smoother in the direction of interest when using the estimator of type \code{'alpha'}. Defaults to \code{NULL} for the case when using estimators of type \code{'0'} or \code{'1'}.}
 
-\item{k.t}{Tuning constant for a Tukey-type loss function. Defaults to \code{4.685}.}
+\item{typePhi}{one of either \code{'Tukey'} or \code{'Huber'}.}
 
-\item{max.it}{Maximum number of iterations for the algorithm.}
+\item{k.h}{tuning constant for a Huber-type loss function. Defaults to \code{1.345}.}
 
-\item{qderivate}{If TRUE, it calculates \code{g^(q+1)/(q+1)!} for each component only for the type \code{'alpha'} method. Defaults to \code{FALSE}.}
+\item{k.t}{tuning constant for a Tukey-type loss function. Defaults to \code{4.685}.}
 
-\item{orderkernel}{Order of the kernel used in the nuisance directions when using the estimator of type \code{'alpha'}. Defaults to \code{2}.}
+\item{max.it}{maximum number of iterations for the algorithm.}
 
-\item{Qmeasure}{A matrix of points where the integration procedure ocurrs. Defaults to \code{NULL} for calcuting the integrals over the sample.}
+\item{qderivate}{if TRUE, it calculates \code{g^(q+1)/(q+1)!} for each component only for the type \code{'alpha'} method. Defaults to \code{FALSE}.}
+
+\item{orderkernel}{order of the kernel used in the nuisance directions when using the estimator of type \code{'alpha'}. Defaults to \code{2}.}
+
+\item{Qmeasure}{a matrix of points where the integration procedure ocurrs. Defaults to \code{NULL} for calcuting the integrals over the sample.}
 }
 \value{
 A list with the following components:
