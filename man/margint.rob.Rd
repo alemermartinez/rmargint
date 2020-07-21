@@ -57,6 +57,7 @@ A list with the following components:
 \item{prediction.derivate }{Matrix of estimated derivatives of the additive components for the points listed in the argument point (only when qderivate is \code{TRUE}).}
 \item{Xp}{Matrix of explanatory variables.}
 \item{yp}{Vector of responses.}
+\item{formula}{Model formula}
 }
 \description{
 This function computes robust marginal integration procedures for additive models.
