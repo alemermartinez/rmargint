@@ -9,7 +9,7 @@ output:
 
 ## Robust MARGinal INTegration procedures
 
-This repository contains an <code>R</code> package with the classical and robust marginal integration procedures for estimating the additive components in an additive model, implementing the proposal of Graciela Boente and Alejandra Martinez in
+This repository contains an <code>R</code> package with the classical and robust marginal integration procedures for estimating the additive components in an additive model, implementing the proposal of Graciela Boente and Alejandra Martínez in
 
 > Boente G. and Martinez A. (2017). Marginal integration M-estimators for additive models. TEST, 26, 231-260.
 
@@ -20,15 +20,16 @@ library(devtools)
 install_github("alemermartinez/rmargint")
 ```
 
-The following example corresponds to one of the 2-dimensional simulated samples considered in the paper.
+The following example corresponds to a 2-dimensional simulated samples with 5% of contaminated responses. For more examples and contamination setting, see Boente and Martínez (2017).
 
 Let begin by defining the additive functions and then generating the simulated sample.
 
 ```{r generating data}
 library(rmargint)
 
-function.g1 <- function(x1) 24*(x1-1/2)^2-2
-function.g2 <- function(x2) 2*pi*sin(pi*x2)-4
+function.g1 <- function(x1) 24*(x1-1/2)^2-(6/5)
+function.g2 <- function(x2) 2*pi*sin(pi*x2)-(48/(pi^2))
+
 
 set.seed(140)
 n <- 500
@@ -36,8 +37,12 @@ x1 <- runif(n)
 x2 <- runif(n)
 X <- cbind(x1, x2)
 eps <- rnorm(n,0,sd=0.15)
+prop.cont <- 0.05
+ou <- rbinom(n, size=1, prob=prop.cont) 
+eps.ou <- eps
+eps.ou[ ou == 1 ] <- rnorm(sum(ou),mean=15, sd=0.1)
 regresion <- function.g1(x1) + function.g2(x2)
-y <- regresion + eps
+y <- regresion + eps.ou
 ```
 
 As it is explained in the paper, the bandwidths used for the direction of interest and for the nuisance direction might be different. For estimating the additive functions, bandwidths for the direction of interest and for the nuisance direction were considered equal to 0.1.
@@ -50,7 +55,8 @@ Besides, for this estimation procedure, a different measure for approximating th
 
 ```{r measure}
 set.seed(9090)
-Qmeasure <- matrix(runif(500*2), 500, 2)
+nQ <- 200
+Qmeasure <- matrix(rbeta(nQ*2,2,2), nQ, 2)
 ```
 
 Now we will use the robust marginal integration procedure to fit an additive model using the Huber loss function (with default tuning constant c=1.345), a linear fit (degree=1) for the estimation procedure at each additive component, a kernel of order 2 (orderkernel=2) and the type of estimation procedure which, in this case, focus the attention on each alpha additive component and not on all of them at the same time (type='alpha'). In addition, a specific point will be predicted.
