@@ -46,7 +46,7 @@ bandw <- rep(0.1,2)
 Besides, for this estimation procedure, a different measure for approximating the integrals can be used. In this case, we will consider the following:
 
 ``` r
-set.seed(9090)
+set.seed(8090)
 nQ <- 200
 Qmeasure <- matrix(rbeta(nQ*2,2,2), nQ, 2)
 ```
@@ -66,7 +66,7 @@ robust.fit$prediction
 ```
 
     ##            [,1]     [,2]
-    ## [1,] -0.2039209 1.237501
+    ## [1,] -0.1797703 1.011623
 
 ``` r
 c(function.g1(point[1]), function.g2(point[2]))
@@ -113,8 +113,8 @@ function.g2.prime <- function(x2) 2*pi^2*cos(pi*x2)
 robust.fit2$prediction.derivate
 ```
 
-    ##          [,1]      [,2]
-    ## [1,] 9.550217 -6.595888
+    ##         [,1]      [,2]
+    ## [1,] 9.93239 -6.707469
 
 ``` r
 c(function.g1.prime(point[1]), function.g2.prime(point[2]))

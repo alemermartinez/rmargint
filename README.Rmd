@@ -54,7 +54,7 @@ bandw <- rep(0.1,2)
 Besides, for this estimation procedure, a different measure for approximating the integrals can be used. In this case, we will consider the following:
 
 ```{r measure}
-set.seed(9090)
+set.seed(8090)
 nQ <- 200
 Qmeasure <- matrix(rbeta(nQ*2,2,2), nQ, 2)
 ```
