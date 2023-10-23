@@ -8,15 +8,6 @@ Robust marginal integration estimators for additive models.
 \description{
 Robust marginal integration estimators for additive models.
 }
-\details{
-\tabular{ll}{
-Package: \tab rmargint\cr
-Type: \tab Package\cr
-Version: \tab 1.1\cr
-Date: \tab 2019-10-15\cr
-License: \tab GPL 3.0\cr
-}
-}
 \author{
 Alejandra Martinez, Matias Salibian-Barrera
 
