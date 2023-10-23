@@ -15,6 +15,6 @@ Description: Three robust marginal integration procedures for additive models ba
              procedures can compute predictions for points outside the training set if desired. 
              See Boente and Martinez (2017) <doi:10.1007/s11749-016-0508-0> for details. 
 License: GPL (>=3.0)
-RoxygenNote: 6.1.1
+RoxygenNote: 7.2.3
 Encoding: UTF-8
 Imports: stats, graphics
