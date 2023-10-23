@@ -4,9 +4,20 @@
 \alias{margint.cl}
 \title{Classic marginal integration procedures for additive models}
 \usage{
-margint.cl(formula, data, subset, point = NULL, windows,
-  epsilon = 1e-06, prob = NULL, type = "0", degree = NULL,
-  qderivate = FALSE, orderkernel = 2, Qmeasure = NULL)
+margint.cl(
+  formula,
+  data,
+  subset,
+  point = NULL,
+  windows,
+  epsilon = 1e-06,
+  prob = NULL,
+  type = "0",
+  degree = NULL,
+  qderivate = FALSE,
+  orderkernel = 2,
+  Qmeasure = NULL
+)
 }
 \arguments{
 \item{formula}{an object of class \code{formula} (or one that can be coerced to that class): a symbolic description of the model to be fitted.}

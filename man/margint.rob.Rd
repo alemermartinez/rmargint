@@ -4,10 +4,26 @@
 \alias{margint.rob}
 \title{Robust marginal integration procedures for additive models}
 \usage{
-margint.rob(formula, data, subset, point = NULL, windows, prob = NULL,
-  sigma.hat = NULL, win.sigma = NULL, epsilon = 1e-06, type = "0",
-  degree = NULL, typePhi = "Huber", k.h = 1.345, k.t = 4.685,
-  max.it = 20, qderivate = FALSE, orderkernel = 2, Qmeasure = NULL)
+margint.rob(
+  formula,
+  data,
+  subset,
+  point = NULL,
+  windows,
+  prob = NULL,
+  sigma.hat = NULL,
+  win.sigma = NULL,
+  epsilon = 1e-06,
+  type = "0",
+  degree = NULL,
+  typePhi = "Huber",
+  k.h = 1.345,
+  k.t = 4.685,
+  max.it = 20,
+  qderivate = FALSE,
+  orderkernel = 2,
+  Qmeasure = NULL
+)
 }
 \arguments{
 \item{formula}{an object of class \code{formula} (or one that can be coerced to that class): a symbolic description of the model to be fitted.}

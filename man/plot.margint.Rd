@@ -4,8 +4,7 @@
 \alias{plot.margint}
 \title{Diagnostic plots for objects of class \code{margint}}
 \usage{
-\method{plot}{margint}(x, derivative = FALSE, which = 1:np,
-  ask = FALSE, ...)
+\method{plot}{margint}(x, derivative = FALSE, which = 1:np, ask = FALSE, ...)
 }
 \arguments{
 \item{x}{an object of class \code{margint}, a result of a call to \code{\link{margint.cl}} or \code{\link{margint.rob}}.}
