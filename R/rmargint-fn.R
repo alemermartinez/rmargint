@@ -1307,7 +1307,8 @@ predict.margint <- function(object, ...){
 #'
 #' @author Alejandra Mercedes Martinez \email{ale_m_martinez@hotmail.com}
 #'
-#' @rawNamespace S3method(fitted.values, margint)
+#' @method fitted.values margint
+#' @export
 fitted.values.margint <- function(object,...){
   UseMethod("fitted")
 }
