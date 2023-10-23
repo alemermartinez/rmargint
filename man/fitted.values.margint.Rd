@@ -4,7 +4,7 @@
 \alias{fitted.values.margint}
 \title{Fitted values for objects of class \code{margint}}
 \usage{
-fitted.values.margint(object, ...)
+\method{fitted.values}{margint}(object, ...)
 }
 \arguments{
 \item{object}{an object of class \code{margint}, a result of a call to \code{margint.cl} or \code{margint.rob}.}

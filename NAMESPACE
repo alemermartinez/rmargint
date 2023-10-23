@@ -2,7 +2,7 @@
 
 S3method(deviance,margint)
 S3method(fitted,margint)
-S3method(fitted.values, margint)
+S3method(fitted.values,margint)
 S3method(formula,margint)
 S3method(plot,margint)
 S3method(predict,margint)
