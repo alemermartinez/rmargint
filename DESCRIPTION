@@ -17,4 +17,5 @@ Description: Three robust marginal integration procedures for additive models ba
 License: GPL (>=3.0)
 RoxygenNote: 7.2.3
 Encoding: UTF-8
+URL: https://github.com/alemermartinez/rmargint
 Imports: stats, graphics
